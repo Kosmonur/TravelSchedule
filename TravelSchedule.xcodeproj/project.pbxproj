@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F205F0EE2BCBEC280086B88E /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F0ED2BCBEC280086B88E /* ScheduleView.swift */; };
+		F205F0F02BCBEC3D0086B88E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F0EF2BCBEC3D0086B88E /* SettingsView.swift */; };
+		F205F0F32BCC04230086B88E /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F0F22BCC04230086B88E /* Fonts.swift */; };
+		F205F0F52BCC10650086B88E /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F0F42BCC10650086B88E /* Constant.swift */; };
+		F205F0FA2BCC23190086B88E /* AgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F0F92BCC23190086B88E /* AgreementView.swift */; };
+		F205F1042BCC291E0086B88E /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F205F1032BCC291E0086B88E /* WebView.swift */; };
 		F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */; };
 		F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732282BA0B0CD0062011B /* ContentView.swift */; };
 		F2F7322B2BA0B0CF0062011B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F7322A2BA0B0CF0062011B /* Assets.xcassets */; };
@@ -14,6 +20,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F201F1362BCBE13B00986982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F205F0ED2BCBEC280086B88E /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		F205F0EF2BCBEC3D0086B88E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		F205F0F22BCC04230086B88E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		F205F0F42BCC10650086B88E /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F205F0F92BCC23190086B88E /* AgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementView.swift; sourceTree = "<group>"; };
+		F205F1032BCC291E0086B88E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F2F732232BA0B0CD0062011B /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		F2F732282BA0B0CD0062011B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +45,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F201F12A2BC97FA700986982 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F205F1052BCC2F030086B88E /* UserAgreement */,
+				F205F0ED2BCBEC280086B88E /* ScheduleView.swift */,
+				F205F0EF2BCBEC3D0086B88E /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F205F1052BCC2F030086B88E /* UserAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				F205F0F92BCC23190086B88E /* AgreementView.swift */,
+				F205F1032BCC291E0086B88E /* WebView.swift */,
+			);
+			path = UserAgreement;
+			sourceTree = "<group>";
+		};
 		F2F7321A2BA0B0CD0062011B = {
 			isa = PBXGroup;
 			children = (
@@ -51,9 +83,13 @@
 		F2F732252BA0B0CD0062011B /* TravelSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				F205F0F42BCC10650086B88E /* Constant.swift */,
 				F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */,
 				F2F732282BA0B0CD0062011B /* ContentView.swift */,
+				F201F12A2BC97FA700986982 /* View */,
 				F2F7322A2BA0B0CF0062011B /* Assets.xcassets */,
+				F205F0F22BCC04230086B88E /* Fonts.swift */,
+				F201F1362BCBE13B00986982 /* Info.plist */,
 				F2F7322C2BA0B0CF0062011B /* Preview Content */,
 			);
 			path = TravelSchedule;
@@ -137,7 +173,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F205F0FA2BCC23190086B88E /* AgreementView.swift in Sources */,
+				F205F1042BCC291E0086B88E /* WebView.swift in Sources */,
+				F205F0F52BCC10650086B88E /* Constant.swift in Sources */,
+				F205F0F02BCBEC3D0086B88E /* SettingsView.swift in Sources */,
 				F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */,
+				F205F0EE2BCBEC280086B88E /* ScheduleView.swift in Sources */,
+				F205F0F32BCC04230086B88E /* Fonts.swift in Sources */,
 				F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,17 +311,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TravelSchedule/Preview Content\"";
 				DEVELOPMENT_TEAM = 3WUFQGL67T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TravelSchedule/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -298,17 +343,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TravelSchedule/Preview Content\"";
 				DEVELOPMENT_TEAM = 3WUFQGL67T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TravelSchedule/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
