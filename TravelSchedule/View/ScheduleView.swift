@@ -11,6 +11,7 @@ struct ScheduleView: View {
     
     @State private var from = ""
     @State private var to = ""
+    @State var isClicked : Bool = false
     
     var body: some View {
         VStack {
@@ -38,11 +39,15 @@ struct ScheduleView: View {
                     .background(Rectangle()
                         .fill(.white)
                         .cornerRadius(20))
-                    Button(action: apply) {
+                    Button {
+                        isClicked.toggle()
+                        swap(&from, &to)
+                    } label: {
                         Image(.change)
                     }
                     .frame(width: 36, height: 36)
                     .background(Circle().fill(Color.white))
+                    .buttonStyle(RotateButtonStyle())
                 }
                 .padding()
             }
@@ -51,13 +56,15 @@ struct ScheduleView: View {
             .padding()
             Spacer()
         }
+        .background(.whiteApp)
     }
-    
-    private func apply() {
-        //TODO: apply
-        print("TODO")
+}
+
+struct RotateButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .rotationEffect(configuration.isPressed ? -Angle(radians: .pi) : .zero)
     }
-    
 }
 
 #Preview {

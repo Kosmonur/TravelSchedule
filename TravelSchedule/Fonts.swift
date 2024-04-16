@@ -12,6 +12,7 @@ extension Font {
     
     //Regular
     static let regular17 = Font.system(size: 17)
+    static let regular12 = Font.system(size: 12)
     
     //Semibold
     

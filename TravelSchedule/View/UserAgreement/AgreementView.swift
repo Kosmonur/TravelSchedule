@@ -11,8 +11,8 @@ struct AgreementView: View {
     
     var body: some View {
         WebView(url: Constant.agreementURL)
-            .navigationBarTitle(Constant.userAgreement, displayMode: .inline)
-            .ignoresSafeArea()
+            .navigationTitle(Constant.userAgreement)
+            .background(.whiteApp)
     }
 }
 

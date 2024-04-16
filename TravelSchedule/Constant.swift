@@ -14,5 +14,8 @@ enum Constant {
     static let from = "Откуда"
     static let to = "Куда"
     static let userAgreement = "Пользовательское соглашение"
+    static let blackTheme = "Тёмная тема"
+    static let appAbout = "Приложение использует API «Яндекс.Расписания»"
+    static let appVersion = "Версия 1.0 (beta)"
     
 }
