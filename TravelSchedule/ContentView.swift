@@ -17,31 +17,21 @@ struct ContentView: View {
     
     var body: some View {
         
-        TabView(selection: $selectedTab) {
-            
-            ScheduleView()
-                .tabItem {
-                    Image(.schedule)
-                        .renderingMode(.template)
-                }
-                .border(.gray)
-                .padding(.leading, -1)
-                .padding(.trailing, -1)
-                .padding(.top, -1)
-                .edgesIgnoringSafeArea(.top)
-                .tag(0)
-            
-            SettingsView()
-                .tabItem {
-                    Image(.setup)
-                        .renderingMode(.template)
-                }
-                .border(.gray)
-                .padding(.leading, -1)
-                .padding(.trailing, -1)
-                .padding(.top, -1)
-                .edgesIgnoringSafeArea(.top)
-                .tag(1)
+        NavigationStack {
+            TabView(selection: $selectedTab) {
+                ScheduleView()
+                    .tabItem {
+                        Image(.schedule)
+                            .renderingMode(.template)
+                    }
+                    .tag(0)
+                SettingsView()
+                    .tabItem {
+                        Image(.setup)
+                            .renderingMode(.template)
+                    }
+                    .tag(1)
+            }
         }
         .tint(.blackApp)
     }

@@ -13,49 +13,49 @@ struct SettingsView: View {
     @State private var isDarkModeOn = false
     
     var body: some View {
-        
-        NavigationView {
-            VStack {
-                List {
-                    Toggle(isOn: $isDarkModeOn) {
-                        Text(Constant.blackTheme)
-                    }
-                    .toggleStyle(SwitchToggleStyle(tint: .blueUniv))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .onChange(of: isDarkModeOn) { isDarkModeOn in
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                            for window in windowScene.windows {
-                                window.overrideUserInterfaceStyle = isDarkModeOn ? .dark : .light
-                            }
+        VStack {
+            List {
+                Toggle(isOn: $isDarkModeOn) {
+                    Text(Constant.blackTheme)
+                }
+                .toggleStyle(SwitchToggleStyle(tint: .blueUniv))
+                .padding(.top, 24)
+                .listRowBackground(Color.clear)
+                .onChange(of: isDarkModeOn) { isDarkModeOn in
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        for window in windowScene.windows {
+                            window.overrideUserInterfaceStyle = isDarkModeOn ? .dark : .light
                         }
                     }
-                    
-                    NavigationLink(destination: AgreementView()) {
-                        Text(Constant.userAgreement)
-                            .font(.regular17)
-                    }
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
                 }
-                .listStyle(.inset)
-                .scrollDisabled(true)
-                
-                Spacer()
-                
-                VStack(alignment: .center, spacing: 16) {
-                    Text(Constant.appAbout)
-                    Text(Constant.appVersion)
+                NavigationLink(destination: AgreementView()) {
+                    Text(Constant.userAgreement)
+                        .font(.regular17)
                 }
-                .font(.regular12)
-                .foregroundStyle(.blackApp)
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+                .navigationTitle(Constant.userAgreement)
             }
-            .padding(.vertical, 24)
+            .listStyle(.plain)
+            .scrollDisabled(true)
+            
+            Spacer()
+            
+            VStack(alignment: .center, spacing: 16) {
+                Text(Constant.appAbout)
+                Text(Constant.appVersion)
+            }
+            .font(.regular12)
+            .foregroundStyle(.blackApp)
+            .padding(.bottom, 24)
+            
+            Rectangle().frame(height: 1)
+                .foregroundStyle(.grayUniv)
+                .padding(.bottom,10)
         }
-        .tint(.blackApp)
+        .background(.whiteApp)
         .onAppear(perform: {
-            isDarkModeOn = colorScheme == .dark ? true : false
-        })
+            isDarkModeOn = colorScheme == .dark ? true : false})
     }
 }
 

@@ -22,15 +22,15 @@ struct ScheduleView: View {
                 HStack(spacing: 16) {
                     VStack {
                         Spacer()
-                        TextField(Constant.from, text: $from)
+                        TextField("", text: $from, prompt: Text(Constant.from).foregroundColor(.grayUniv))
                             .font(.regular17)
-                            .foregroundColor(.blackUniv)
+                            .foregroundStyle(.blackUniv)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
                         Spacer()
-                        TextField(Constant.to, text: $to)
+                        TextField("", text: $to, prompt: Text(Constant.to).foregroundColor(.grayUniv))
                             .font(.regular17)
-                            .foregroundColor(.blackUniv)
+                            .foregroundStyle(.blackUniv)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
                         Spacer()
@@ -55,6 +55,9 @@ struct ScheduleView: View {
             .cornerRadius(20)
             .padding()
             Spacer()
+            Rectangle().frame(height: 1)
+                .foregroundStyle(.grayUniv)
+                .padding(.bottom,10)
         }
         .background(.whiteApp)
     }
