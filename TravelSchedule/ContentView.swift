@@ -11,10 +11,6 @@ struct ContentView: View {
     
     @State private var selectedTab = 0
     
-    init() {
-        UITabBar.appearance().backgroundColor = .whiteApp
-    }
-    
     var body: some View {
         
         NavigationStack {

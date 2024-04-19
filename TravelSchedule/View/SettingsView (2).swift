@@ -11,6 +11,7 @@ struct SettingsView: View {
     
     @Environment(\.colorScheme) var colorScheme
     @State private var isDarkModeOn = false
+    @State private var isConnect = true
     
     var body: some View {
         VStack {
@@ -28,7 +29,15 @@ struct SettingsView: View {
                         }
                     }
                 }
-                NavigationLink(destination: AgreementView()) {
+                NavigationLink(destination: {
+                    if isConnect {
+                        AgreementView()
+                    }
+                    else {
+                        ErrorView(errorType: .noInternet)
+                    }
+                })
+                {
                     Text(Constant.userAgreement)
                         .font(.regular17)
                 }
@@ -54,9 +63,8 @@ struct SettingsView: View {
                 .padding(.bottom,10)
         }
         .background(.whiteApp)
-        .onAppear {
-            isDarkModeOn = colorScheme == .dark ? true : false
-        }
+        .onAppear(perform: {
+            isDarkModeOn = colorScheme == .dark ? true : false})
     }
 }
 

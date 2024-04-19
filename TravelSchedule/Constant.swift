@@ -18,4 +18,7 @@ enum Constant {
     static let appAbout = "Приложение использует API «Яндекс.Расписания»"
     static let appVersion = "Версия 1.0 (beta)"
     
+    static let noInternet = "Нет интернета"
+    static let serverErr = "Ошибка сервера"
+    
 }
