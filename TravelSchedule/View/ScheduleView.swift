@@ -11,7 +11,9 @@ struct ScheduleView: View {
     
     @State private var from = ""
     @State private var to = ""
-    @State var isClicked : Bool = false
+    
+    @State private var isClicked: Bool = false
+    @State private var viewModel = ScheduleViewModel()
     
     var body: some View {
         VStack {
@@ -22,17 +24,27 @@ struct ScheduleView: View {
                 HStack(spacing: 16) {
                     VStack {
                         Spacer()
-                        TextField("", text: $from, prompt: Text(Constant.from).foregroundColor(.grayUniv))
-                            .font(.regular17)
-                            .foregroundStyle(.blackUniv)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
+                        
+                        NavigationLink(destination: SearchCityView(selectionType: .departure, viewModel: viewModel)) {
+                            Text(from)
+                                .font(.regular17)
+                                .foregroundStyle(from == Constant.from ? .grayUniv: .blackUniv)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .lineLimit(1)
+                                .padding(.horizontal)
+                        }
+                        
                         Spacer()
-                        TextField("", text: $to, prompt: Text(Constant.to).foregroundColor(.grayUniv))
-                            .font(.regular17)
-                            .foregroundStyle(.blackUniv)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal)
+                        
+                        NavigationLink(destination: SearchCityView(selectionType: .arrival, viewModel: viewModel)) {
+                            Text(to)
+                                .font(.regular17)
+                                .foregroundStyle(to == Constant.to ? .grayUniv: .blackUniv)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .lineLimit(1)
+                                .padding(.horizontal)
+                        }
+                        
                         Spacer()
                     }
                     .frame(height: 96)
@@ -41,6 +53,8 @@ struct ScheduleView: View {
                         .cornerRadius(20))
                     Button {
                         isClicked.toggle()
+                        swap(&viewModel.fromCity, &viewModel.toCity)
+                        swap(&viewModel.fromStation, &viewModel.toStation)
                         swap(&from, &to)
                     } label: {
                         Image(.change)
@@ -60,6 +74,20 @@ struct ScheduleView: View {
                 .padding(.bottom,10)
         }
         .background(.whiteApp)
+        .onAppear {
+            if let fromCity = viewModel.fromCity,
+               let fromStation = viewModel.fromStation {
+                from = "\(fromCity) (\(fromStation))"
+            } else {
+                from = Constant.from
+            }
+            if let toCity = viewModel.toCity,
+               let toStation = viewModel.toStation {
+                to = "\(toCity) (\(toStation))"
+            } else {
+                to = Constant.to
+            }
+        }
     }
 }
 

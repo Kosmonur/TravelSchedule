@@ -20,5 +20,6 @@ enum Constant {
     
     static let noInternet = "Нет интернета"
     static let serverErr = "Ошибка сервера"
+    static let searchPlaceholder = "Введите запрос"
     
 }
