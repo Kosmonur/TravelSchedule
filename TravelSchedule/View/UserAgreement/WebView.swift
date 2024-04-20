@@ -11,18 +11,58 @@ import WebKit
 struct WebView: UIViewRepresentable {
     
     let url: URL
+    @ObservedObject var viewModel: ProgressViewModel
+    
+    private let webView = WKWebView()
     
     func makeUIView(context: Context) -> WKWebView {
-        return WKWebView()
+        webView.load(URLRequest(url: url))
+        return webView
     }
     
-    func updateUIView(_ webView: WKWebView, context: Context) {
-        let request = URLRequest(url: url)
-        webView.load(request)
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+    }
+    
+}
+
+extension WebView {
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self, viewModel: viewModel)
+    }
+    
+    class Coordinator: NSObject {
+        private var parent: WebView
+        private var viewModel: ProgressViewModel
+        private var observer: NSKeyValueObservation?
+        
+        init(_ parent: WebView, viewModel: ProgressViewModel) {
+            self.parent = parent
+            self.viewModel = viewModel
+            super.init()
+            
+            observer = self.parent.webView.observe(\.estimatedProgress) { [weak self] webView, _ in
+                guard let self = self else { return }
+                self.parent.viewModel.progress = webView.estimatedProgress
+            }
+        }
+        
+        deinit {
+            observer = nil
+        }
+    }
+}
+
+extension WebView {
+    class ProgressViewModel: ObservableObject {
+        @Published var progress: Double = .zero
+        
+        init (progress: Double) {
+            self.progress = progress
+        }
     }
 }
 
 #Preview {
-    WebView(url: Constant.agreementURL)
+    WebView(url: Constant.agreementURL, viewModel: WebView.ProgressViewModel(progress: .zero))
 }
-

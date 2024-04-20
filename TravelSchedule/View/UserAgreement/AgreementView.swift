@@ -11,18 +11,37 @@ import Network
 struct AgreementView: View {
     
     @State private var isConnected = true
+    @State var isProgressViewVisible: Bool = true
+    @StateObject var viewModel = WebView.ProgressViewModel(progress: .zero)
     
     var body: some View {
-        if isConnected {
-            WebView(url: Constant.agreementURL)
-                .navigationTitle(Constant.userAgreement)
-                .background(.whiteApp)
-                .onAppear {
-                    checkConnection()
+        ZStack {
+            Color(.whiteApp)
+                .ignoresSafeArea()
+            VStack {
+                if isConnected {
+                    if isProgressViewVisible {
+                        ProgressView(value: viewModel.progress)
+                            .progressViewStyle(.linear)
+                            .tint(.blackApp)
+                            .scaleEffect(x: 1, y: 0.5)
+                            .onChange(of: viewModel.progress) { value in
+                                if value > 0.99 {
+                                    isProgressViewVisible = false
+                                }
+                            }
+                    }
+                    WebView(url: Constant.agreementURL, viewModel: viewModel)
+                        .navigationTitle(Constant.userAgreement)
+                        .background(.whiteApp)
+                        .onAppear {
+                            checkConnection()
+                        }
+                } else {
+                    ErrorView(errorType: .noInternet)
+                        .navigationBarBackButtonHidden(true)
                 }
-        } else {
-            ErrorView(errorType: .noInternet)
-                .navigationBarBackButtonHidden(true)
+            }
         }
     }
     
