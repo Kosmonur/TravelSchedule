@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchCityView: View {
     
+    @Binding var path: NavigationPath
     let selectionType: SelectionType
     @ObservedObject var viewModel: ScheduleViewModel
     @State private var searchCity: String = ""
@@ -23,9 +24,8 @@ struct SearchCityView: View {
     
     var body: some View {
         SearchBar(searchText: $searchCity)
-        
         List(searchCityResult) { city in
-            NavigationLink(destination: SearchStationView(city: city, selectionType: selectionType, viewModel: viewModel)) {
+            NavigationLink(destination: SearchStationView(path: $path, city: city, selectionType: selectionType, viewModel: viewModel)) {
                 Text(city.name)
             }
         }
@@ -34,5 +34,5 @@ struct SearchCityView: View {
 
 
 #Preview {
-    SearchCityView(selectionType: .departure, viewModel: ScheduleViewModel())
+    SearchCityView(path: ContentView().$path, selectionType: .departure, viewModel: ScheduleViewModel())
 }

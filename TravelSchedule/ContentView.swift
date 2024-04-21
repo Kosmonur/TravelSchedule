@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var path = NavigationPath()
     @State private var selectedTab = 0
     
     var body: some View {
-        
-        NavigationStack {
+        NavigationStack(path: $path) {
             TabView(selection: $selectedTab) {
-                ScheduleView()
+                ScheduleView(path: $path)
                     .tabItem {
                         Image(.schedule)
                             .renderingMode(.template)

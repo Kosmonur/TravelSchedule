@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ScheduleView: View {
-    
+    @Binding var path: NavigationPath
     @State private var from = ""
     @State private var to = ""
-    
-    @State private var isClicked: Bool = false
+    @State private var isClicked = false
     @State private var viewModel = ScheduleViewModel()
     
     var body: some View {
@@ -24,8 +23,7 @@ struct ScheduleView: View {
                 HStack(spacing: 16) {
                     VStack {
                         Spacer()
-                        
-                        NavigationLink(destination: SearchCityView(selectionType: .departure, viewModel: viewModel)) {
+                        NavigationLink(value: SelectionType.departure) {
                             Text(from)
                                 .font(.regular17)
                                 .foregroundStyle(from == Constant.from ? .grayUniv: .blackUniv)
@@ -33,10 +31,8 @@ struct ScheduleView: View {
                                 .lineLimit(1)
                                 .padding(.horizontal)
                         }
-                        
                         Spacer()
-                        
-                        NavigationLink(destination: SearchCityView(selectionType: .arrival, viewModel: viewModel)) {
+                        NavigationLink(value: SelectionType.arrival) {
                             Text(to)
                                 .font(.regular17)
                                 .foregroundStyle(to == Constant.to ? .grayUniv: .blackUniv)
@@ -44,7 +40,6 @@ struct ScheduleView: View {
                                 .lineLimit(1)
                                 .padding(.horizontal)
                         }
-                        
                         Spacer()
                     }
                     .frame(height: 96)
@@ -88,6 +83,16 @@ struct ScheduleView: View {
                 to = Constant.to
             }
         }
+        .navigationDestination(for: SelectionType.self) { type in
+            switch type {
+            case .departure: SearchCityView(path: $path,
+                                            selectionType: .departure,
+                                            viewModel: viewModel)
+            case .arrival: SearchCityView(path: $path,
+                                          selectionType: .arrival,
+                                          viewModel: viewModel)
+            }
+        }
     }
 }
 
@@ -99,5 +104,5 @@ struct RotateButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    ScheduleView()
+    ScheduleView(path: ContentView().$path)
 }

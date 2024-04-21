@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SearchStationView: View {
     
+    @Binding var path: NavigationPath
+    
     let city: CityModel
     let selectionType: SelectionType
     @ObservedObject var viewModel: ScheduleViewModel
@@ -22,34 +24,30 @@ struct SearchStationView: View {
         }
     }
     
-    
     var body: some View {
-        
         SearchBar(searchText: $searchStation)
-        
         List(searchStationResult, id: \.self) { station in
-            NavigationLink(destination: EmptyView()) {
+            NavigationLink(value: "") {
                 Text(station)
-                    .onTapGesture {
-                        switch selectionType {
-                        case .departure:
-                            viewModel.fromCity = city.name
-                            viewModel.fromStation = station
-                        case .arrival:
-                            viewModel.toCity = city.name
-                            viewModel.toStation = station
-                        }
-                    }
-                
+            }
+            .onTapGesture {
+                switch selectionType {
+                case .departure:
+                    viewModel.fromCity = city.name
+                    viewModel.fromStation = station
+                case .arrival:
+                    viewModel.toCity = city.name
+                    viewModel.toStation = station
+                }
+                path = NavigationPath()
             }
         }
     }
 }
 
-
-
 #Preview {
-    SearchStationView(city: CityModel( name: "Сочи",
+    SearchStationView(path: ContentView().$path,
+                      city: CityModel( name: "Сочи",
                                        stations: [ "Морской вокзал",
                                                    "Центральный вокзал",
                                                    "Южный вокзал"]),
