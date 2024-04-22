@@ -26,7 +26,9 @@ struct ScheduleView: View {
                         NavigationLink(value: SelectionType.departure) {
                             Text(from)
                                 .font(.regular17)
-                                .foregroundStyle(from == Constant.from ? .grayUniv: .blackUniv)
+                                .scaledToFit()
+                                .minimumScaleFactor(0.5)
+                                .foregroundStyle(from == Constant.from || from == Constant.to ? .grayUniv: .blackUniv)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .lineLimit(1)
                                 .padding(.horizontal)
@@ -35,7 +37,9 @@ struct ScheduleView: View {
                         NavigationLink(value: SelectionType.arrival) {
                             Text(to)
                                 .font(.regular17)
-                                .foregroundStyle(to == Constant.to ? .grayUniv: .blackUniv)
+                                .scaledToFit()
+                                .minimumScaleFactor(0.5)
+                                .foregroundStyle(to == Constant.to || to == Constant.from ? .grayUniv: .blackUniv)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .lineLimit(1)
                                 .padding(.horizontal)
