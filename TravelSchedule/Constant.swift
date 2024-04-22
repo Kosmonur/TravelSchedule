@@ -21,5 +21,9 @@ enum Constant {
     static let noInternet = "Нет интернета"
     static let serverErr = "Ошибка сервера"
     static let searchPlaceholder = "Введите запрос"
+    static let citySelect = "Выбор города"
+    static let stationSelect = "Выбор станции"
+    static let cityNotFound = "Город не найден"
+    static let stationNotFound = "Станция не найдена"
     
 }

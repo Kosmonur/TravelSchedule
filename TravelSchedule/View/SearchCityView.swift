@@ -23,10 +23,28 @@ struct SearchCityView: View {
     }
     
     var body: some View {
-        SearchBar(searchText: $searchCity)
-        List(searchCityResult) { city in
-            NavigationLink(destination: SearchStationView(path: $path, city: city, selectionType: selectionType, viewModel: viewModel)) {
-                Text(city.name)
+        ZStack {
+            Color(.whiteApp)
+                .ignoresSafeArea()
+            VStack {
+                SearchBar(searchText: $searchCity)
+                List(searchCityResult) { city in
+                    NavigationLink(destination: SearchStationView(path: $path, city: city, selectionType: selectionType, viewModel: viewModel)) {
+                        Text(city.name)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                }
+                .listStyle(.plain)
+                .overlay(Group {
+                    if searchCityResult.isEmpty {
+                        Text(Constant.cityNotFound)
+                            .foregroundStyle(.blackApp)
+                            .font(.bold24)
+                    }
+                })
+                .toolbarRole(.editor)
+                .navigationTitle(Constant.citySelect)
             }
         }
     }

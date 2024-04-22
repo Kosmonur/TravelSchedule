@@ -25,21 +25,39 @@ struct SearchStationView: View {
     }
     
     var body: some View {
-        SearchBar(searchText: $searchStation)
-        List(searchStationResult, id: \.self) { station in
-            NavigationLink(value: "") {
-                Text(station)
-            }
-            .onTapGesture {
-                switch selectionType {
-                case .departure:
-                    viewModel.fromCity = city.name
-                    viewModel.fromStation = station
-                case .arrival:
-                    viewModel.toCity = city.name
-                    viewModel.toStation = station
+        ZStack {
+            Color(.whiteApp)
+                .ignoresSafeArea()
+            VStack {
+                SearchBar(searchText: $searchStation)
+                List(searchStationResult, id: \.self) { station in
+                    NavigationLink(value: "") {
+                        Text(station)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .onTapGesture {
+                        switch selectionType {
+                        case .departure:
+                            viewModel.fromCity = city.name
+                            viewModel.fromStation = station
+                        case .arrival:
+                            viewModel.toCity = city.name
+                            viewModel.toStation = station
+                        }
+                        path = NavigationPath()
+                    }
                 }
-                path = NavigationPath()
+                .listStyle(.plain)
+                .overlay(Group {
+                    if searchStationResult.isEmpty {
+                        Text(Constant.stationNotFound)
+                            .foregroundStyle(.blackApp)
+                            .font(.bold24)
+                    }
+                })
+                .toolbarRole(.editor)
+                .navigationTitle(Constant.stationSelect)
             }
         }
     }
