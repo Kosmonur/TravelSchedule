@@ -44,6 +44,7 @@ struct SearchStationView: View {
                         case .arrival:
                             viewModel.toCity = city.name
                             viewModel.toStation = station
+                        case .find: ()
                         }
                         path = NavigationPath()
                     }

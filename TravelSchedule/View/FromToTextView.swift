@@ -14,8 +14,8 @@ struct FromToTextView: View {
     var body: some View {
         Text(type)
             .font(.regular17)
-            .scaledToFit()
-            .minimumScaleFactor(0.5)
+//            .scaledToFit()
+//            .minimumScaleFactor(0.5)
             .foregroundStyle(type == Constant.from || type == Constant.to ? .grayUniv: .blackUniv)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineLimit(1)

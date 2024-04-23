@@ -20,6 +20,9 @@
 		F21C092D2BD42509006AAD9A /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C092C2BD42509006AAD9A /* ScheduleViewModel.swift */; };
 		F21C092F2BD42846006AAD9A /* SearchStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C092E2BD42846006AAD9A /* SearchStationView.swift */; };
 		F21C09512BD66878006AAD9A /* FromToTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09502BD66878006AAD9A /* FromToTextView.swift */; };
+		F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09522BD78C9B006AAD9A /* RoutesListView.swift */; };
+		F21C09572BD794E7006AAD9A /* RouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09562BD794E7006AAD9A /* RouteModel.swift */; };
+		F21C09592BD79A4C006AAD9A /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09582BD79A4C006AAD9A /* RouteView.swift */; };
 		F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */; };
 		F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732282BA0B0CD0062011B /* ContentView.swift */; };
 		F2F7322B2BA0B0CF0062011B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F7322A2BA0B0CF0062011B /* Assets.xcassets */; };
@@ -41,6 +44,9 @@
 		F21C092C2BD42509006AAD9A /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		F21C092E2BD42846006AAD9A /* SearchStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStationView.swift; sourceTree = "<group>"; };
 		F21C09502BD66878006AAD9A /* FromToTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromToTextView.swift; sourceTree = "<group>"; };
+		F21C09522BD78C9B006AAD9A /* RoutesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesListView.swift; sourceTree = "<group>"; };
+		F21C09562BD794E7006AAD9A /* RouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteModel.swift; sourceTree = "<group>"; };
+		F21C09582BD79A4C006AAD9A /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		F2F732232BA0B0CD0062011B /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		F2F732282BA0B0CD0062011B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +76,8 @@
 				F21C091A2BD3BCA4006AAD9A /* SearchCityView.swift */,
 				F21C092E2BD42846006AAD9A /* SearchStationView.swift */,
 				F21C09212BD3BFC4006AAD9A /* SearchBarView.swift */,
+				F21C09522BD78C9B006AAD9A /* RoutesListView.swift */,
+				F21C09582BD79A4C006AAD9A /* RouteView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -87,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				F21C09162BD3B757006AAD9A /* CityModel.swift */,
+				F21C09562BD794E7006AAD9A /* RouteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,7 +221,9 @@
 			files = (
 				F21C09172BD3B757006AAD9A /* CityModel.swift in Sources */,
 				F205F0FA2BCC23190086B88E /* AgreementView.swift in Sources */,
+				F21C09592BD79A4C006AAD9A /* RouteView.swift in Sources */,
 				F205F1042BCC291E0086B88E /* WebView.swift in Sources */,
+				F21C09572BD794E7006AAD9A /* RouteModel.swift in Sources */,
 				F21C092F2BD42846006AAD9A /* SearchStationView.swift in Sources */,
 				F205F0F52BCC10650086B88E /* Constant.swift in Sources */,
 				F205F0F02BCBEC3D0086B88E /* SettingsView.swift in Sources */,
@@ -225,6 +236,7 @@
 				F205F0F32BCC04230086B88E /* Fonts.swift in Sources */,
 				F21C092D2BD42509006AAD9A /* ScheduleViewModel.swift in Sources */,
 				F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */,
+				F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

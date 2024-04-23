@@ -7,12 +7,19 @@
 
 import SwiftUI
 
+enum SelectionType {
+    case departure
+    case arrival
+    case find
+}
+
 struct ScheduleView: View {
     @Binding var path: NavigationPath
     @State private var from = ""
     @State private var to = ""
     @State private var isClicked = false
     @State private var viewModel = ScheduleViewModel()
+    @State private var isFindButtonTapped = false
     
     var body: some View {
         VStack {
@@ -52,7 +59,19 @@ struct ScheduleView: View {
             }
             .frame(height: 128)
             .cornerRadius(20)
-            .padding()
+            .padding([.leading, .trailing], 16)
+            
+            NavigationLink(value: SelectionType.find) {
+                Text(Constant.find)
+                    .foregroundColor(.white)
+                    .font(.bold17)
+                    .frame(width: 150, height: 60)
+                    .background(.blueUniv)
+                    .cornerRadius(16)
+                    .padding(.vertical, 16)
+                    .opacity(viewModel.fromCity == nil || viewModel.toCity == nil ? 0 : 1)
+            }
+            
             Spacer()
             Rectangle().frame(height: 1)
                 .foregroundStyle(.grayUniv)
@@ -81,6 +100,7 @@ struct ScheduleView: View {
             case .arrival: SearchCityView(path: $path,
                                           selectionType: .arrival,
                                           viewModel: viewModel)
+            case .find: RoutesListView()
             }
         }
     }

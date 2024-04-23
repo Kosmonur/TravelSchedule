@@ -25,5 +25,5 @@ enum Constant {
     static let stationSelect = "Выбор станции"
     static let cityNotFound = "Город не найден"
     static let stationNotFound = "Станция не найдена"
-    
+    static let find = "Найти"
 }
