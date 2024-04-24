@@ -11,7 +11,12 @@ struct RoutesListView: View {
     
     @ObservedObject private var viewModel = RoutesViewModel()
     @State var title: String
-    @State var isRedDotVisible: Bool = true
+    @State var isRedDotVisible = false
+    @State var isMorningOn = true
+    @State var isDayOn = true
+    @State var isEveningOn = true
+    @State var isNightOn = true
+    @State var isTransfersOn = true
     
     var filteredRoutes: [RouteModel] {
         return(viewModel.routes)
@@ -36,7 +41,7 @@ struct RoutesListView: View {
                 }
                 .padding(.bottom, -32)
                 
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: FilterTimeView(isMorningOn: $isMorningOn, isDayOn: $isDayOn, isEveningOn: $isEveningOn, isNightOn: $isNightOn, isTransfersOn: $isTransfersOn)) {
                     HStack{
                         Text(Constant.specifyTime)
                         Rectangle()
@@ -48,7 +53,7 @@ struct RoutesListView: View {
                     .foregroundColor(.white)
                     .font(.bold17)
                     .frame(maxWidth: .infinity)
-                    .frame( height: 60)
+                    .frame(height: 60)
                     .background(.blueUniv)
                     .cornerRadius(16)
                 }

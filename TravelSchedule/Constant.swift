@@ -30,4 +30,12 @@ enum Constant {
     static let email = "E-mail"
     static let phone = "Телефон"
     static let carrierInfo = "Информация о перевозчике"
+    static let departureTime = "Время отправления"
+    static let showTransfer = "Показывать варианты с пересадками"
+    static let yes = "Да"
+    static let no = "Нет"
+    static let morningTime = "Утро 06:00 - 12:00"
+    static let dayTime = "День 12:00 - 18:00"
+    static let eveningTime = "Вечер 18:00 - 00:00"
+    static let nightTime = "Ночь 00:00 - 06:00"
 }
