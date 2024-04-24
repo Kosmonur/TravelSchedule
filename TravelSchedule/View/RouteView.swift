@@ -44,7 +44,7 @@ struct RouteView: View {
         }
         .frame(height: 104)
         .padding(.horizontal, 14)
-        .background(.lightGray)
+        .background(.lightGr)
         .cornerRadius(24)
     }
 }

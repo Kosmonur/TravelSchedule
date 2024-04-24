@@ -11,6 +11,7 @@ struct RoutesListView: View {
     
     @ObservedObject private var viewModel = RoutesViewModel()
     @State var title: String
+    @State var isRedDotVisible: Bool = true
     
     var filteredRoutes: [RouteModel] {
         return(viewModel.routes)
@@ -36,13 +37,20 @@ struct RoutesListView: View {
                 .padding(.bottom, -32)
                 
                 NavigationLink(destination: EmptyView()) {
-                    Text(Constant.specifyTime)
-                        .foregroundColor(.white)
-                        .font(.bold17)
-                        .frame(maxWidth: .infinity)
-                        .frame( height: 60)
-                        .background(.blueUniv)
-                        .cornerRadius(16)
+                    HStack{
+                        Text(Constant.specifyTime)
+                        Rectangle()
+                            .frame(width: 8, height: 8)
+                            .cornerRadius(8)
+                            .foregroundColor(.redUniv)
+                            .opacity(isRedDotVisible ? 1 : 0)
+                    }
+                    .foregroundColor(.white)
+                    .font(.bold17)
+                    .frame(maxWidth: .infinity)
+                    .frame( height: 60)
+                    .background(.blueUniv)
+                    .cornerRadius(16)
                 }
             }
             .toolbarRole(.editor)
