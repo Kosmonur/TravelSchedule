@@ -15,10 +15,9 @@ enum SelectionType {
 
 struct ScheduleView: View {
     @Binding var path: NavigationPath
-    @State private var from = ""
-    @State private var to = ""
+    @State private var from = Constant.from
+    @State private var to = Constant.to
     @State private var isClicked = false
-    @State private var viewModel = ScheduleViewModel()
     @State private var isFindButtonTapped = false
     
     var body: some View {
@@ -31,11 +30,11 @@ struct ScheduleView: View {
                     VStack {
                         Spacer()
                         NavigationLink(value: SelectionType.departure) {
-                            FromToTextView(type: from)
+                            FromToTextView(type: $from)
                         }
                         Spacer()
                         NavigationLink(value: SelectionType.arrival) {
-                            FromToTextView(type: to)
+                            FromToTextView(type: $to)
                         }
                         Spacer()
                     }
@@ -45,8 +44,6 @@ struct ScheduleView: View {
                         .cornerRadius(20))
                     Button {
                         isClicked.toggle()
-                        swap(&viewModel.fromCity, &viewModel.toCity)
-                        swap(&viewModel.fromStation, &viewModel.toStation)
                         swap(&from, &to)
                     } label: {
                         Image(.change)
@@ -69,7 +66,7 @@ struct ScheduleView: View {
                     .background(.blueUniv)
                     .cornerRadius(16)
                     .padding(.vertical, 16)
-                    .opacity(viewModel.fromCity == nil || viewModel.toCity == nil ? 0 : 1)
+                    .opacity(from == Constant.from || to == Constant.to || from == Constant.to || to == Constant.from ? 0 : 1)
             }
             
             Spacer()
@@ -78,29 +75,11 @@ struct ScheduleView: View {
                 .padding(.bottom,10)
         }
         .background(.whiteApp)
-        .onAppear {
-            if let fromCity = viewModel.fromCity,
-               let fromStation = viewModel.fromStation {
-                from = "\(fromCity) (\(fromStation))"
-            } else {
-                from = Constant.from
-            }
-            if let toCity = viewModel.toCity,
-               let toStation = viewModel.toStation {
-                to = "\(toCity) (\(toStation))"
-            } else {
-                to = Constant.to
-            }
-        }
         .navigationDestination(for: SelectionType.self) { type in
             switch type {
-            case .departure: SearchCityView(path: $path,
-                                            selectionType: .departure,
-                                            viewModel: viewModel)
-            case .arrival: SearchCityView(path: $path,
-                                          selectionType: .arrival,
-                                          viewModel: viewModel)
-            case .find: RoutesListView()
+            case .departure: SearchCityView(path: $path, from: $from, to: $to, selectionType: .departure)
+            case .arrival: SearchCityView(path: $path, from: $from, to: $to, selectionType: .arrival)
+            case .find: RoutesListView(title: "\(from) → \(to)")
             }
         }
     }
@@ -114,5 +93,5 @@ struct RotateButtonStyle: ButtonStyle {
 }
 
 #Preview {
-    ScheduleView(path: ContentView().$path)
+    ScheduleView(path: .constant(NavigationPath()))
 }

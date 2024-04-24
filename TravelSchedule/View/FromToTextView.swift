@@ -9,13 +9,11 @@ import SwiftUI
 
 struct FromToTextView: View {
     
-    var type: String
+    @Binding var type: String
     
     var body: some View {
         Text(type)
             .font(.regular17)
-//            .scaledToFit()
-//            .minimumScaleFactor(0.5)
             .foregroundStyle(type == Constant.from || type == Constant.to ? .grayUniv: .blackUniv)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineLimit(1)
@@ -24,5 +22,5 @@ struct FromToTextView: View {
 }
 
 #Preview {
-    FromToTextView(type: Constant.from)
+    FromToTextView(type: .constant(Constant.from))
 }

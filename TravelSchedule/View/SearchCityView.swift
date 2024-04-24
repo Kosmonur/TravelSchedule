@@ -10,15 +10,18 @@ import SwiftUI
 struct SearchCityView: View {
     
     @Binding var path: NavigationPath
+    @Binding var from: String
+    @Binding var to: String
     let selectionType: SelectionType
-    @ObservedObject var viewModel: ScheduleViewModel
+    @State private var viewModel = ScheduleViewModel()
     @State private var searchCity: String = ""
     
     var searchCityResult: [CityModel] {
         if searchCity.isEmpty {
             return viewModel.cities
         } else {
-            return viewModel.cities.filter { $0.name.lowercased().contains(searchCity.lowercased()) }
+            return viewModel.cities.filter { $0.name.lowercased().contains(searchCity.lowercased())
+            }
         }
     }
     
@@ -29,7 +32,7 @@ struct SearchCityView: View {
             VStack {
                 SearchBar(searchText: $searchCity)
                 List(searchCityResult) { city in
-                    NavigationLink(destination: SearchStationView(path: $path, city: city, selectionType: selectionType, viewModel: viewModel)) {
+                    NavigationLink(destination: SearchStationView(path: $path, from: $from, to: $to, city: city, selectionType: selectionType)) {
                         Text(city.name)
                     }
                     .listRowBackground(Color.clear)
@@ -50,7 +53,7 @@ struct SearchCityView: View {
     }
 }
 
-
 #Preview {
-    SearchCityView(path: ContentView().$path, selectionType: .departure, viewModel: ScheduleViewModel())
+    SearchCityView(path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
+    
 }

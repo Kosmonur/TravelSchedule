@@ -9,19 +9,48 @@ import SwiftUI
 
 struct RoutesListView: View {
     
-    @State var viewModel = ScheduleViewModel()
+    @StateObject var viewModel = ScheduleViewModel()
+    @State var title: String
+    
+    var filteredRoutes: [RouteModel] {
+        return(viewModel.routes)
+    }
     
     var body: some View {
-        VStack(spacing: 8){
-            RouteView(route: viewModel.routes[0])
-            RouteView(route: viewModel.routes[1])
+        ZStack {
+            Color(.whiteApp)
+                .ignoresSafeArea()
+            VStack {
+                Text(title)
+                    .font(.bold24)
+                    .foregroundColor(.blackApp)
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 8) {
+                        ForEach(filteredRoutes) { route in
+                            NavigationLink(destination: EmptyView()) {
+                                RouteView(route: route)
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom, -32)
+                
+                NavigationLink(destination: EmptyView()) {
+                    Text(Constant.specifyTime)
+                        .foregroundColor(.white)
+                        .font(.bold17)
+                        .frame(maxWidth: .infinity)
+                        .frame( height: 60)
+                        .background(.blueUniv)
+                        .cornerRadius(16)
+                }
+            }
+            .toolbarRole(.editor)
+            .padding(16)
         }
-        .toolbarRole(.editor)
-        .padding(16)
-        .navigationTitle("Name")
     }
 }
 
 #Preview {
-    RoutesListView()
+    RoutesListView(title: "Маршрут")
 }

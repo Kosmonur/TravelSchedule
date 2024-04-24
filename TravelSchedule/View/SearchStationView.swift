@@ -10,17 +10,18 @@ import SwiftUI
 struct SearchStationView: View {
     
     @Binding var path: NavigationPath
-    
+    @Binding var from: String
+    @Binding var to: String
     let city: CityModel
     let selectionType: SelectionType
-    @ObservedObject var viewModel: ScheduleViewModel
     @State private var searchStation: String = ""
     
     var searchStationResult: [String] {
         if searchStation.isEmpty {
             return city.stations
         } else {
-            return city.stations.filter { $0.lowercased().contains(searchStation.lowercased()) }
+            return city.stations.filter { $0.lowercased().contains(searchStation.lowercased())
+            }
         }
     }
     
@@ -39,11 +40,9 @@ struct SearchStationView: View {
                     .onTapGesture {
                         switch selectionType {
                         case .departure:
-                            viewModel.fromCity = city.name
-                            viewModel.fromStation = station
+                            from = "\(city.name) (\(station))"
                         case .arrival:
-                            viewModel.toCity = city.name
-                            viewModel.toStation = station
+                            to = "\(city.name) (\(station))"
                         case .find: ()
                         }
                         path = NavigationPath()
@@ -65,11 +64,5 @@ struct SearchStationView: View {
 }
 
 #Preview {
-    SearchStationView(path: ContentView().$path,
-                      city: CityModel( name: "Сочи",
-                                       stations: [ "Морской вокзал",
-                                                   "Центральный вокзал",
-                                                   "Южный вокзал"]),
-                      selectionType: .departure,
-                      viewModel: ScheduleViewModel())
+    SearchCityView(path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
 }
