@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RouteModel: Identifiable, Hashable {
+struct RouteModel: Identifiable {
     let id: UUID
     let carrierName: String
     let logo: String

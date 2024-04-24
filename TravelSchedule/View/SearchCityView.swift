@@ -13,7 +13,7 @@ struct SearchCityView: View {
     @Binding var from: String
     @Binding var to: String
     let selectionType: SelectionType
-    @State private var viewModel = ScheduleViewModel()
+    @ObservedObject private var viewModel = CitiesViewModel()
     @State private var searchCity: String = ""
     
     var searchCityResult: [CityModel] {

@@ -50,5 +50,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: ScheduleViewModel().routes[0])
+    RouteView(route: RoutesViewModel().routes[0])
 }

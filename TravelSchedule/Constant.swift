@@ -27,4 +27,7 @@ enum Constant {
     static let stationNotFound = "Станция не найдена"
     static let find = "Найти"
     static let specifyTime = "Уточнить время"
+    static let email = "E-mail"
+    static let phone = "Телефон"
+    static let carrierInfo = "Информация о перевозчике"
 }

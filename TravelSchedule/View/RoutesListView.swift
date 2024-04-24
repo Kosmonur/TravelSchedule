@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RoutesListView: View {
     
-    @StateObject var viewModel = ScheduleViewModel()
+    @ObservedObject private var viewModel = RoutesViewModel()
     @State var title: String
     
     var filteredRoutes: [RouteModel] {
@@ -27,7 +27,7 @@ struct RoutesListView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 8) {
                         ForEach(filteredRoutes) { route in
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: CarrierView(logo: route.logo)) {
                                 RouteView(route: route)
                             }
                         }
