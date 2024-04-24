@@ -32,7 +32,7 @@ struct FilterTimeView: View {
                 }
                 Section {
                     RadioButtonView(isOn: $isTransfersOn, label: Constant.yes)
-                    RadioButtonView(isOn: $isTransfersOn, label: Constant.no)
+                    RadioButtonView(isOn: !$isTransfersOn, label: Constant.no)
                 } header: {
                     Text(Constant.showTransfer)
                         .font(.bold24)
@@ -44,6 +44,13 @@ struct FilterTimeView: View {
         }
         .toolbarRole(.editor)
     }
+}
+
+prefix func !(value: Binding<Bool>) -> Binding<Bool> {
+    Binding<Bool>(
+        get: { !value.wrappedValue },
+        set: { value.wrappedValue = !$0 }
+    )
 }
 
 #Preview {

@@ -11,7 +11,7 @@ struct RoutesListView: View {
     
     @ObservedObject private var viewModel = RoutesViewModel()
     @State var title: String
-    @State var isRedDotVisible = false
+    @State var isRedDotHide = true
     @State var isMorningOn = true
     @State var isDayOn = true
     @State var isEveningOn = true
@@ -48,7 +48,7 @@ struct RoutesListView: View {
                             .frame(width: 8, height: 8)
                             .cornerRadius(8)
                             .foregroundColor(.redUniv)
-                            .opacity(isRedDotVisible ? 1 : 0)
+                            .opacity(isRedDotHide ? 0 : 1)
                     }
                     .foregroundColor(.white)
                     .font(.bold17)
@@ -60,6 +60,9 @@ struct RoutesListView: View {
             }
             .toolbarRole(.editor)
             .padding(16)
+        }
+        .onAppear() {
+            isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
         }
     }
 }

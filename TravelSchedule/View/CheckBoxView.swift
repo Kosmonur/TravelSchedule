@@ -43,7 +43,7 @@ struct CheckBoxButtonStyle: ToggleStyle {
 
 #Preview {
     struct CheckBoxPreview: View {
-        @State var isOn: Bool = true
+        @State var isOn = true
         var body: some View {
             CheckBoxView(isOn: $isOn, label: Constant.morningTime)
         }

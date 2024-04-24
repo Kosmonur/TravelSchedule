@@ -43,7 +43,7 @@ struct ToggleRadioButtonStyle: ToggleStyle {
 
 #Preview {
     struct RadioButtonPreview: View {
-        @State var isOn: Bool = true
+        @State var isOn = true
         var body: some View {
             RadioButtonView(isOn: $isOn, label: Constant.no)
         }
