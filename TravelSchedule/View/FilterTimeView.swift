@@ -9,6 +9,8 @@ import SwiftUI
 
 struct FilterTimeView: View {
     
+    @Environment(\.dismiss) private var dismiss
+    
     @Binding var isMorningOn: Bool
     @Binding var isDayOn: Bool
     @Binding var isEveningOn: Bool
@@ -39,6 +41,19 @@ struct FilterTimeView: View {
                         .foregroundColor(.blackApp)
                 }
                 Spacer()
+                
+                NavigationLink(value: "") {
+                    Text(Constant.apply)
+                        .foregroundColor(.white)
+                        .font(.bold17)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 60)
+                        .background(.blueUniv)
+                        .cornerRadius(16)
+                        .onTapGesture {
+                            dismiss()
+                        }
+                }
             }
             .padding(16)
         }

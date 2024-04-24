@@ -56,13 +56,13 @@ struct RoutesListView: View {
                     .frame(height: 60)
                     .background(.blueUniv)
                     .cornerRadius(16)
+                    .onAppear {
+                        isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
+                    }
                 }
             }
             .toolbarRole(.editor)
             .padding(16)
-        }
-        .onAppear() {
-            isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
         }
     }
 }
