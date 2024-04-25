@@ -41,5 +41,15 @@ final class CitiesViewModel: ObservableObject {
                 name: "Гадюкино",
                 stations: [])]
     }
+    
+    func searchCityResult(searchCity: String) -> [CityModel] {
+        if searchCity.isEmpty {
+            return cities
+        } else {
+            return cities.filter { $0.name.lowercased().contains(searchCity.lowercased())
+            }
+        }
+    }
+    
 }
 

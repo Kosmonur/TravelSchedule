@@ -18,11 +18,8 @@ struct RoutesListView: View {
     @State var isNightOn = true
     @State var isTransfersOn = true
     
-    var filteredRoutes: [RouteModel] {
-        return(viewModel.routes)
-    }
-    
     var body: some View {
+        let filteredRoutes = viewModel.filteredRoutes(isMorningOn: isMorningOn, isDayOn: isDayOn, isEveningOn: isEveningOn, isNightOn: isNightOn, isTransfersOn: isTransfersOn)
         ZStack {
             Color(.whiteApp)
                 .ignoresSafeArea()
@@ -40,7 +37,6 @@ struct RoutesListView: View {
                     }
                 }
                 .padding(.bottom, -32)
-                
                 NavigationLink(destination: FilterTimeView(isMorningOn: $isMorningOn, isDayOn: $isDayOn, isEveningOn: $isEveningOn, isNightOn: $isNightOn, isTransfersOn: $isTransfersOn)) {
                     HStack{
                         Text(Constant.specifyTime)
@@ -61,6 +57,17 @@ struct RoutesListView: View {
                     }
                 }
             }
+            .overlay(Group {
+                if filteredRoutes.isEmpty {
+                    HStack {
+                        Spacer()
+                        Text(Constant.noOptions)
+                            .foregroundStyle(.blackApp)
+                            .font(.bold24)
+                        Spacer()
+                    }
+                }
+            })
             .toolbarRole(.editor)
             .padding(16)
         }

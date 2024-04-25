@@ -26,8 +26,8 @@ final class RoutesViewModel: ObservableObject {
                                   logo: "fgk",
                                   transfer: "",
                                   date: "15 января",
-                                  startTime: "01:15",
-                                  endTime: "09:00",
+                                  startTime: "11:15",
+                                  endTime: "15:00",
                                   duration: "9 часов"),
                        
                        RouteModel(id: UUID(),
@@ -91,6 +91,43 @@ final class RoutesViewModel: ObservableObject {
                                   endTime: "21:00",
                                   duration: "9 часов")
         ]
+    }
+    
+    func filteredRoutes(isMorningOn: Bool, isDayOn: Bool, isEveningOn: Bool, isNightOn: Bool, isTransfersOn: Bool ) -> [RouteModel] {
+        
+        let morningRoutes = isMorningOn ? routes.filter { route in
+            if let startHour = Int(route.startTime.prefix(2)),
+               (6 ..< 12).contains(startHour) {
+                return true
+            } else { return false }
+        } : []
+        
+        let dayRoutes = isDayOn ? routes.filter { route in
+            if let startHour = Int(route.startTime.prefix(2)),
+               (12 ..< 18).contains(startHour) {
+                return true
+            } else { return false }
+        } : []
+        
+        let eveningRoutes = isEveningOn ? routes.filter { route in
+            if let startHour = Int(route.startTime.prefix(2)),
+               (18 ..< 24).contains(startHour) {
+                return true
+            } else { return false }
+        } : []
+        
+        let nightyRoutes = isNightOn ? routes.filter { route in
+            if let startHour = Int(route.startTime.prefix(2)),
+               (0 ..< 6).contains(startHour) {
+                return true
+            } else { return false }
+        } : []
+        
+        var outputRoutes = [morningRoutes, dayRoutes, eveningRoutes, nightyRoutes].flatMap {$0}
+        outputRoutes.sort(by: { $0.date.prefix(2) < $1.date.prefix(2) })
+        
+        return(isTransfersOn ? outputRoutes : outputRoutes.filter {
+            $0.transfer == ""})
     }
 }
 

@@ -41,7 +41,6 @@ struct FilterTimeView: View {
                         .foregroundColor(.blackApp)
                 }
                 Spacer()
-                
                 NavigationLink(value: "") {
                     Text(Constant.apply)
                         .foregroundColor(.white)

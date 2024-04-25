@@ -16,16 +16,8 @@ struct SearchCityView: View {
     @ObservedObject private var viewModel = CitiesViewModel()
     @State private var searchCity: String = ""
     
-    var searchCityResult: [CityModel] {
-        if searchCity.isEmpty {
-            return viewModel.cities
-        } else {
-            return viewModel.cities.filter { $0.name.lowercased().contains(searchCity.lowercased())
-            }
-        }
-    }
-    
     var body: some View {
+        let searchCityResult = viewModel.searchCityResult(searchCity: searchCity)
         ZStack {
             Color(.whiteApp)
                 .ignoresSafeArea()

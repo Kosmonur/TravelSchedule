@@ -39,4 +39,5 @@ enum Constant {
     static let eveningTime = "Вечер 18:00 - 00:00"
     static let nightTime = "Ночь 00:00 - 06:00"
     static let apply = "Применить"
+    static let noOptions = "Вариантов нет"
 }
