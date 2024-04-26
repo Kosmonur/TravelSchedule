@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var path = NavigationPath()
-    @State private var selectedTab = 0
+    @State private var selectedTab: Int = .zero
     
     var body: some View {
         NavigationStack(path: $path) {

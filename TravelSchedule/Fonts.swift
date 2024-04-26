@@ -8,17 +8,13 @@
 import SwiftUI
 
 extension Font {
-    //Bold
     
+    //Bold
     static let bold17 = Font.system(size: 17, weight: .bold)
     static let bold24 = Font.system(size: 24, weight: .bold)
     
     //Regular
     static let regular12 = Font.system(size: 12)
     static let regular17 = Font.system(size: 17)
-    
-    //Semibold
-    
-    //Medium
-    
+
 }

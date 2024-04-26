@@ -13,4 +13,16 @@ struct CarrierModel: Identifiable {
     let name: String
     let email: String
     let phone: String
+    
+    init(
+        logo: String = "",
+        name: String = "",
+        email: String = "",
+        phone: String = ""
+    ) {
+        self.logo = logo
+        self.name = name
+        self.email = email
+        self.phone = phone
+    }
 }

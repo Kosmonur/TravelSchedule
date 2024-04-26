@@ -14,10 +14,7 @@ struct CarrierView: View {
     
     var body: some View {
         
-        let carrier = CarrierModel(logo: viewModel.carriers.filter { $0.logo == logo}.first?.logo ?? "",
-                                   name: viewModel.carriers.filter { $0.logo == logo}.first?.name ?? "",
-                                   email: viewModel.carriers.filter { $0.logo == logo}.first?.email ?? "",
-                                   phone: viewModel.carriers.filter { $0.logo == logo}.first?.phone ?? "")
+        let carrier = viewModel.carriers.filter { $0.logo == logo }.first ?? .init()
         
         ZStack {
             Color(.whiteApp)
