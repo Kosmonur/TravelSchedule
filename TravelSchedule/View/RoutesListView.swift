@@ -21,7 +21,7 @@ struct RoutesListView: View {
     var body: some View {
         let filteredRoutes = viewModel.filteredRoutes(isMorningOn: isMorningOn, isDayOn: isDayOn, isEveningOn: isEveningOn, isNightOn: isNightOn, isTransfersOn: isTransfersOn)
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack {
                 Text(title)

@@ -19,7 +19,7 @@ struct SearchCityView: View {
     var body: some View {
         let searchCityResult = viewModel.searchCityResult(searchCity: searchCity)
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack {
                 SearchBar(searchText: $searchCity)

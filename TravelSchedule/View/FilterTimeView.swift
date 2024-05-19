@@ -19,7 +19,7 @@ struct FilterTimeView: View {
     
     var body: some View {
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack(alignment: .leading) {
                 Section {

@@ -17,7 +17,7 @@ struct CarrierView: View {
         let carrier = viewModel.carriers.filter { $0.logo == logo }.first ?? .init()
         
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack (spacing: 16) {
                 Image(carrier.logo)

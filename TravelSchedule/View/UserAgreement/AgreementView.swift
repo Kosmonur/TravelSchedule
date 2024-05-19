@@ -16,7 +16,7 @@ struct AgreementView: View {
     
     var body: some View {
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack {
                 if isConnected {

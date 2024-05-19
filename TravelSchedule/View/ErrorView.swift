@@ -19,7 +19,7 @@ struct ErrorView: View {
     
     var body: some View {
         ZStack {
-            Color(.whiteApp)
+            Color.whiteApp
                 .ignoresSafeArea()
             VStack {
                 switch errorType {
