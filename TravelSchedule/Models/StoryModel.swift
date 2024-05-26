@@ -8,7 +8,7 @@
 import Foundation
 
 struct StoryModel: Identifiable {
-    let id: UUID
+    let id: Int
     let imageName: String
     let title: String
     let description: String

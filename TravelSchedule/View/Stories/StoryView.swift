@@ -9,11 +9,11 @@ import SwiftUI
 
 struct StoryView: View {
     
-    let viewModel = StoryViewModel()
+    let story: StoryModel
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
-            Image(viewModel.model[0].imageName)
+        ZStack {
+            Image(story.imageName)
                 .resizable()
                 .clipShape(RoundedRectangle(cornerRadius: 40))
                 .scaledToFill()
@@ -21,13 +21,13 @@ struct StoryView: View {
             VStack (spacing: 16) {
                 Spacer()
                 HStack {
-                    Text (viewModel.model[0].title)
+                    Text (story.title)
                         .font(.bold34)
                         .lineLimit(2)
                     Spacer()
                 }
                 HStack {
-                    Text (viewModel.model[0].description)
+                    Text (story.description)
                         .font(.regular20)
                         .lineLimit(3)
                     Spacer()
@@ -40,5 +40,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView()
+    StoryView(story: StoryViewModel().model[0])
 }

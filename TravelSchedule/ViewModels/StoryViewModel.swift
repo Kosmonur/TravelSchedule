@@ -12,10 +12,10 @@ final class StoryViewModel: ObservableObject {
     @Published var model: [StoryModel]
     
     init() {
-        model = (1...18).map { StoryModel(id: UUID(),
+        model = (1...18).map { StoryModel(id: $0-1,
                                           imageName: "\($0)",
-                                          title: "Text Text TextText Text Text Text Text Text",
-                                          description: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text TextText Text Text Text Text Text",
+                                          title: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)",
+                                          description: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)",
                                           isViewed: false)
         }
     }
