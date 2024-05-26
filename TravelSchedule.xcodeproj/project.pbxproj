@@ -40,6 +40,9 @@
 		F232A55D2C03460A006B5EDD /* StoriesProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A55B2C03460A006B5EDD /* StoriesProgressBar.swift */; };
 		F232A55E2C03460A006B5EDD /* StoriesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A55C2C03460A006B5EDD /* StoriesTabView.swift */; };
 		F232A5602C03467D006B5EDD /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A55F2C03467D006B5EDD /* ProgressBar.swift */; };
+		F232A5672C037E1B006B5EDD /* StoryPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5662C037E1B006B5EDD /* StoryPreviewModel.swift */; };
+		F232A5692C037E91006B5EDD /* StoryPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */; };
+		F232A56B2C03806E006B5EDD /* StoryPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A56A2C03806E006B5EDD /* StoryPreviewView.swift */; };
 		F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */; };
 		F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732282BA0B0CD0062011B /* ContentView.swift */; };
 		F2F7322B2BA0B0CF0062011B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F7322A2BA0B0CF0062011B /* Assets.xcassets */; };
@@ -81,6 +84,9 @@
 		F232A55B2C03460A006B5EDD /* StoriesProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesProgressBar.swift; sourceTree = "<group>"; };
 		F232A55C2C03460A006B5EDD /* StoriesTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesTabView.swift; sourceTree = "<group>"; };
 		F232A55F2C03467D006B5EDD /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		F232A5662C037E1B006B5EDD /* StoryPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewModel.swift; sourceTree = "<group>"; };
+		F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewViewModel.swift; sourceTree = "<group>"; };
+		F232A56A2C03806E006B5EDD /* StoryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewView.swift; sourceTree = "<group>"; };
 		F2F732232BA0B0CD0062011B /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		F2F732282BA0B0CD0062011B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				F21C09162BD3B757006AAD9A /* CityModel.swift */,
 				F21C09562BD794E7006AAD9A /* RouteModel.swift */,
 				F21C095C2BD8E058006AAD9A /* CarrierModel.swift */,
+				F232A5662C037E1B006B5EDD /* StoryPreviewModel.swift */,
 				F232A54A2C03386E006B5EDD /* StoryModel.swift */,
 			);
 			path = Models;
@@ -149,6 +156,7 @@
 				F21C09602BD8E3FF006AAD9A /* RoutesViewModel.swift */,
 				F21C09622BD8E41A006AAD9A /* CarrierViewModel.swift */,
 				F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */,
+				F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -187,6 +195,7 @@
 				F232A55C2C03460A006B5EDD /* StoriesTabView.swift */,
 				F232A54E2C033E2A006B5EDD /* StoryView.swift */,
 				F232A55B2C03460A006B5EDD /* StoriesProgressBar.swift */,
+				F232A56A2C03806E006B5EDD /* StoryPreviewView.swift */,
 			);
 			path = Stories;
 			sourceTree = "<group>";
@@ -303,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F21C09172BD3B757006AAD9A /* CityModel.swift in Sources */,
+				F232A56B2C03806E006B5EDD /* StoryPreviewView.swift in Sources */,
 				F205F0FA2BCC23190086B88E /* AgreementView.swift in Sources */,
 				F21C09592BD79A4C006AAD9A /* RouteView.swift in Sources */,
 				F205F1042BCC291E0086B88E /* WebView.swift in Sources */,
@@ -324,6 +334,7 @@
 				F21C09632BD8E41A006AAD9A /* CarrierViewModel.swift in Sources */,
 				F21C091B2BD3BCA4006AAD9A /* SearchCityView.swift in Sources */,
 				F21C09222BD3BFC4006AAD9A /* SearchBarView.swift in Sources */,
+				F232A5672C037E1B006B5EDD /* StoryPreviewModel.swift in Sources */,
 				F232A54D2C033A3D006B5EDD /* StoryViewModel.swift in Sources */,
 				F205F0EE2BCBEC280086B88E /* ScheduleView.swift in Sources */,
 				F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */,
@@ -333,6 +344,7 @@
 				F21C095B2BD8DF62006AAD9A /* CarrierView.swift in Sources */,
 				F205F0F32BCC04230086B88E /* Fonts.swift in Sources */,
 				F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */,
+				F232A5692C037E91006B5EDD /* StoryPreviewViewModel.swift in Sources */,
 				F232A5552C0342F6006B5EDD /* StoriesView.swift in Sources */,
 				F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */,
 				F21C09672BD90DD2006AAD9A /* FilterTimeView.swift in Sources */,

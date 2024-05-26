@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import Combine
 
 struct StoriesView: View {
+    
+    var storiesIsVisible = PassthroughSubject<Bool, Never>()
     
     let stories: [StoryModel]
     @State var currentStoryIndex: Int = .zero
@@ -17,7 +20,7 @@ struct StoriesView: View {
     private var timerConfiguration: TimerConfiguration { .init(storiesCount: stories.count) }
     
     var body: some View {
-        ZStack(alignment: .topTrailing) {
+        ZStack {
             
             StoriesTabView(stories: stories, currentStoryIndex: $currentStoryIndex)
                 .onChange(of: currentStoryIndex) { newValue in
@@ -31,14 +34,13 @@ struct StoriesView: View {
                 currentProgress: $currentProgress
             )
             .padding(.horizontal, 12)
+            .padding(.top, 28)
             .onChange(of: currentProgress) { newValue in
                 didChangeCurrentProgress(newProgress: newValue)
+                if currentProgress >= 1 {
+                    storiesIsVisible.send(false)
+                }
             }
-            
-            CloseButton(action: {})
-                .padding(.top, 50)
-                .padding(.trailing, 12)
-            
         }
     }
     

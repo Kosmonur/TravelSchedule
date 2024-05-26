@@ -17,7 +17,6 @@ struct StoriesProgressBar: View {
     
     var body: some View {
         ProgressBar(numberOfSections: storiesCount, progress: currentProgress)
-            .padding(.init(top: 28, leading: 12, bottom: 12, trailing: 12))
             .onAppear {
                 timer = Self.makeTimer(configuration: timerConfiguration)
                 cancellable = timer.connect()
