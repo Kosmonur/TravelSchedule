@@ -30,6 +30,10 @@
 		F21C09672BD90DD2006AAD9A /* FilterTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09662BD90DD2006AAD9A /* FilterTimeView.swift */; };
 		F21C09692BD913CE006AAD9A /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09682BD913CE006AAD9A /* CheckBoxView.swift */; };
 		F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */; };
+		F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54A2C03386E006B5EDD /* StoryModel.swift */; };
+		F232A54D2C033A3D006B5EDD /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */; };
+		F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54E2C033E2A006B5EDD /* StoryView.swift */; };
+		F232A5532C034168006B5EDD /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5522C034168006B5EDD /* CloseButton.swift */; };
 		F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */; };
 		F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732282BA0B0CD0062011B /* ContentView.swift */; };
 		F2F7322B2BA0B0CF0062011B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F7322A2BA0B0CF0062011B /* Assets.xcassets */; };
@@ -61,6 +65,10 @@
 		F21C09662BD90DD2006AAD9A /* FilterTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTimeView.swift; sourceTree = "<group>"; };
 		F21C09682BD913CE006AAD9A /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
+		F232A54A2C03386E006B5EDD /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
+		F232A54E2C033E2A006B5EDD /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
+		F232A5522C034168006B5EDD /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		F2F732232BA0B0CD0062011B /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		F2F732282BA0B0CD0062011B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +104,8 @@
 				F21C09682BD913CE006AAD9A /* CheckBoxView.swift */,
 				F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */,
 				F21C095A2BD8DF62006AAD9A /* CarrierView.swift */,
+				F232A54E2C033E2A006B5EDD /* StoryView.swift */,
+				F232A5502C034127006B5EDD /* Helpers */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -115,6 +125,7 @@
 				F21C09162BD3B757006AAD9A /* CityModel.swift */,
 				F21C09562BD794E7006AAD9A /* RouteModel.swift */,
 				F21C095C2BD8E058006AAD9A /* CarrierModel.swift */,
+				F232A54A2C03386E006B5EDD /* StoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,8 +136,26 @@
 				F21C095E2BD8E3E6006AAD9A /* CitiesViewModel.swift */,
 				F21C09602BD8E3FF006AAD9A /* RoutesViewModel.swift */,
 				F21C09622BD8E41A006AAD9A /* CarrierViewModel.swift */,
+				F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F232A5502C034127006B5EDD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F232A5522C034168006B5EDD /* CloseButton.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F232A5512C03413A006B5EDD /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F2F7322A2BA0B0CF0062011B /* Assets.xcassets */,
+				F205F0F22BCC04230086B88E /* Fonts.swift */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		F2F7321A2BA0B0CD0062011B = {
@@ -154,8 +183,7 @@
 				F21C091C2BD3BD16006AAD9A /* ViewModels */,
 				F21C09152BD3B726006AAD9A /* Models */,
 				F201F12A2BC97FA700986982 /* View */,
-				F2F7322A2BA0B0CF0062011B /* Assets.xcassets */,
-				F205F0F22BCC04230086B88E /* Fonts.swift */,
+				F232A5512C03413A006B5EDD /* Assets */,
 				F201F1362BCBE13B00986982 /* Info.plist */,
 				F2F7322C2BA0B0CF0062011B /* Preview Content */,
 			);
@@ -250,6 +278,7 @@
 				F21C09692BD913CE006AAD9A /* CheckBoxView.swift in Sources */,
 				F205F0F52BCC10650086B88E /* Constant.swift in Sources */,
 				F21C09612BD8E3FF006AAD9A /* RoutesViewModel.swift in Sources */,
+				F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */,
 				F205F0F02BCBEC3D0086B88E /* SettingsView.swift in Sources */,
 				F21C09512BD66878006AAD9A /* FromToTextView.swift in Sources */,
 				F21C095F2BD8E3E6006AAD9A /* CitiesViewModel.swift in Sources */,
@@ -258,13 +287,16 @@
 				F21C09632BD8E41A006AAD9A /* CarrierViewModel.swift in Sources */,
 				F21C091B2BD3BCA4006AAD9A /* SearchCityView.swift in Sources */,
 				F21C09222BD3BFC4006AAD9A /* SearchBarView.swift in Sources */,
+				F232A54D2C033A3D006B5EDD /* StoryViewModel.swift in Sources */,
 				F205F0EE2BCBEC280086B88E /* ScheduleView.swift in Sources */,
 				F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */,
+				F232A5532C034168006B5EDD /* CloseButton.swift in Sources */,
 				F21C095B2BD8DF62006AAD9A /* CarrierView.swift in Sources */,
 				F205F0F32BCC04230086B88E /* Fonts.swift in Sources */,
 				F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */,
 				F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */,
 				F21C09672BD90DD2006AAD9A /* FilterTimeView.swift in Sources */,
+				F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
