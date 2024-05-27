@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 enum SelectionType {
     case departure
@@ -22,8 +21,7 @@ struct ScheduleView: View {
     @State private var isClicked = false
     @State private var isFindButtonTapped = false
     @State private var showStoryView = false
-    @State private var modelsForShow: [StoryModel] = []
-    @State private var cancellable = Set<AnyCancellable>()
+    @State private var modelsForShow: [StoryModel] = [StoryViewModel().model[0]]
     
     
     @ObservedObject private var storyPreviewViewModel = StoryPreviewViewModel()
@@ -117,34 +115,15 @@ struct ScheduleView: View {
                 case .find: RoutesListView(title: "\(from) → \(to)")
                 }
             }
-            
-            if showStoryView {
-                
-                ZStack(alignment: .topTrailing) {
-                    let storiesView = StoriesView(stories: modelsForShow)
-                    storiesView
-                        .onAppear {
-                            storiesView.storiesIsVisible
-                                .assign(to: \.showStoryView, on: self)
-                                .store(in: &cancellable)
-                        }
-                    
-                    CloseButton(action: {
-                        showStoryView = false
-                    })
-                    .padding(.top, 50)
-                    .padding(.trailing, 12)
-                    
-                }
-//                .transition(.asymmetric(insertion: .slide, removal: .scale))
- //               .transition(.push(from: .bottom))
- //               .transition(.slide)
-//                .scaleEffect(showStoryView ? 1 : 0.1)
-//                .opacity(showStoryView ? 1 : 0)
-                
+        }
+        .fullScreenCover(isPresented: $showStoryView) {
+            ZStack {
+                StoriesView(stories: modelsForShow)
             }
         }
-        .animation(.easeInOut(duration: 1), value: showStoryView)
+        .transaction({ transaction in
+            transaction.disablesAnimations = true
+        })
     }
 }
 

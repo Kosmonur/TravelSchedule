@@ -6,27 +6,36 @@
 //
 
 import SwiftUI
-import Combine
 
 struct StoriesView: View {
     
-    var storiesIsVisible = PassthroughSubject<Bool, Never>()
+    @Environment(\.dismiss) private var dismiss
     
     let stories: [StoryModel]
     @State var currentStoryIndex: Int = .zero
     @State var oldStoryIndex: Int = .zero
     @State var currentProgress: CGFloat = .zero
+    @State var viewInFinalState = false
     
     private var timerConfiguration: TimerConfiguration { .init(storiesCount: stories.count) }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
+            
+            Color.blackUniv
+                .ignoresSafeArea()
             
             StoriesTabView(stories: stories, currentStoryIndex: $currentStoryIndex)
                 .onChange(of: currentStoryIndex) { newValue in
                     didChangeCurrentIndex(oldIndex: oldStoryIndex, newIndex: newValue)
                     oldStoryIndex = newValue
                 }
+            
+            CloseButton(action: {
+                dismiss()
+            })
+            .padding(.top, 50)
+            .padding(.trailing, 12)
             
             StoriesProgressBar(
                 storiesCount: stories.count,
@@ -38,9 +47,21 @@ struct StoriesView: View {
             .onChange(of: currentProgress) { newValue in
                 didChangeCurrentProgress(newProgress: newValue)
                 if currentProgress >= 1 {
-                    storiesIsVisible.send(false)
+                    dismiss()
                 }
             }
+        }
+        .gesture(
+            DragGesture(minimumDistance: 50, coordinateSpace: .local)
+                .onEnded { _ in
+                    dismiss()
+                }
+        )
+        .opacity(viewInFinalState ? 1 : 0)
+        .scaleEffect(viewInFinalState ? 1 : 0)
+        .animation(.easeInOut(duration: 0.5), value: viewInFinalState)
+        .onAppear {
+            viewInFinalState = true
         }
     }
     
