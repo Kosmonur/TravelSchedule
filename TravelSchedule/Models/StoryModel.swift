@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StoryModel: Identifiable {
+struct StoryModel: Identifiable, Equatable {
     let id: Int
     let imageName: String
     let title: String

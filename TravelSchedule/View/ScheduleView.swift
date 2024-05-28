@@ -21,8 +21,7 @@ struct ScheduleView: View {
     @State private var isClicked = false
     @State private var isFindButtonTapped = false
     @State private var showStoryView = false
-    @State private var modelsForShow: [StoryModel] = [StoryViewModel().model[0]]
-    
+    @State private var modelsForShow: [StoryModel] = []
     
     @ObservedObject private var storyPreviewViewModel = StoryPreviewViewModel()
     
@@ -31,9 +30,7 @@ struct ScheduleView: View {
     var body: some View {
         
         ZStack {
-            
             VStack {
-                
                 ScrollView (.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: rows, alignment: .center, spacing: 12) {
                         ForEach(storyPreviewViewModel.models) { model in
@@ -49,7 +46,6 @@ struct ScheduleView: View {
                                                           description: $1.description,
                                                           isViewed: $1.isViewed)
                                         }
-                                    showStoryView = true
                                 }
                         }
                     }
@@ -121,9 +117,14 @@ struct ScheduleView: View {
                 StoriesView(stories: modelsForShow)
             }
         }
-        .transaction({ transaction in
+        .onChange(of: modelsForShow) { _ in
+            showStoryView = true
+        }
+        .transaction { transaction in
             transaction.disablesAnimations = true
-        })
+        }
+        .scaleEffect(showStoryView ? 0 : 1)
+        .animation(.easeInOut(duration: 0.6), value: showStoryView)
     }
 }
 

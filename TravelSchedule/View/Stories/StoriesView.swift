@@ -19,11 +19,17 @@ struct StoriesView: View {
     
     private var timerConfiguration: TimerConfiguration { .init(storiesCount: stories.count) }
     
+    private let duration = 0.6
+    
+    private func closeStories() {
+        viewInFinalState = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            dismiss()
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            
-            Color.blackUniv
-                .ignoresSafeArea()
             
             StoriesTabView(stories: stories, currentStoryIndex: $currentStoryIndex)
                 .onChange(of: currentStoryIndex) { newValue in
@@ -31,9 +37,9 @@ struct StoriesView: View {
                     oldStoryIndex = newValue
                 }
             
-            CloseButton(action: {
-                dismiss()
-            })
+            CloseButton {
+                closeStories()
+            }
             .padding(.top, 50)
             .padding(.trailing, 12)
             
@@ -47,19 +53,19 @@ struct StoriesView: View {
             .onChange(of: currentProgress) { newValue in
                 didChangeCurrentProgress(newProgress: newValue)
                 if currentProgress >= 1 {
-                    dismiss()
+                    closeStories()
                 }
             }
         }
         .gesture(
             DragGesture(minimumDistance: 50, coordinateSpace: .local)
                 .onEnded { _ in
-                    dismiss()
+                    closeStories()
                 }
         )
-        .opacity(viewInFinalState ? 1 : 0)
         .scaleEffect(viewInFinalState ? 1 : 0)
-        .animation(.easeInOut(duration: 0.5), value: viewInFinalState)
+        .background(viewInFinalState ? .blackUniv : .clear)
+        .animation(.easeInOut(duration: duration), value: viewInFinalState)
         .onAppear {
             viewInFinalState = true
         }

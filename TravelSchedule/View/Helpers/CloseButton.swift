@@ -20,5 +20,5 @@ struct CloseButton: View {
 }
 
 #Preview {
-    CloseButton(action: {})
+    CloseButton{}
 }
