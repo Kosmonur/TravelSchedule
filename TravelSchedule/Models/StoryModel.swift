@@ -12,5 +12,4 @@ struct StoryModel: Identifiable, Equatable {
     let imageName: String
     let title: String
     let description: String
-    let isViewed: Bool
 }

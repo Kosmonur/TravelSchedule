@@ -31,5 +31,6 @@ struct StoriesTabView: View {
 }
 
 #Preview {
-    StoriesTabView(stories: StoryViewModel().model.filter {(0...3).contains($0.id)}, currentStoryIndex: .constant(0))
+    
+    StoriesTabView(stories: [StoryModel(id: 0, imageName: "1", title: "Text1", description: "Text1"), StoryModel(id: 1, imageName: "2", title: "Text2", description: "Text2"), StoryModel(id: 2, imageName: "3", title: "Text3", description: "Text3")], currentStoryIndex: .constant(1))
 }

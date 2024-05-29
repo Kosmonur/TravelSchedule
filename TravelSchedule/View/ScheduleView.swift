@@ -21,7 +21,7 @@ struct ScheduleView: View {
     @State private var isClicked = false
     @State private var isFindButtonTapped = false
     @State private var showStoryView = false
-    @State private var modelsForShow: [StoryModel] = []
+    @State private var modelIDForShow: Int = .zero
     
     @ObservedObject private var storyPreviewViewModel = StoryPreviewViewModel()
     
@@ -36,16 +36,8 @@ struct ScheduleView: View {
                         ForEach(storyPreviewViewModel.models) { model in
                             StoryPreviewView(model: model)
                                 .onTapGesture {
-                                    modelsForShow = storyPreviewViewModel.models
-                                        .filter{$0.id >= model.id}
-                                        .flatMap {$0.storyModels}
-                                        .enumerated()
-                                        .map { StoryModel(id: $0,
-                                                          imageName: $1.imageName,
-                                                          title: $1.title,
-                                                          description: $1.description,
-                                                          isViewed: $1.isViewed)
-                                        }
+                                    modelIDForShow = model.id
+                                    showStoryView = true
                                 }
                         }
                     }
@@ -114,11 +106,8 @@ struct ScheduleView: View {
         }
         .fullScreenCover(isPresented: $showStoryView) {
             ZStack {
-                StoriesView(stories: modelsForShow)
+                StoriesView(storyPreviewModel: storyPreviewViewModel.models, previewIndex: modelIDForShow)
             }
-        }
-        .onChange(of: modelsForShow) { _ in
-            showStoryView = true
         }
         .transaction { transaction in
             transaction.disablesAnimations = true

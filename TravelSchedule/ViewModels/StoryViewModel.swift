@@ -5,20 +5,19 @@
 //  Created by Александр Пичугин on 26.05.2024.
 //
 
-import Foundation
+// import Foundation
 
-final class StoryViewModel: ObservableObject {
-    
-    @Published var model: [StoryModel]
-    
-    init() {
-        model = (1...18).map { StoryModel(id: $0-1,
-                                          imageName: "\($0)",
-                                          title: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)",
-                                          description: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)",
-                                          isViewed: false)
-        }
-    }
+//final class StoryViewModel: ObservableObject {
+//    
+//    @Published var model: [StoryModel]
+//    
+//    init() {
+//        model = (1...18).map { StoryModel(id: $0-1,
+//                                          imageName: "\($0)",
+//                                          title: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)",
+//                                          description: "Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0) Text\($0)")
+//        }
+//    }
     
 //    func isViewed(_ id: UUID) {
 //        model = model.map {
@@ -29,5 +28,5 @@ final class StoryViewModel: ObservableObject {
 //                                     isViewed: true) : $0
 //        }
 //    }
-}
+//}
 

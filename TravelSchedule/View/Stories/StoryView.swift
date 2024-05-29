@@ -40,5 +40,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView(story: StoryViewModel().model[0])
+    StoryView(story: StoryModel(id: 0, imageName: "1", title: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text", description: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text"))
 }
