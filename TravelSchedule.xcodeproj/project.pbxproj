@@ -31,7 +31,6 @@
 		F21C09692BD913CE006AAD9A /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C09682BD913CE006AAD9A /* CheckBoxView.swift */; };
 		F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */; };
 		F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54A2C03386E006B5EDD /* StoryModel.swift */; };
-		F232A54D2C033A3D006B5EDD /* StoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */; };
 		F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54E2C033E2A006B5EDD /* StoryView.swift */; };
 		F232A5532C034168006B5EDD /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5522C034168006B5EDD /* CloseButton.swift */; };
 		F232A5552C0342F6006B5EDD /* StoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5542C0342F6006B5EDD /* StoriesView.swift */; };
@@ -75,7 +74,6 @@
 		F21C09682BD913CE006AAD9A /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		F232A54A2C03386E006B5EDD /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
-		F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewModel.swift; sourceTree = "<group>"; };
 		F232A54E2C033E2A006B5EDD /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		F232A5522C034168006B5EDD /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		F232A5542C0342F6006B5EDD /* StoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesView.swift; sourceTree = "<group>"; };
@@ -155,7 +153,6 @@
 				F21C095E2BD8E3E6006AAD9A /* CitiesViewModel.swift */,
 				F21C09602BD8E3FF006AAD9A /* RoutesViewModel.swift */,
 				F21C09622BD8E41A006AAD9A /* CarrierViewModel.swift */,
-				F232A54C2C033A3D006B5EDD /* StoryViewModel.swift */,
 				F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */,
 			);
 			path = ViewModels;
@@ -335,7 +332,6 @@
 				F21C091B2BD3BCA4006AAD9A /* SearchCityView.swift in Sources */,
 				F21C09222BD3BFC4006AAD9A /* SearchBarView.swift in Sources */,
 				F232A5672C037E1B006B5EDD /* StoryPreviewModel.swift in Sources */,
-				F232A54D2C033A3D006B5EDD /* StoryViewModel.swift in Sources */,
 				F205F0EE2BCBEC280086B88E /* ScheduleView.swift in Sources */,
 				F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */,
 				F232A5592C0345B6006B5EDD /* TimerConfiguration.swift in Sources */,

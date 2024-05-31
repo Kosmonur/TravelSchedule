@@ -106,7 +106,7 @@ struct ScheduleView: View {
         }
         .fullScreenCover(isPresented: $showStoryView) {
             ZStack {
-                StoriesView(storyPreviewModel: storyPreviewViewModel.models, previewIndex: modelIDForShow)
+                StoriesView(storyPreviewModel: storyPreviewViewModel, previewIndex: modelIDForShow)
             }
         }
         .transaction { transaction in

@@ -40,5 +40,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView(story: StoryModel(id: 0, imageName: "1", title: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text", description: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text"))
+    StoryView(story: StoryModel(id: 0, imageName: "1", title: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text", description: "Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text Text", isViewed: false))
 }
