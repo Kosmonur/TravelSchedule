@@ -22,11 +22,15 @@ struct StoriesTabView: View {
     }
     
     func didTapStoryLeft() {
-        currentStoryIndex = max(currentStoryIndex - 1, .zero)
+        withAnimation {
+            currentStoryIndex = max(currentStoryIndex - 1, .zero)
+        }
     }
     
     func didTapStoryRight() {
-        currentStoryIndex = min(currentStoryIndex + 1, stories.count - 1)
+        withAnimation {
+            currentStoryIndex = min(currentStoryIndex + 1, stories.count - 1)
+        }
     }
 }
 

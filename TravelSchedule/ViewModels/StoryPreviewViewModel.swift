@@ -76,6 +76,45 @@ final class StoryPreviewViewModel: ObservableObject {
                                               storyModels: viewedStory)
     }
     
+    func allStoriesArray() -> [StoryModel] {
+        // массив всех stories в порядке их расположения в preview
+        models
+            .flatMap{$0.storyModels}.enumerated()
+            .map { StoryModel(id: $0,
+                              imageName: $1.imageName,
+                              title: $1.title,
+                              description: $1.description,
+                              isViewed: $1.isViewed)}
+    }
+    
+    func allStoryIdArray() -> [Int] {
+        // массив с номерами всех StoryID от 0 до последнего, входящими в модель
+        models.flatMap{$0.storyModels.map{$0.id}}
+    }
+    
+    func allPreviewIdArray() -> [Int] {
+        // массив, размером равный массиву StoryID, но вместо id Story стоит id preview, в который входит данная Story
+        models.map {model in
+            (.zero ..< model.storyModels.count).map {_ in model.id}
+        }
+        .flatMap {$0}
+    }
+    
+    func storiesBeforePreview(previewIndex: Int) -> Int {
+        //возвращает суммарное кол-во сториз во всех preview до previewIndex
+        (.zero ... previewIndex).map {models[$0].storyModels.count }.reduce(.zero, +) - models[previewIndex].storyModels.count
+    }
+    
+    func currentStoryIndex(previewIndex: Int, storyIndex: Int) -> Int {
+        //возвращает индекс сториз в общем массиве по известному индексу preview и индексу story в этом preview
+        storiesBeforePreview(previewIndex: previewIndex) + storyIndex
+    }
+    
+    func currentPreviewIndex(currentStoryIndex: Int) -> Int {
+        //возвращает по индексу сториз в общем массиве индекс preview, в которую эта сториз входит
+        models.map {model in
+            (.zero ..< model.storyModels.count).map {_ in model.id}
+        }.flatMap {$0}[currentStoryIndex]
+    }
+    
 }
-
-

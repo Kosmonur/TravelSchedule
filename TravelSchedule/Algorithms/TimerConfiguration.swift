@@ -1,13 +1,13 @@
 import Foundation
 
 struct TimerConfiguration {
-    let storiesCount: Int
+    var storiesCount: Int
     let timerTickInternal: TimeInterval
     let progressPerTick: CGFloat
     
     init(
         storiesCount: Int,
-        secondsPerStory: TimeInterval = 10,
+        secondsPerStory: TimeInterval = 5, //10,
         timerTickInternal: TimeInterval = 0.25
     ) {
         self.storiesCount = storiesCount
