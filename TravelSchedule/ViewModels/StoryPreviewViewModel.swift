@@ -14,53 +14,23 @@ final class StoryPreviewViewModel: ObservableObject {
     init() {
         models = (1...9).map { StoryPreviewModel(id: $0-1,
                                                  previewImageName: "Preview\($0)",
-                                                 title: "Text Text Text Text Text Text Text Text",
+                                                 title: String(repeating: "Text\($0-1) ", count: 10),
                                                  isViewed: false,
                                                  storyModels: [StoryModel(id: 0,
                                                                           imageName: "\(2*$0-1)",
-                                                                          title: "Text \(2*$0-2)",
-                                                                          description: "Text \(2*$0-2)",
+                                                                          title: String(repeating: "Text\(2*$0-2) ", count: 10),
+                                                                          description: String(repeating: "Text\(2*$0-2) ", count: 20),
                                                                           isViewed: false),
                                                                StoryModel(id: 1,
                                                                           imageName: "\(2*$0)",
-                                                                          title: "Text \(2*$0-1)",
-                                                                          description: "Text \(2*$0-1)",
+                                                                          title: String(repeating: "Text\(2*$0-1) ", count: 10),
+                                                                          description: String(repeating: "Text\(2*$0-1) ", count: 20),
                                                                           isViewed: false)
-                                                 ])
-        }
-        models.append(StoryPreviewModel(id: 9,
-                                        previewImageName: "Preview1",
-                                        title: "Text Text Text Text Text Text Text Text",
-                                        isViewed: false,
-                                        storyModels: [StoryModel(id: 0,
-                                                                 imageName: "1",
-                                                                 title: "Text18",
-                                                                 description: "Text18",
-                                                                 isViewed: false),
-                                                      StoryModel(id: 1,
-                                                                 imageName: "2",
-                                                                 title: "Text19",
-                                                                 description: "Text19",
-                                                                 isViewed: false),
-                                                      StoryModel(id: 2,
-                                                                 imageName: "3",
-                                                                 title: "Text20",
-                                                                 description: "Text20",
-                                                                 isViewed: false)
-                                        ]))
-        models.append(StoryPreviewModel(id: 10,
-                                        previewImageName: "Preview5",
-                                        title: "Text Text Text Text Text Text Text Text",
-                                        isViewed: false,
-                                        storyModels: [StoryModel(id: 0,
-                                                                 imageName: "9",
-                                                                 title: "Text21",
-                                                                 description: "Text21",
-                                                                 isViewed: false)]))
+                                                 ])}
     }
     
     func isViewed(previewId: Int, storyId: Int) {
-        
+        // выставляет isViewed в сториз в true. Если все сториз, входящие в preview просмотрены, то preview .isViewed также выставляется в true
         let viewedStory = models[previewId].storyModels.enumerated().map { id, storyModel in
             id == storyId ? StoryModel(id: storyModel.id,
                                        imageName: storyModel.imageName,
@@ -87,7 +57,7 @@ final class StoryPreviewViewModel: ObservableObject {
                               isViewed: $1.isViewed)}
     }
     
-    func allStoryIdArray() -> [Int] {
+    func allStoriesIdArray() -> [Int] {
         // массив с номерами всех StoryID от 0 до последнего, входящими в модель
         models.flatMap{$0.storyModels.map{$0.id}}
     }
@@ -105,16 +75,16 @@ final class StoryPreviewViewModel: ObservableObject {
         (.zero ... previewIndex).map {models[$0].storyModels.count }.reduce(.zero, +) - models[previewIndex].storyModels.count
     }
     
-    func currentStoryIndex(previewIndex: Int, storyIndex: Int) -> Int {
-        //возвращает индекс сториз в общем массиве по известному индексу preview и индексу story в этом preview
-        storiesBeforePreview(previewIndex: previewIndex) + storyIndex
-    }
-    
     func currentPreviewIndex(currentStoryIndex: Int) -> Int {
         //возвращает по индексу сториз в общем массиве индекс preview, в которую эта сториз входит
         models.map {model in
             (.zero ..< model.storyModels.count).map {_ in model.id}
         }.flatMap {$0}[currentStoryIndex]
+    }
+    
+    func storiesInPreview(previewIndex: Int) -> Int {
+        // возвращает кол-во сториз в preview по его индексу
+        models[previewIndex].storyModels.count
     }
     
 }

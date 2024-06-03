@@ -13,45 +13,38 @@ struct StoriesView: View {
     
     let storyPreviewViewModel: StoryPreviewViewModel
     
-    @State var currentProgress: CGFloat = .zero
-    @State var viewInFinalState = false
+    private let duration = 0.6
+    private let stories: [StoryModel]
+    private let storyIdArray: [Int]
+    private let previewIdArray: [Int]
+    
+    @State private var viewInFinalState = false
     @State private var currentStoryIndex: Int
-    @State private var oldPreviewIndex: Int
     @State private var currentPreviewIndex: Int
+    @State private var oldPreviewIndex: Int
     @State private var storiesBeforePreview: Int
     @State private var storiesInCurrentPreview: Int
+    @State private var currentProgress: CGFloat = .zero
     @State private var timerConfiguration: TimerConfiguration
-    
-    private let stories: [StoryModel]
-    private let duration = 0.6
-    private var storyIdArray: [Int]
-    private var previewIdArray: [Int]
-    
-    private func closeStories() {
-        viewInFinalState = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
-            dismiss()
-        }
-    }
     
     init(storyPreviewModel: StoryPreviewViewModel, previewIndex: Int) {
         self.storyPreviewViewModel = storyPreviewModel
         
         stories = storyPreviewModel.allStoriesArray()
-        currentStoryIndex = storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex)
+        storyIdArray = storyPreviewModel.allStoriesIdArray()
+        previewIdArray = storyPreviewModel.allPreviewIdArray()
         
-        oldPreviewIndex = storyPreviewModel.currentPreviewIndex(currentStoryIndex: previewIndex)
+        currentPreviewIndex = previewIndex
+        oldPreviewIndex = previewIndex
+        
+        currentStoryIndex = storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex)
         
         storiesBeforePreview = storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex)
         
-        storyIdArray = storyPreviewModel.allStoryIdArray()
-        previewIdArray = storyPreviewModel.allPreviewIdArray()
+        storiesInCurrentPreview = storyPreviewModel.storiesInPreview(previewIndex: previewIndex)
         
-        storiesInCurrentPreview = storyPreviewModel.models[previewIndex].storyModels.count
         
-        currentPreviewIndex = storyPreviewModel.currentPreviewIndex(currentStoryIndex: storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex))
-        
-        timerConfiguration = TimerConfiguration(storiesCount: storyPreviewModel.models[previewIndex].storyModels.count)
+        timerConfiguration = TimerConfiguration(storiesCount: storyPreviewModel.storiesInPreview(previewIndex: previewIndex))
     }
     
     var body: some View {
@@ -64,7 +57,7 @@ struct StoriesView: View {
                 .onAppear(){
                     storyPreviewViewModel.isViewed(previewId: previewIdArray[currentStoryIndex], storyId: storyIdArray[currentStoryIndex])
                 }
-                .animation(.easeInOut(duration: 0.6), value: currentStoryIndex)
+                .animation(.easeInOut(duration: duration), value: currentStoryIndex)
             
             CloseButton {
                 closeStories()
@@ -101,13 +94,7 @@ struct StoriesView: View {
         
         storyPreviewViewModel.isViewed(previewId: previewIdArray[currentStoryIndex], storyId: storyIdArray[currentStoryIndex])
         
-        currentPreviewIndex = storyPreviewViewModel.currentPreviewIndex(currentStoryIndex: currentStoryIndex)
-        
-        storiesBeforePreview = storyPreviewViewModel.storiesBeforePreview(previewIndex: currentPreviewIndex)
-        
-        storiesInCurrentPreview = storyPreviewViewModel.models[        currentPreviewIndex].storyModels.count
-        
-        timerConfiguration.storiesCount = storiesInCurrentPreview
+        changeIndexes()
         
         if currentPreviewIndex > oldPreviewIndex {
             currentProgress = .zero
@@ -127,24 +114,34 @@ struct StoriesView: View {
                 return }
             
             currentStoryIndex += 1
-            
-            currentPreviewIndex = storyPreviewViewModel.currentPreviewIndex(currentStoryIndex: currentStoryIndex)
-            
-            storiesBeforePreview = storyPreviewViewModel.storiesBeforePreview(previewIndex: currentPreviewIndex)
-            
-            storiesInCurrentPreview = storyPreviewViewModel.models[currentPreviewIndex].storyModels.count
-            
-            timerConfiguration.storiesCount =  storiesInCurrentPreview
+            changeIndexes()
             currentProgress = .zero
             
         } else {
             
-            let index = timerConfiguration.index(for: newProgress) +         storiesBeforePreview
+            let index = storiesBeforePreview + timerConfiguration.index(for: newProgress)
             guard index != currentStoryIndex else { return }
             withAnimation {
                 currentStoryIndex = index
             }
         }
+    }
+    
+    private func closeStories() {
+        viewInFinalState = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            dismiss()
+        }
+    }
+    
+    private func changeIndexes() {
+        currentPreviewIndex = storyPreviewViewModel.currentPreviewIndex(currentStoryIndex: currentStoryIndex)
+        
+        storiesBeforePreview = storyPreviewViewModel.storiesBeforePreview(previewIndex: currentPreviewIndex)
+        
+        storiesInCurrentPreview = storyPreviewViewModel.storiesInPreview(previewIndex: currentPreviewIndex)
+        
+        timerConfiguration.storiesCount =  storiesInCurrentPreview
     }
 }
 
