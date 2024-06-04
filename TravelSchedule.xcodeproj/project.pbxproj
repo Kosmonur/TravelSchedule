@@ -40,8 +40,9 @@
 		F232A55E2C03460A006B5EDD /* StoriesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A55C2C03460A006B5EDD /* StoriesTabView.swift */; };
 		F232A5602C03467D006B5EDD /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A55F2C03467D006B5EDD /* ProgressBar.swift */; };
 		F232A5672C037E1B006B5EDD /* StoryPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5662C037E1B006B5EDD /* StoryPreviewModel.swift */; };
-		F232A5692C037E91006B5EDD /* StoryPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */; };
+		F232A5692C037E91006B5EDD /* StoriesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5682C037E91006B5EDD /* StoriesModel.swift */; };
 		F232A56B2C03806E006B5EDD /* StoryPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A56A2C03806E006B5EDD /* StoryPreviewView.swift */; };
+		F2EBE13B2C0ED73200E73B3F /* StoriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EBE13A2C0ED73200E73B3F /* StoriesData.swift */; };
 		F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */; };
 		F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F732282BA0B0CD0062011B /* ContentView.swift */; };
 		F2F7322B2BA0B0CF0062011B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2F7322A2BA0B0CF0062011B /* Assets.xcassets */; };
@@ -83,8 +84,9 @@
 		F232A55C2C03460A006B5EDD /* StoriesTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoriesTabView.swift; sourceTree = "<group>"; };
 		F232A55F2C03467D006B5EDD /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		F232A5662C037E1B006B5EDD /* StoryPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewModel.swift; sourceTree = "<group>"; };
-		F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewViewModel.swift; sourceTree = "<group>"; };
+		F232A5682C037E91006B5EDD /* StoriesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesModel.swift; sourceTree = "<group>"; };
 		F232A56A2C03806E006B5EDD /* StoryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryPreviewView.swift; sourceTree = "<group>"; };
+		F2EBE13A2C0ED73200E73B3F /* StoriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesData.swift; sourceTree = "<group>"; };
 		F2F732232BA0B0CD0062011B /* TravelSchedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelSchedule.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelScheduleApp.swift; sourceTree = "<group>"; };
 		F2F732282BA0B0CD0062011B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -153,7 +155,7 @@
 				F21C095E2BD8E3E6006AAD9A /* CitiesViewModel.swift */,
 				F21C09602BD8E3FF006AAD9A /* RoutesViewModel.swift */,
 				F21C09622BD8E41A006AAD9A /* CarrierViewModel.swift */,
-				F232A5682C037E91006B5EDD /* StoryPreviewViewModel.swift */,
+				F232A5682C037E91006B5EDD /* StoriesModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -197,6 +199,14 @@
 			path = Stories;
 			sourceTree = "<group>";
 		};
+		F2EBE1392C0ED71800E73B3F /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				F2EBE13A2C0ED73200E73B3F /* StoriesData.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
 		F2F7321A2BA0B0CD0062011B = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 		F2F732252BA0B0CD0062011B /* TravelSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				F2EBE1392C0ED71800E73B3F /* MockData */,
 				F205F0F42BCC10650086B88E /* Constant.swift */,
 				F2F732262BA0B0CD0062011B /* TravelScheduleApp.swift */,
 				F2F732282BA0B0CD0062011B /* ContentView.swift */,
@@ -323,6 +334,7 @@
 				F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */,
 				F205F0F02BCBEC3D0086B88E /* SettingsView.swift in Sources */,
 				F232A5602C03467D006B5EDD /* ProgressBar.swift in Sources */,
+				F2EBE13B2C0ED73200E73B3F /* StoriesData.swift in Sources */,
 				F21C09512BD66878006AAD9A /* FromToTextView.swift in Sources */,
 				F21C095F2BD8E3E6006AAD9A /* CitiesViewModel.swift in Sources */,
 				F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */,
@@ -340,7 +352,7 @@
 				F21C095B2BD8DF62006AAD9A /* CarrierView.swift in Sources */,
 				F205F0F32BCC04230086B88E /* Fonts.swift in Sources */,
 				F2F732272BA0B0CD0062011B /* TravelScheduleApp.swift in Sources */,
-				F232A5692C037E91006B5EDD /* StoryPreviewViewModel.swift in Sources */,
+				F232A5692C037E91006B5EDD /* StoriesModel.swift in Sources */,
 				F232A5552C0342F6006B5EDD /* StoriesView.swift in Sources */,
 				F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */,
 				F21C09672BD90DD2006AAD9A /* FilterTimeView.swift in Sources */,

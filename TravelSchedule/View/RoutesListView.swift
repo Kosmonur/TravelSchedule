@@ -44,7 +44,7 @@ struct RoutesListView: View {
                             .frame(width: 8, height: 8)
                             .cornerRadius(8)
                             .foregroundColor(.redUniv)
-                            .opacity(isRedDotHide ? 0 : 1)
+                            .opacity(isRedDotHide ? .zero : 1)
                     }
                     .foregroundColor(.white)
                     .font(.bold17)

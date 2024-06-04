@@ -11,12 +11,10 @@ struct StoriesView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    let storyPreviewViewModel: StoryPreviewViewModel
+    let storiesModel: StoriesModel
     
     private let duration = 0.6
     private let stories: [StoryModel]
-    private let storyIdArray: [Int]
-    private let previewIdArray: [Int]
     
     @State private var viewInFinalState = false
     @State private var currentStoryIndex: Int
@@ -27,24 +25,22 @@ struct StoriesView: View {
     @State private var currentProgress: CGFloat = .zero
     @State private var timerConfiguration: TimerConfiguration
     
-    init(storyPreviewModel: StoryPreviewViewModel, previewIndex: Int) {
-        self.storyPreviewViewModel = storyPreviewModel
+    init(storiesModel: StoriesModel, previewIndex: Int) {
+        self.storiesModel = storiesModel
         
-        stories = storyPreviewModel.allStoriesArray()
-        storyIdArray = storyPreviewModel.allStoriesIdArray()
-        previewIdArray = storyPreviewModel.allPreviewIdArray()
+        stories = storiesModel.allStoriesArray()
         
         currentPreviewIndex = previewIndex
         oldPreviewIndex = previewIndex
         
-        currentStoryIndex = storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex)
+        currentStoryIndex = storiesModel.storiesBeforePreview(previewIndex: previewIndex)
         
-        storiesBeforePreview = storyPreviewModel.storiesBeforePreview(previewIndex: previewIndex)
+        storiesBeforePreview = storiesModel.storiesBeforePreview(previewIndex: previewIndex)
         
-        storiesInCurrentPreview = storyPreviewModel.storiesInPreview(previewIndex: previewIndex)
+        storiesInCurrentPreview = storiesModel.storiesInPreview(previewIndex: previewIndex)
         
         
-        timerConfiguration = TimerConfiguration(storiesCount: storyPreviewModel.storiesInPreview(previewIndex: previewIndex))
+        timerConfiguration = TimerConfiguration(storiesCount: storiesModel.storiesInPreview(previewIndex: previewIndex))
     }
     
     var body: some View {
@@ -55,7 +51,7 @@ struct StoriesView: View {
                     didChangeCurrentIndex()
                 }
                 .onAppear(){
-                    storyPreviewViewModel.isViewed(previewId: previewIdArray[currentStoryIndex], storyId: storyIdArray[currentStoryIndex])
+                    storiesModel.isViewed(currentStoryIndex: currentStoryIndex)
                 }
                 .animation(.easeInOut(duration: duration), value: currentStoryIndex)
             
@@ -92,14 +88,14 @@ struct StoriesView: View {
     
     private func didChangeCurrentIndex() {
         
-        storyPreviewViewModel.isViewed(previewId: previewIdArray[currentStoryIndex], storyId: storyIdArray[currentStoryIndex])
+        storiesModel.isViewed(currentStoryIndex: currentStoryIndex)
         
         changeIndexes()
         
         if currentPreviewIndex > oldPreviewIndex {
             currentProgress = .zero
         } else {
-            currentProgress = timerConfiguration.progress(for: storyIdArray[currentStoryIndex])
+            currentProgress = timerConfiguration.progress(for: storiesModel.storyIndexInStories(index: currentStoryIndex))
         }
         
         oldPreviewIndex = currentPreviewIndex
@@ -135,16 +131,16 @@ struct StoriesView: View {
     }
     
     private func changeIndexes() {
-        currentPreviewIndex = storyPreviewViewModel.currentPreviewIndex(currentStoryIndex: currentStoryIndex)
+        currentPreviewIndex = storiesModel.currentPreviewIndex(currentStoryIndex: currentStoryIndex)
         
-        storiesBeforePreview = storyPreviewViewModel.storiesBeforePreview(previewIndex: currentPreviewIndex)
+        storiesBeforePreview = storiesModel.storiesBeforePreview(previewIndex: currentPreviewIndex)
         
-        storiesInCurrentPreview = storyPreviewViewModel.storiesInPreview(previewIndex: currentPreviewIndex)
+        storiesInCurrentPreview = storiesModel.storiesInPreview(previewIndex: currentPreviewIndex)
         
         timerConfiguration.storiesCount =  storiesInCurrentPreview
     }
 }
 
 #Preview {
-    StoriesView(storyPreviewModel: StoryPreviewViewModel(), previewIndex: 5)
+    StoriesView(storiesModel: StoriesModel(models: storiesData), previewIndex: 5)
 }

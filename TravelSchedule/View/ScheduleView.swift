@@ -23,7 +23,7 @@ struct ScheduleView: View {
     @State private var showStoryView = false
     @State private var previewIndex: Int = .zero
     
-    @ObservedObject private var storyPreviewViewModel = StoryPreviewViewModel()
+    @ObservedObject private var storiesModel = StoriesModel(models: storiesData)
     
     private let rows = [GridItem(.flexible())]
     
@@ -33,7 +33,7 @@ struct ScheduleView: View {
             VStack {
                 ScrollView (.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: rows, alignment: .center, spacing: 12) {
-                        ForEach(storyPreviewViewModel.models) { model in
+                        ForEach(storiesModel.models) { model in
                             StoryPreviewView(model: model)
                                 .onTapGesture {
                                     previewIndex = model.id
@@ -87,7 +87,7 @@ struct ScheduleView: View {
                         .background(.blueUniv)
                         .cornerRadius(16)
                         .padding(.vertical, 16)
-                        .opacity(from == Constant.from || to == Constant.to || from == Constant.to || to == Constant.from ? 0 : 1)
+                        .opacity(from == Constant.from || to == Constant.to || from == Constant.to || to == Constant.from ? .zero : 1)
                 }
                 
                 Spacer()
@@ -106,13 +106,13 @@ struct ScheduleView: View {
         }
         .fullScreenCover(isPresented: $showStoryView) {
             ZStack {
-                StoriesView(storyPreviewModel: storyPreviewViewModel, previewIndex: previewIndex)
+                StoriesView(storiesModel: storiesModel, previewIndex: previewIndex)
             }
         }
         .transaction { transaction in
             transaction.disablesAnimations = true
         }
-        .scaleEffect(showStoryView ? 0 : 1)
+        .scaleEffect(showStoryView ? .zero : 1)
         .animation(.easeInOut(duration: 0.6), value: showStoryView)
     }
 }

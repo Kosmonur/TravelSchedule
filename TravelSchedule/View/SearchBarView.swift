@@ -14,8 +14,8 @@ struct SearchBar: View {
     var placeholder = Constant.searchPlaceholder
     
     var body: some View {
-        HStack (spacing: 0) {
-            HStack (spacing: 0) {
+        HStack (spacing: .zero) {
+            HStack (spacing: .zero) {
                 HStack {
                     TextField(placeholder, text: $searchText)
                         .font(.system(size: 17))
@@ -38,7 +38,7 @@ struct SearchBar: View {
                         
                         Spacer()
                         
-                        if isSearching && searchText.count > 0 {
+                        if isSearching && searchText.count > .zero {
                             Button(action: { searchText = "" }, label: {
                                 Image(systemName: "xmark.circle.fill")
                                     .foregroundColor(.gray)
