@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var path = NavigationPath()
+    @State private var selectedTab: Int = .zero
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack(path: $path) {
+            TabView(selection: $selectedTab) {
+                ScheduleView(path: $path)
+                    .tabItem {
+                        Image(.schedule)
+                            .renderingMode(.template)
+                    }
+                    .tag(0)
+                SettingsView()
+                    .tabItem {
+                        Image(.setup)
+                            .renderingMode(.template)
+                    }
+                    .tag(1)
+            }
         }
-        .padding()
+        .tint(.blackApp)
     }
 }
 
