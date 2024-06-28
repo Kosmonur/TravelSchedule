@@ -11,7 +11,7 @@ struct StoriesView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    let storiesModel: StoriesModel
+    let storiesModel: StoriesViewModel
     
     private let duration = 0.6
     private let stories: [StoryModel]
@@ -25,7 +25,7 @@ struct StoriesView: View {
     @State private var currentProgress: CGFloat = .zero
     @State private var timerConfiguration: TimerConfiguration
     
-    init(storiesModel: StoriesModel, previewIndex: Int) {
+    init(storiesModel: StoriesViewModel, previewIndex: Int) {
         self.storiesModel = storiesModel
         
         stories = storiesModel.allStoriesArray()
@@ -142,5 +142,5 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView(storiesModel: StoriesModel(models: storiesData), previewIndex: 5)
+    StoriesView(storiesModel: StoriesViewModel(models: storiesData), previewIndex: 5)
 }

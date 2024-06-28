@@ -12,16 +12,20 @@ struct ContentView: View {
     @State var path = NavigationPath()
     @State private var selectedTab: Int = .zero
     
+    private let settingsViewModel = SettingsViewModel()
+    private let travelViewModel = TravelViewModel()
+    private let storiesViewModel = StoriesViewModel(models: storiesData)
+    
     var body: some View {
         NavigationStack(path: $path) {
             TabView(selection: $selectedTab) {
-                ScheduleView(path: $path)
+                TravelView(travelViewModel: travelViewModel, storiesViewModel: storiesViewModel, path: $path)
                     .tabItem {
                         Image(.schedule)
                             .renderingMode(.template)
                     }
                     .tag(0)
-                SettingsView()
+                SettingsView(viewModel: settingsViewModel)
                     .tabItem {
                         Image(.setup)
                             .renderingMode(.template)

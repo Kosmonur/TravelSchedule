@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class StoriesModel: ObservableObject {
+final class StoriesViewModel: ObservableObject {
     
     @Published var models: [StoryPreviewModel]
     

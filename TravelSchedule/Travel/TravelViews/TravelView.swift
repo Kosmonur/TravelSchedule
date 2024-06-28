@@ -1,8 +1,8 @@
 //
-//  ScheduleView.swift
+//  TravelView.swift
 //  TravelSchedule
 //
-//  Created by Александр Пичугин on 14.04.2024.
+//  Created by Александр Пичугин on 28.06.2024.
 //
 
 import SwiftUI
@@ -13,17 +13,16 @@ enum SelectionType {
     case find
 }
 
-struct ScheduleView: View {
+struct TravelView: View {
+    
+    @ObservedObject var travelViewModel: TravelViewModel
+    @ObservedObject var storiesViewModel: StoriesViewModel
     
     @Binding var path: NavigationPath
-    @State private var from = Constant.from
-    @State private var to = Constant.to
-    @State private var isClicked = false
+    @State private var animate = false
     @State private var isFindButtonTapped = false
     @State private var showStoryView = false
     @State private var previewIndex: Int = .zero
-    
-    @ObservedObject private var storiesModel = StoriesModel(models: storiesData)
     
     private let rows = [GridItem(.flexible())]
     
@@ -33,7 +32,7 @@ struct ScheduleView: View {
             VStack {
                 ScrollView (.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: rows, alignment: .center, spacing: 12) {
-                        ForEach(storiesModel.models) { model in
+                        ForEach(storiesViewModel.models) { model in
                             StoryPreviewView(model: model)
                                 .onTapGesture {
                                     previewIndex = model.id
@@ -50,11 +49,11 @@ struct ScheduleView: View {
                         VStack {
                             Spacer()
                             NavigationLink(value: SelectionType.departure) {
-                                FromToTextView(type: $from)
+                                FromToTextView(type: $travelViewModel.from)
                             }
                             Spacer()
                             NavigationLink(value: SelectionType.arrival) {
-                                FromToTextView(type: $to)
+                                FromToTextView(type: $travelViewModel.to)
                             }
                             Spacer()
                         }
@@ -63,14 +62,17 @@ struct ScheduleView: View {
                             .fill(.white)
                             .cornerRadius(20))
                         Button {
-                            isClicked.toggle()
-                            swap(&from, &to)
+                            withAnimation(.easeInOut(duration: 0.7)) {
+                                animate.toggle()
+                                travelViewModel.swapFromTo()
+                            }
                         } label: {
                             Image(.change)
                         }
                         .frame(width: 36, height: 36)
                         .background(Circle().fill(Color.white))
-                        .buttonStyle(RotateButtonStyle())
+                        .rotation3DEffect(animate ? .radians(.pi) : .zero, axis: (x: 1.0, y: .zero, z: .zero)
+                        )
                     }
                     .padding()
                 }
@@ -87,7 +89,7 @@ struct ScheduleView: View {
                         .background(.blueUniv)
                         .cornerRadius(16)
                         .padding(.vertical, 16)
-                        .opacity(from == Constant.from || to == Constant.to || from == Constant.to || to == Constant.from ? .zero : 1)
+                        .opacity(travelViewModel.findButtonIsHidden ? .zero : 1)
                 }
                 
                 Spacer()
@@ -98,15 +100,15 @@ struct ScheduleView: View {
             .background(.whiteApp)
             .navigationDestination(for: SelectionType.self) { type in
                 switch type {
-                case .departure: SearchCityView(path: $path, from: $from, to: $to, selectionType: .departure)
-                case .arrival: SearchCityView(path: $path, from: $from, to: $to, selectionType: .arrival)
-                case .find: RoutesListView(title: "\(from) → \(to)")
+                case .departure: SearchCityView(path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: .departure)
+                case .arrival: SearchCityView(path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: .arrival)
+                case .find: RoutesListView(title: "\(travelViewModel.from) → \(travelViewModel.to)")
                 }
             }
         }
         .fullScreenCover(isPresented: $showStoryView) {
             ZStack {
-                StoriesView(storiesModel: storiesModel, previewIndex: previewIndex)
+                StoriesView(storiesModel: storiesViewModel, previewIndex: previewIndex)
             }
         }
         .transaction { transaction in
@@ -117,13 +119,6 @@ struct ScheduleView: View {
     }
 }
 
-struct RotateButtonStyle: ButtonStyle {
-    func makeBody(configuration: Self.Configuration) -> some View {
-        configuration.label
-            .rotationEffect(configuration.isPressed ? -Angle(radians: .pi) : .zero)
-    }
-}
-
 #Preview {
-    ScheduleView(path: .constant(NavigationPath()))
+    TravelView(travelViewModel: TravelViewModel(), storiesViewModel: StoriesViewModel(models: storiesData), path: .constant(NavigationPath()))
 }

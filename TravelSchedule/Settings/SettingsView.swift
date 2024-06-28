@@ -2,26 +2,26 @@
 //  SettingsView.swift
 //  TravelSchedule
 //
-//  Created by Александр Пичугин on 14.04.2024.
+//  Created by Александр Пичугин on 28.06.2024.
 //
 
 import SwiftUI
 
 struct SettingsView: View {
+    @ObservedObject var viewModel: SettingsViewModel
     
-    @Environment(\.colorScheme) var colorScheme
-    @State private var isDarkModeOn = false
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack {
             List {
-                Toggle(isOn: $isDarkModeOn) {
+                Toggle(isOn: $viewModel.isDarkModeOn) {
                     Text(Constant.blackTheme)
                 }
                 .toggleStyle(SwitchToggleStyle(tint: .blueUniv))
                 .padding(.top, 24)
                 .listRowBackground(Color.clear)
-                .onChange(of: isDarkModeOn) { isDarkModeOn in
+                .onChange(of: viewModel.isDarkModeOn) { isDarkModeOn in
                     if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                         for window in windowScene.windows {
                             window.overrideUserInterfaceStyle = isDarkModeOn ? .dark : .light
@@ -55,11 +55,11 @@ struct SettingsView: View {
         }
         .background(.whiteApp)
         .onAppear {
-            isDarkModeOn = colorScheme == .dark ? true : false
+            viewModel.setScreenMode(darkMode: colorScheme == .dark ? true : false)
         }
     }
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(viewModel: SettingsViewModel())
 }
