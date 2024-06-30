@@ -10,6 +10,7 @@ import Foundation
 final class CitiesViewModel: ObservableObject {
     
     @Published var cities: [CityModel]
+    @Published var searchCity: String = ""
     
     init() {
         self.cities = [
@@ -42,7 +43,7 @@ final class CitiesViewModel: ObservableObject {
                 stations: [])]
     }
     
-    func searchCityResult(searchCity: String) -> [CityModel] {
+    func searchCityResult() -> [CityModel] {
         if searchCity.isEmpty {
             return cities
         } else {

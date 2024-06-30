@@ -25,22 +25,22 @@ struct StoriesView: View {
     @State private var currentProgress: CGFloat = .zero
     @State private var timerConfiguration: TimerConfiguration
     
-    init(storiesModel: StoriesViewModel, previewIndex: Int) {
+    init(storiesModel: StoriesViewModel) {
         self.storiesModel = storiesModel
         
         stories = storiesModel.allStoriesArray()
         
-        currentPreviewIndex = previewIndex
-        oldPreviewIndex = previewIndex
+        currentPreviewIndex = storiesModel.previewIndex
+        oldPreviewIndex = storiesModel.previewIndex
         
-        currentStoryIndex = storiesModel.storiesBeforePreview(previewIndex: previewIndex)
+        currentStoryIndex = storiesModel.storiesBeforePreview(previewIndex: storiesModel.previewIndex)
         
-        storiesBeforePreview = storiesModel.storiesBeforePreview(previewIndex: previewIndex)
+        storiesBeforePreview = storiesModel.storiesBeforePreview(previewIndex: storiesModel.previewIndex)
         
-        storiesInCurrentPreview = storiesModel.storiesInPreview(previewIndex: previewIndex)
+        storiesInCurrentPreview = storiesModel.storiesInPreview(previewIndex: storiesModel.previewIndex)
         
         
-        timerConfiguration = TimerConfiguration(storiesCount: storiesModel.storiesInPreview(previewIndex: previewIndex))
+        timerConfiguration = TimerConfiguration(storiesCount: storiesModel.storiesInPreview(previewIndex: storiesModel.previewIndex))
     }
     
     var body: some View {
@@ -142,5 +142,5 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView(storiesModel: StoriesViewModel(models: storiesData), previewIndex: 5)
+    StoriesView(storiesModel: StoriesViewModel(models: Constant.storiesData))
 }

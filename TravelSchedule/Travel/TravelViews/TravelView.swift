@@ -16,13 +16,11 @@ enum SelectionType {
 struct TravelView: View {
     
     @ObservedObject var travelViewModel: TravelViewModel
-    @ObservedObject var storiesViewModel: StoriesViewModel
     
     @Binding var path: NavigationPath
     @State private var animate = false
     @State private var isFindButtonTapped = false
     @State private var showStoryView = false
-    @State private var previewIndex: Int = .zero
     
     private let rows = [GridItem(.flexible())]
     
@@ -32,10 +30,10 @@ struct TravelView: View {
             VStack {
                 ScrollView (.horizontal, showsIndicators: false) {
                     LazyHGrid(rows: rows, alignment: .center, spacing: 12) {
-                        ForEach(storiesViewModel.models) { model in
+                        ForEach(travelViewModel.storiesViewModel.models) { model in
                             StoryPreviewView(model: model)
                                 .onTapGesture {
-                                    previewIndex = model.id
+                                    travelViewModel.storiesViewModel.previewIndex = model.id
                                     showStoryView = true
                                 }
                         }
@@ -100,15 +98,14 @@ struct TravelView: View {
             .background(.whiteApp)
             .navigationDestination(for: SelectionType.self) { type in
                 switch type {
-                case .departure: SearchCityView(path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: .departure)
-                case .arrival: SearchCityView(path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: .arrival)
-                case .find: RoutesListView(title: "\(travelViewModel.from) → \(travelViewModel.to)")
+                case .departure, .arrival: SearchCityView(citiesViewModel: travelViewModel.citiesViewModel, path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: type)
+                case .find: RoutesListView(routesViewModel: travelViewModel.routesViewModel, title: "\(travelViewModel.from) → \(travelViewModel.to)")
                 }
             }
         }
         .fullScreenCover(isPresented: $showStoryView) {
             ZStack {
-                StoriesView(storiesModel: storiesViewModel, previewIndex: previewIndex)
+                StoriesView(storiesModel: travelViewModel.storiesViewModel)
             }
         }
         .transaction { transaction in
@@ -120,5 +117,5 @@ struct TravelView: View {
 }
 
 #Preview {
-    TravelView(travelViewModel: TravelViewModel(), storiesViewModel: StoriesViewModel(models: storiesData), path: .constant(NavigationPath()))
+    TravelView(travelViewModel: TravelViewModel(), path: .constant(NavigationPath()))
 }

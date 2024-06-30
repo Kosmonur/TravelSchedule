@@ -9,12 +9,12 @@ import SwiftUI
 
 struct CarrierView: View {
     
-    @ObservedObject private var viewModel = CarrierViewModel()
+    @ObservedObject private var carrierViewModel = CarrierViewModel()
     @State var logo: String
     
     var body: some View {
         
-        let carrier = viewModel.carriers.filter { $0.logo == logo }.first ?? .init()
+        let carrier = carrierViewModel.getCarrierWithLogo(logo: logo)
         
         ZStack {
             Color.whiteApp

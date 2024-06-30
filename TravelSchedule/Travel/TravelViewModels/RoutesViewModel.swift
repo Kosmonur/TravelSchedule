@@ -9,9 +9,17 @@ import Foundation
 
 final class RoutesViewModel: ObservableObject {
     
+    @Published var isRedDotHide = true
+    @Published var isMorningOn = true
+    @Published var isDayOn = true
+    @Published var isEveningOn = true
+    @Published var isNightOn = true
+    @Published var isTransfersOn = true
+    
     @Published var routes: [RouteModel]
     
     init() {
+        
         self.routes = [RouteModel(carrierName: "РЖД",
                                   logo: "rzhd",
                                   transfer: "С пересадкой в Костроме",
@@ -84,7 +92,7 @@ final class RoutesViewModel: ObservableObject {
         ]
     }
     
-    func filteredRoutes(isMorningOn: Bool, isDayOn: Bool, isEveningOn: Bool, isNightOn: Bool, isTransfersOn: Bool ) -> [RouteModel] {
+    func filteredRoutes() -> [RouteModel] {
         
         let morningRoutes = isMorningOn ? routes.filter { route in
             if let startHour = Int(route.startTime.prefix(2)),
@@ -119,6 +127,10 @@ final class RoutesViewModel: ObservableObject {
         
         return(isTransfersOn ? outputRoutes : outputRoutes.filter {
             $0.transfer == ""})
+    }
+    
+    func setRedDotStatus() {
+        isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
     }
 }
 

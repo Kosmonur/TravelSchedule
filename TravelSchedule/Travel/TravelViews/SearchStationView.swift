@@ -12,6 +12,7 @@ struct SearchStationView: View {
     @Binding var path: NavigationPath
     @Binding var from: String
     @Binding var to: String
+    
     let city: CityModel
     let selectionType: SelectionType
     @State private var searchStation: String = ""
@@ -64,5 +65,5 @@ struct SearchStationView: View {
 }
 
 #Preview {
-    SearchCityView(path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
+    SearchCityView(citiesViewModel: CitiesViewModel(), path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
 }

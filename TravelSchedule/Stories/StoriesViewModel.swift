@@ -10,6 +10,7 @@ import Foundation
 final class StoriesViewModel: ObservableObject {
     
     @Published var models: [StoryPreviewModel]
+    @Published var previewIndex: Int = .zero
     
     private let storyIdArray: [Int]
     

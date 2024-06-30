@@ -9,17 +9,11 @@ import SwiftUI
 
 struct RoutesListView: View {
     
-    @ObservedObject private var viewModel = RoutesViewModel()
+    @ObservedObject var routesViewModel: RoutesViewModel
     @State var title: String
-    @State var isRedDotHide = true
-    @State var isMorningOn = true
-    @State var isDayOn = true
-    @State var isEveningOn = true
-    @State var isNightOn = true
-    @State var isTransfersOn = true
     
     var body: some View {
-        let filteredRoutes = viewModel.filteredRoutes(isMorningOn: isMorningOn, isDayOn: isDayOn, isEveningOn: isEveningOn, isNightOn: isNightOn, isTransfersOn: isTransfersOn)
+        let filteredRoutes = routesViewModel.filteredRoutes()
         ZStack {
             Color.whiteApp
                 .ignoresSafeArea()
@@ -37,14 +31,15 @@ struct RoutesListView: View {
                     }
                 }
                 .padding(.bottom, -32)
-                NavigationLink(destination: FilterTimeView(isMorningOn: $isMorningOn, isDayOn: $isDayOn, isEveningOn: $isEveningOn, isNightOn: $isNightOn, isTransfersOn: $isTransfersOn)) {
+                NavigationLink(destination:
+                                FilterTimeView(isMorningOn: $routesViewModel.isMorningOn, isDayOn: $routesViewModel.isDayOn, isEveningOn: $routesViewModel.isEveningOn, isNightOn: $routesViewModel.isNightOn, isTransfersOn: $routesViewModel.isTransfersOn)) {
                     HStack{
                         Text(Constant.specifyTime)
                         Rectangle()
                             .frame(width: 8, height: 8)
                             .cornerRadius(8)
                             .foregroundColor(.redUniv)
-                            .opacity(isRedDotHide ? .zero : 1)
+                            .opacity(routesViewModel.isRedDotHide ? .zero : 1)
                     }
                     .foregroundColor(.white)
                     .font(.bold17)
@@ -53,7 +48,7 @@ struct RoutesListView: View {
                     .background(.blueUniv)
                     .cornerRadius(16)
                     .onAppear {
-                        isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
+                        routesViewModel.setRedDotStatus()
                     }
                 }
             }
@@ -75,5 +70,5 @@ struct RoutesListView: View {
 }
 
 #Preview {
-    RoutesListView(title: "Маршрут")
+    RoutesListView(routesViewModel: RoutesViewModel(), title: "Маршрут")
 }

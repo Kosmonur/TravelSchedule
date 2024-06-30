@@ -18,5 +18,9 @@ final class CarrierViewModel: ObservableObject {
             CarrierModel(logo: "uralLog", name: "ОАО «Уральские поездатые поезда»", email: "parovoz@yandex.ru", phone: "+7 (123) 234-00-00")
         ]
     }
+    
+    func getCarrierWithLogo(logo: String) -> CarrierModel {
+        carriers.filter { $0.logo == logo }.first ?? .init()
+    }
 }
 

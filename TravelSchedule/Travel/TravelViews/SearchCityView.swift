@@ -9,20 +9,20 @@ import SwiftUI
 
 struct SearchCityView: View {
     
+    @ObservedObject var citiesViewModel: CitiesViewModel
+    
     @Binding var path: NavigationPath
     @Binding var from: String
     @Binding var to: String
     let selectionType: SelectionType
-    @ObservedObject private var viewModel = CitiesViewModel()
-    @State private var searchCity: String = ""
-    
+
     var body: some View {
-        let searchCityResult = viewModel.searchCityResult(searchCity: searchCity)
+        let searchCityResult = citiesViewModel.searchCityResult()
         ZStack {
             Color.whiteApp
                 .ignoresSafeArea()
             VStack {
-                SearchBar(searchText: $searchCity)
+                SearchBar(searchText: $citiesViewModel.searchCity)
                 List(searchCityResult) { city in
                     NavigationLink(destination: SearchStationView(path: $path, from: $from, to: $to, city: city, selectionType: selectionType)) {
                         Text(city.name)
@@ -46,6 +46,9 @@ struct SearchCityView: View {
 }
 
 #Preview {
-    SearchCityView(path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
-    
+    SearchCityView(citiesViewModel: CitiesViewModel(),
+                   path: .constant(NavigationPath()),
+                   from: .constant(Constant.from),
+                   to: .constant(Constant.to),
+                   selectionType: .departure)
 }

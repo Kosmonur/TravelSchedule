@@ -14,12 +14,12 @@ struct ContentView: View {
     
     private let settingsViewModel = SettingsViewModel()
     private let travelViewModel = TravelViewModel()
-    private let storiesViewModel = StoriesViewModel(models: storiesData)
     
     var body: some View {
         NavigationStack(path: $path) {
             TabView(selection: $selectedTab) {
-                TravelView(travelViewModel: travelViewModel, storiesViewModel: storiesViewModel, path: $path)
+                TravelView(travelViewModel: travelViewModel,
+                           path: $path)
                     .tabItem {
                         Image(.schedule)
                             .renderingMode(.template)

@@ -5,9 +5,13 @@
 //  Created by Александр Пичугин on 28.06.2024.
 //
 
-import Foundation
+import SwiftUI
 
 final class TravelViewModel: ObservableObject {
+    
+    @ObservedObject var citiesViewModel: CitiesViewModel
+    @ObservedObject var routesViewModel: RoutesViewModel
+    @ObservedObject var storiesViewModel: StoriesViewModel
     
     @Published var findButtonIsHidden = true
     
@@ -21,6 +25,12 @@ final class TravelViewModel: ObservableObject {
         didSet {
             checkFindButtonVisibility()
         }
+    }
+    
+    init() {
+        self.citiesViewModel = CitiesViewModel()
+        self.routesViewModel = RoutesViewModel()
+        self.storiesViewModel = StoriesViewModel(models: Constant.storiesData)
     }
     
     func swapFromTo () {
