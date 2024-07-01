@@ -9,6 +9,7 @@ import Foundation
 
 struct CityModel: Identifiable {
     let id = UUID()
+    let code: String
     let name: String
     let stations: [String]
 }

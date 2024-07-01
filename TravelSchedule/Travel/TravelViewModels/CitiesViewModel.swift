@@ -69,7 +69,7 @@ final class CitiesViewModel: ObservableObject {
                                         }
                                     }.filter{$0 != ""}.sorted()
                                     
-                                    let newSettlement = CityModel(name: cityName, stations: stationNames ?? [])
+                                    let newSettlement = CityModel(code: "s9605487", name: cityName, stations: stationNames ?? [])
                                     cities.append(newSettlement)
                                 }
                             }
