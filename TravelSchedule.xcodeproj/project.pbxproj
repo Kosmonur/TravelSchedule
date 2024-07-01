@@ -31,16 +31,9 @@
 		F2238C402C31E28B00FC6D8D /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F2238C3F2C31E28B00FC6D8D /* OpenAPIRuntime */; };
 		F2238C432C31E2A400FC6D8D /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F2238C422C31E2A400FC6D8D /* OpenAPIURLSession */; };
 		F2238C522C31E32D00FC6D8D /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C462C31E32D00FC6D8D /* APIkey.swift */; };
-		F2238C532C31E32D00FC6D8D /* CarrierService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C472C31E32D00FC6D8D /* CarrierService.swift */; };
-		F2238C542C31E32D00FC6D8D /* CopyrightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C482C31E32D00FC6D8D /* CopyrightService.swift */; };
-		F2238C552C31E32D00FC6D8D /* NearestSettlementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C492C31E32D00FC6D8D /* NearestSettlementService.swift */; };
-		F2238C562C31E32D00FC6D8D /* NearestStationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4A2C31E32D00FC6D8D /* NearestStationsService.swift */; };
 		F2238C572C31E32D00FC6D8D /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */; };
 		F2238C582C31E32D00FC6D8D /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4C2C31E32D00FC6D8D /* openapi.yaml */; };
-		F2238C592C31E32D00FC6D8D /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4D2C31E32D00FC6D8D /* ScheduleService.swift */; };
-		F2238C5A2C31E32D00FC6D8D /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4E2C31E32D00FC6D8D /* SearchService.swift */; };
 		F2238C5B2C31E32D00FC6D8D /* StationsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */; };
-		F2238C5C2C31E32D00FC6D8D /* ThreadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C502C31E32D00FC6D8D /* ThreadService.swift */; };
 		F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54A2C03386E006B5EDD /* StoryModel.swift */; };
 		F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54E2C033E2A006B5EDD /* StoryView.swift */; };
 		F232A5532C034168006B5EDD /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5522C034168006B5EDD /* CloseButton.swift */; };
@@ -87,16 +80,9 @@
 		F21C09682BD913CE006AAD9A /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
 		F2238C462C31E32D00FC6D8D /* APIkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
-		F2238C472C31E32D00FC6D8D /* CarrierService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarrierService.swift; sourceTree = "<group>"; };
-		F2238C482C31E32D00FC6D8D /* CopyrightService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyrightService.swift; sourceTree = "<group>"; };
-		F2238C492C31E32D00FC6D8D /* NearestSettlementService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearestSettlementService.swift; sourceTree = "<group>"; };
-		F2238C4A2C31E32D00FC6D8D /* NearestStationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearestStationsService.swift; sourceTree = "<group>"; };
 		F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		F2238C4C2C31E32D00FC6D8D /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
-		F2238C4D2C31E32D00FC6D8D /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
-		F2238C4E2C31E32D00FC6D8D /* SearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListService.swift; sourceTree = "<group>"; };
-		F2238C502C31E32D00FC6D8D /* ThreadService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadService.swift; sourceTree = "<group>"; };
 		F232A54A2C03386E006B5EDD /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		F232A54E2C033E2A006B5EDD /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		F232A5522C034168006B5EDD /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
@@ -168,16 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				F2238C462C31E32D00FC6D8D /* APIkey.swift */,
-				F2238C472C31E32D00FC6D8D /* CarrierService.swift */,
-				F2238C482C31E32D00FC6D8D /* CopyrightService.swift */,
-				F2238C492C31E32D00FC6D8D /* NearestSettlementService.swift */,
-				F2238C4A2C31E32D00FC6D8D /* NearestStationsService.swift */,
 				F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */,
 				F2238C4C2C31E32D00FC6D8D /* openapi.yaml */,
-				F2238C4D2C31E32D00FC6D8D /* ScheduleService.swift */,
-				F2238C4E2C31E32D00FC6D8D /* SearchService.swift */,
 				F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */,
-				F2238C502C31E32D00FC6D8D /* ThreadService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -407,7 +386,6 @@
 				F21C095D2BD8E058006AAD9A /* CarrierModel.swift in Sources */,
 				F21C09692BD913CE006AAD9A /* CheckBoxView.swift in Sources */,
 				F205F0F52BCC10650086B88E /* Constant.swift in Sources */,
-				F2238C532C31E32D00FC6D8D /* CarrierService.swift in Sources */,
 				F2740B152C2F431100493AB7 /* TravelView.swift in Sources */,
 				F21C09612BD8E3FF006AAD9A /* RoutesViewModel.swift in Sources */,
 				F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */,
@@ -416,12 +394,8 @@
 				F21C095F2BD8E3E6006AAD9A /* CitiesViewModel.swift in Sources */,
 				F2740B132C2F42FE00493AB7 /* TravelViewModel.swift in Sources */,
 				F2F732292BA0B0CD0062011B /* ContentView.swift in Sources */,
-				F2238C5A2C31E32D00FC6D8D /* SearchService.swift in Sources */,
-				F2238C592C31E32D00FC6D8D /* ScheduleService.swift in Sources */,
-				F2238C5C2C31E32D00FC6D8D /* ThreadService.swift in Sources */,
 				F232A55D2C03460A006B5EDD /* StoriesProgressBar.swift in Sources */,
 				F2740B0E2C2F348100493AB7 /* SettingsView.swift in Sources */,
-				F2238C562C31E32D00FC6D8D /* NearestStationsService.swift in Sources */,
 				F205F10E2BD2C0400086B88E /* ErrorView.swift in Sources */,
 				F21C09632BD8E41A006AAD9A /* CarrierViewModel.swift in Sources */,
 				F21C091B2BD3BCA4006AAD9A /* SearchCityView.swift in Sources */,
@@ -440,9 +414,7 @@
 				F232A5552C0342F6006B5EDD /* StoriesView.swift in Sources */,
 				F21C09532BD78C9B006AAD9A /* RoutesListView.swift in Sources */,
 				F21C09672BD90DD2006AAD9A /* FilterTimeView.swift in Sources */,
-				F2238C552C31E32D00FC6D8D /* NearestSettlementService.swift in Sources */,
 				F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */,
-				F2238C542C31E32D00FC6D8D /* CopyrightService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
