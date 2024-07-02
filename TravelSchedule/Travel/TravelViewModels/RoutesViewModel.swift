@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OpenAPIURLSession
 
 final class RoutesViewModel: ObservableObject {
     
@@ -90,6 +91,9 @@ final class RoutesViewModel: ObservableObject {
                                   endTime: "21:00",
                                   duration: "9 часов")
         ]
+        
+        self.search()
+        
     }
     
     func filteredRoutes() -> [RouteModel] {
@@ -131,6 +135,31 @@ final class RoutesViewModel: ObservableObject {
     
     func setRedDotStatus() {
         isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
+    }
+    
+    // Расписание рейсов между станциями
+    func search() {
+        let client = Client(
+            serverURL: try! Servers.server1(),
+            transport: URLSessionTransport()
+        )
+        
+        let service = SearchService(
+            client: client,
+            apikey: apiKey
+        )
+        
+        Task {
+            do {
+                let route = try await service.search(from: "s9602498",
+                                                     to: "s9603596",
+                                                     date:  "2024-07-03")
+                print ("\nРасписание рейсов между станциями\n")
+                print(route)
+            } catch {
+                print("Error: \(error)")
+            }
+        }
     }
 }
 

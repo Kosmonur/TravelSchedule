@@ -22,7 +22,6 @@ final class CitiesViewModel: ObservableObject {
         }
     }
     
-    // Полный список станций
     func getStationsList() {
         let client = Client(
             serverURL: try! Servers.server1(),
@@ -65,7 +64,7 @@ final class CitiesViewModel: ObservableObject {
                     }
                 cities.sort {$0.name < $1.name}
                 
-                print(cities)
+//                print(cities)
             } catch {
                 print("Error: \(error)")
             }
