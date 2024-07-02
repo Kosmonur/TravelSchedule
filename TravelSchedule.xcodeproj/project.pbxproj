@@ -34,6 +34,7 @@
 		F2238C572C31E32D00FC6D8D /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */; };
 		F2238C582C31E32D00FC6D8D /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4C2C31E32D00FC6D8D /* openapi.yaml */; };
 		F2238C5B2C31E32D00FC6D8D /* StationsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */; };
+		F2238C902C3480EC00FC6D8D /* StationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C8F2C3480EC00FC6D8D /* StationModel.swift */; };
 		F232A54B2C03386E006B5EDD /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54A2C03386E006B5EDD /* StoryModel.swift */; };
 		F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A54E2C033E2A006B5EDD /* StoryView.swift */; };
 		F232A5532C034168006B5EDD /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F232A5522C034168006B5EDD /* CloseButton.swift */; };
@@ -83,6 +84,7 @@
 		F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		F2238C4C2C31E32D00FC6D8D /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListService.swift; sourceTree = "<group>"; };
+		F2238C8F2C3480EC00FC6D8D /* StationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationModel.swift; sourceTree = "<group>"; };
 		F232A54A2C03386E006B5EDD /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		F232A54E2C033E2A006B5EDD /* StoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryView.swift; sourceTree = "<group>"; };
 		F232A5522C034168006B5EDD /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F21C09162BD3B757006AAD9A /* CityModel.swift */,
+				F2238C8F2C3480EC00FC6D8D /* StationModel.swift */,
 				F21C09562BD794E7006AAD9A /* RouteModel.swift */,
 				F21C095C2BD8E058006AAD9A /* CarrierModel.swift */,
 			);
@@ -390,6 +393,7 @@
 				F21C09612BD8E3FF006AAD9A /* RoutesViewModel.swift in Sources */,
 				F232A54F2C033E2A006B5EDD /* StoryView.swift in Sources */,
 				F232A5602C03467D006B5EDD /* ProgressBar.swift in Sources */,
+				F2238C902C3480EC00FC6D8D /* StationModel.swift in Sources */,
 				F21C09512BD66878006AAD9A /* FromToTextView.swift in Sources */,
 				F21C095F2BD8E3E6006AAD9A /* CitiesViewModel.swift in Sources */,
 				F2740B132C2F42FE00493AB7 /* TravelViewModel.swift in Sources */,

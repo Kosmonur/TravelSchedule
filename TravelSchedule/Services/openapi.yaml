@@ -92,7 +92,16 @@ components:
     DetailedStation:
         type: object
         properties:
+          codes:
+            $ref: '#/components/schemas/StationCode'
           title:
             type: string
           transport_type:
             type: string
+            
+    StationCode:
+      type: object
+      properties:
+        yandex_code:
+          type: string
+          nullable: true

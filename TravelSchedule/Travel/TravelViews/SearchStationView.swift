@@ -19,9 +19,9 @@ struct SearchStationView: View {
     
     var searchStationResult: [String] {
         if searchStation.isEmpty {
-            return city.stations
+            return city.stations.map{ $0.name }
         } else {
-            return city.stations.filter { $0.lowercased().contains(searchStation.lowercased())
+            return city.stations.map{ $0.name }.filter { $0.lowercased().contains(searchStation.lowercased())
             }
         }
     }

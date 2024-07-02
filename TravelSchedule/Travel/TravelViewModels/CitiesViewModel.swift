@@ -13,20 +13,6 @@ final class CitiesViewModel: ObservableObject {
     @Published var cities: [CityModel] = []
     @Published var searchCity: String = ""
     
-    init() {
-        getStationsList()
-        //        self.cities = [
-        //            CityModel(
-        //                name: "Москва",
-        //                stations: ["Киевский вокзал",
-        //                           "Курский вокзал",
-        //                           "Ярославский вокзал",
-        //                           "Белорусский вокзал"]),
-        //            CityModel(
-        //                name: "Гадюкино",
-        //                stations: [])]
-    }
-    
     func searchCityResult() -> [CityModel] {
         if searchCity.isEmpty {
             return cities
@@ -60,22 +46,23 @@ final class CitiesViewModel: ObservableObject {
                             region.settlements?.forEach { settlement in
                                 if let cityName = settlement.title,
                                    cityName != "" {
-                                    let stationNames = settlement.stations?.map { station in
+                                    var stationNames: [StationModel] = []
+                                    settlement.stations?.forEach { station in
                                         if station.transport_type == "train",
-                                           let stationName = station.title {
-                                            return stationName
-                                        } else {
-                                            return("")
+                                           let stationName = station.title,
+                                           stationName != "" {
+                                            let code = station.codes?.yandex_code ?? ""
+                                            stationNames.append(StationModel(name: stationName, code: code))
                                         }
-                                    }.filter{$0 != ""}.sorted()
-                                    
-                                    let newSettlement = CityModel(code: "s9605487", name: cityName, stations: stationNames ?? [])
-                                    cities.append(newSettlement)
+                                    }
+                                    if !stationNames.isEmpty {
+                                        let newSettlement = CityModel(name: cityName, stations: stationNames.sorted{$0.name < $1.name})
+                                        cities.append(newSettlement)
+                                    }
                                 }
                             }
                         }
                     }
-                
                 cities.sort {$0.name < $1.name}
                 
                 print(cities)
