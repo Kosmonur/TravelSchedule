@@ -42,6 +42,7 @@ struct RouteView: View {
                     .foregroundColor(.grayUniv)
                     .frame(height: 1)
                 Text(route.duration)
+                    .font(.regular12)
                 Rectangle()
                     .foregroundColor(.grayUniv)
                     .frame(height: 1)

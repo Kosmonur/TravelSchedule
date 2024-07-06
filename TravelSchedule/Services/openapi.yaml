@@ -244,6 +244,8 @@ components:
           $ref: '#/components/schemas/Thread'
         departure_platform:
           type: string
+        departure:
+          type: string  
         stops:
           type: string
         departure_terminal:

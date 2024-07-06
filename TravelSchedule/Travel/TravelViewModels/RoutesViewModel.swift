@@ -16,7 +16,7 @@ final class RoutesViewModel: ObservableObject {
     @Published var isEveningOn = true
     @Published var isNightOn = true
     @Published var isTransfersOn = true
-    @Published var routes: [RouteModel]
+    @Published var routes: [RouteModel] = []
     
     private var fromStation: StationModel
     private var toStation: StationModel
@@ -32,86 +32,8 @@ final class RoutesViewModel: ObservableObject {
                                   date: "14 января",
                                   startTime: "22:30",
                                   endTime: "08:15",
-                                  duration: "20 часов",
+                                  duration: "23 ч 35 мин",
                                   carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "15 января",
-                                  startTime: "11:15",
-                                  endTime: "15:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "16 января",
-                                  startTime: "12:30",
-                                  endTime: "21:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       RouteModel(transfer: "С пересадкой в Костроме",
-                                  date: "14 января",
-                                  startTime: "22:30",
-                                  endTime: "08:15",
-                                  duration: "20 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "15 января",
-                                  startTime: "01:15",
-                                  endTime: "09:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "16 января",
-                                  startTime: "12:30",
-                                  endTime: "21:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       RouteModel(transfer: "С пересадкой в Костроме",
-                                  date: "14 января",
-                                  startTime: "22:30",
-                                  endTime: "08:15",
-                                  duration: "20 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "15 января",
-                                  startTime: "01:15",
-                                  endTime: "09:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       
-                       RouteModel(transfer: "",
-                                  date: "16 января",
-                                  startTime: "12:30",
-                                  endTime: "21:00",
-                                  duration: "9 часов",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68"))
@@ -166,6 +88,27 @@ final class RoutesViewModel: ObservableObject {
         "\(fromStation.name) → \(toStation.name)"
     }
     
+    func getTimeFromUTC(utc: String?) -> String {
+        guard let utc else {return ""}
+        return String(utc.dropFirst(11).dropLast(9))
+    }
+    
+    func getDateFromUTC(utc: String?) -> String {
+        guard let utc else {return ""}
+        let day = String(utc.dropFirst(8).dropLast(15))
+        let monthNumber = Int(String(utc.dropFirst(5).dropLast(18))) ?? 1
+        let monthName = Constant.monthNames[monthNumber-1]
+        return "\(day) \(monthName)"
+    }
+    
+    func getDuration(duration: Int?) -> String {
+        guard let duration else {return ""}
+        
+        print(duration)
+        
+        return ("23 ч 35 мин")
+    }
+    
     // Расписание рейсов между станциями
     func search() {
         let client = Client(
@@ -180,14 +123,33 @@ final class RoutesViewModel: ObservableObject {
         
         Task {
             do {
-                let route = try await service.search(from: fromStation.code,
-                                                     to: toStation.code,
-                                                     date:  date)
+                let routesData = try await service.search(from: fromStation.code,
+                                                          to: toStation.code,
+                                                          date:  date)
                 
+                routesData.segments?.forEach {segment in
+                    
+                    let carrier = segment.value1.thread?.carrier
+                    
+                    let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
+                                                      name: carrier?.title ?? "",
+                                                      email: carrier?.email ?? "",
+                                                      phone: carrier?.phone ?? "")
+                    
+                    let currentRoute = RouteModel(transfer: "что-то про пересадку",
+                                                  date: getDateFromUTC(utc: segment.value2.arrival),
+                                                  startTime: getTimeFromUTC(utc: segment.value1.departure),
+                                                  endTime: getTimeFromUTC(utc: segment.value2.arrival),
+                                                  duration: getDuration(duration: segment.value1.duration),
+                                                  carrier: currentCarrier)
+                    
+                    routes.append(currentRoute)
+                    
+                }
                 
                 
                 print ("\nРасписание рейсов между станциями\n")
-                print(route)
+                //                print(routes)
             } catch {
                 print("Error: \(error)")
             }
