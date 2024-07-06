@@ -9,18 +9,16 @@ import Foundation
 
 final class CarrierViewModel: ObservableObject {
     
-    @Published var carriers: [CarrierModel]
+    @Published var logo: String
+    @Published var name: String
+    @Published var email: String
+    @Published var phone: String
     
-    init() {
-        self.carriers = [
-            CarrierModel(logo: "rzhd", name: "ОАО «РЖД»", email: "i.lozgkina@yandex.ru", phone: "+7 (904) 329-27-71"),
-            CarrierModel(logo: "fgk", name: "ОАО «Федеральная государственная компания»", email: "pupkin@yandex.ru", phone: "+7 (904) 329-27-71"),
-            CarrierModel(logo: "uralLog", name: "ОАО «Уральские поездатые поезда»", email: "parovoz@yandex.ru", phone: "+7 (123) 234-00-00")
-        ]
-    }
-    
-    func getCarrierWithLogo(logo: String) -> CarrierModel {
-        carriers.filter { $0.logo == logo }.first ?? .init()
+    init(logo: String, name: String, email: String, phone: String) {
+        self.logo = logo
+        self.name = name
+        self.email = email
+        self.phone = phone
     }
 }
 

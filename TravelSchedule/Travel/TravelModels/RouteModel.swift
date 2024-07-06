@@ -16,4 +16,5 @@ struct RouteModel: Identifiable {
     let startTime: String
     let endTime: String
     let duration: String
+    let carrier: CarrierModel
 }
