@@ -18,19 +18,15 @@ final class RoutesViewModel: ObservableObject {
     @Published var isTransfersOn = true
     @Published var routes: [RouteModel]
     
-    private var fromCode: String
-    private var toCode: String
+    private var fromStation: StationModel
+    private var toStation: StationModel
     private var date: String
     
-    init(fromCode: String, toCode: String) {
+    init(fromStation: StationModel, toStation: StationModel) {
         
-        self.fromCode = fromCode
-        self.toCode = toCode
-        self.date = "2024-07-06"
-        
-        print(fromCode)
-        print(toCode)
-        
+        self.fromStation = fromStation
+        self.toStation = toStation
+        self.date = String(Date.now.description.prefix(10))
         
         self.routes = [RouteModel(transfer: "С пересадкой в Костроме",
                                   date: "14 января",
@@ -166,6 +162,10 @@ final class RoutesViewModel: ObservableObject {
         isRedDotHide = isMorningOn && isDayOn && isEveningOn && isNightOn && isTransfersOn
     }
     
+    func getTitle() -> String {
+        "\(fromStation.name) → \(toStation.name)"
+    }
+    
     // Расписание рейсов между станциями
     func search() {
         let client = Client(
@@ -180,14 +180,14 @@ final class RoutesViewModel: ObservableObject {
         
         Task {
             do {
-                let route = try await service.search(from: "s2006004",
-                                                     to: "s9602494",
+                let route = try await service.search(from: fromStation.code,
+                                                     to: toStation.code,
                                                      date:  date)
                 
                 
                 
                 print ("\nРасписание рейсов между станциями\n")
-//                print(route)
+                print(route)
             } catch {
                 print("Error: \(error)")
             }

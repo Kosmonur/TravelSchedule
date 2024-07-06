@@ -10,7 +10,6 @@ import SwiftUI
 struct RoutesListView: View {
     
     @ObservedObject var routesViewModel: RoutesViewModel
-    @State var title: String
     
     var body: some View {
         let filteredRoutes = routesViewModel.filteredRoutes()
@@ -18,7 +17,7 @@ struct RoutesListView: View {
             Color.whiteApp
                 .ignoresSafeArea()
             VStack {
-                Text(title)
+                Text(routesViewModel.getTitle())
                     .font(.bold24)
                     .foregroundColor(.blackApp)
                 ScrollView(showsIndicators: false) {
@@ -70,6 +69,6 @@ struct RoutesListView: View {
 }
 
 #Preview {
-    RoutesListView(routesViewModel: RoutesViewModel(fromCode: "s2006004", toCode: "s9602494"), title: "Маршрут")
+    RoutesListView(routesViewModel: RoutesViewModel(fromStation: StationModel(name: "Дибуны", code: "s2006004"), toStation: StationModel(name: "Коркино", code: "s9602494")))
 }
 

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct FromToTextView: View {
     
-    @Binding var type: String
+    @Binding var type: StationModel
     
     var body: some View {
-        Text(type)
+        Text(type.name)
             .font(.regular17)
-            .foregroundStyle(type == Constant.from || type == Constant.to ? .grayUniv: .blackUniv)
+            .foregroundStyle(type.name == Constant.from || type.name == Constant.to ? .grayUniv: .blackUniv)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineLimit(1)
             .padding(.horizontal)
@@ -22,5 +22,5 @@ struct FromToTextView: View {
 }
 
 #Preview {
-    FromToTextView(type: .constant(Constant.from))
+    FromToTextView(type: .constant(StationModel(name: Constant.from, code: "")))
 }

@@ -10,18 +10,18 @@ import SwiftUI
 struct SearchStationView: View {
     
     @Binding var path: NavigationPath
-    @Binding var from: String
-    @Binding var to: String
+    @Binding var from: StationModel
+    @Binding var to: StationModel
     
     let city: CityModel
     let selectionType: SelectionType
-    @State private var searchStation: String = ""
+    @State private var searchStation = ""
     
-    var searchStationResult: [String] {
+    var searchStationResult: [StationModel] {
         if searchStation.isEmpty {
-            return city.stations.map{ $0.name }
+            return city.stations.map{$0}
         } else {
-            return city.stations.map{ $0.name }.filter { $0.lowercased().contains(searchStation.lowercased())
+            return city.stations.map{$0}.filter { $0.name.lowercased().contains(searchStation.lowercased())
             }
         }
     }
@@ -34,16 +34,16 @@ struct SearchStationView: View {
                 SearchBar(searchText: $searchStation)
                 List(searchStationResult, id: \.self) { station in
                     NavigationLink(value: "") {
-                        Text(station)
+                        Text(station.name)
                     }
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .onTapGesture {
                         switch selectionType {
                         case .departure:
-                            from = "\(city.name) (\(station))"
+                            from = StationModel(name: "\(city.name) (\(station.name))", code: station.code)
                         case .arrival:
-                            to = "\(city.name) (\(station))"
+                            to = StationModel(name: "\(city.name) (\(station.name))", code: station.code)
                         case .find: ()
                         }
                         path = NavigationPath()
@@ -65,5 +65,5 @@ struct SearchStationView: View {
 }
 
 #Preview {
-    SearchCityView(citiesViewModel: CitiesViewModel(), path: .constant(NavigationPath()), from: .constant(Constant.from), to: .constant(Constant.to), selectionType: .departure)
+    SearchCityView(citiesViewModel: CitiesViewModel(), path: .constant(NavigationPath()), from: .constant(StationModel(name: Constant.from, code: "")), to: .constant(StationModel(name: Constant.to, code: "")), selectionType: .departure)
 }

@@ -14,13 +14,13 @@ final class TravelViewModel: ObservableObject {
     
     @Published var findButtonIsHidden = true
     
-    @Published var from = Constant.from {
+    @Published var from = StationModel(name: Constant.from, code: "") {
         didSet {
             checkFindButtonVisibility()
         }
     }
     
-    @Published var to = Constant.to  {
+    @Published var to = StationModel(name: Constant.to, code: "") {
         didSet {
             checkFindButtonVisibility()
         }
@@ -37,6 +37,6 @@ final class TravelViewModel: ObservableObject {
     }
     
     private func checkFindButtonVisibility() {
-        findButtonIsHidden = from == Constant.from || to == Constant.to || from == Constant.to || to == Constant.from
+        findButtonIsHidden = from.name == Constant.from || to.name == Constant.to || from.name == Constant.to || to.name == Constant.from
     }
 }

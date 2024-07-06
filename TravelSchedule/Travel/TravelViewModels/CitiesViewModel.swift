@@ -45,17 +45,17 @@ final class CitiesViewModel: ObservableObject {
                             region.settlements?.forEach { settlement in
                                 if let cityName = settlement.title,
                                    cityName != "" {
-                                    var stationNames: [StationModel] = []
+                                    var stations: [StationModel] = []
                                     settlement.stations?.forEach { station in
                                         if station.transport_type == "train",
                                            let stationName = station.title,
                                            stationName != "" {
                                             let code = station.codes?.yandex_code ?? ""
-                                            stationNames.append(StationModel(name: stationName + code, code: code))
+                                            stations.append(StationModel(name: stationName, code: code))
                                         }
                                     }
-                                    if !stationNames.isEmpty {
-                                        let newSettlement = CityModel(name: cityName, stations: stationNames.sorted{$0.name < $1.name})
+                                    if !stations.isEmpty {
+                                        let newSettlement = CityModel(name: cityName, stations: stations.sorted{$0.name < $1.name})
                                         cities.append(newSettlement)
                                     }
                                 }

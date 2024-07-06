@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StationModel {
+struct StationModel: Hashable {
     let name: String
     let code: String
 }

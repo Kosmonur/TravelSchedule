@@ -12,8 +12,8 @@ struct SearchCityView: View {
     @ObservedObject var citiesViewModel: CitiesViewModel
     
     @Binding var path: NavigationPath
-    @Binding var from: String
-    @Binding var to: String
+    @Binding var from: StationModel
+    @Binding var to: StationModel
     let selectionType: SelectionType
 
     var body: some View {
@@ -48,7 +48,7 @@ struct SearchCityView: View {
 #Preview {
     SearchCityView(citiesViewModel: CitiesViewModel(),
                    path: .constant(NavigationPath()),
-                   from: .constant(Constant.from),
-                   to: .constant(Constant.to),
+                   from: .constant(StationModel(name: Constant.from, code: "")),
+                   to: .constant(StationModel(name: Constant.to, code: "")),
                    selectionType: .departure)
 }

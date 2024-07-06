@@ -58,5 +58,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: RoutesViewModel(fromCode: "s2006004", toCode: "s9602494").routes[0])
+    RouteView(route: RoutesViewModel(fromStation: StationModel(name: "Дибуны", code: "s2006004"), toStation: StationModel(name: "Коркино", code: "s9602494")).routes[0])
 }

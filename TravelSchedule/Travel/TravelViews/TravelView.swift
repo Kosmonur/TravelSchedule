@@ -99,7 +99,7 @@ struct TravelView: View {
             .navigationDestination(for: SelectionType.self) { type in
                 switch type {
                 case .departure, .arrival: SearchCityView(citiesViewModel: travelViewModel.citiesViewModel, path: $path, from: $travelViewModel.from, to: $travelViewModel.to, selectionType: type)
-                case .find: RoutesListView(routesViewModel: RoutesViewModel(fromCode: travelViewModel.from, toCode: travelViewModel.to), title: "\(travelViewModel.from) → \(travelViewModel.to)")
+                case .find: RoutesListView(routesViewModel: RoutesViewModel(fromStation:  travelViewModel.from, toStation: travelViewModel.to))
                 }
             }
         }
