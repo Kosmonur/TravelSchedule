@@ -24,7 +24,7 @@ struct RoutesListView: View {
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 8) {
                         ForEach(filteredRoutes) { route in
-                            NavigationLink(destination: CarrierView(carrierViewModel: routesViewModel.carrierViewModel)) {
+                            NavigationLink(destination: CarrierView(carrier: route.carrier)) {
                                 RouteView(route: route)
                             }
                         }

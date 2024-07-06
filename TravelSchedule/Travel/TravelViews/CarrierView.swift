@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CarrierView: View {
     
-    @ObservedObject var carrierViewModel: CarrierViewModel
+    var carrier: CarrierModel
     
     var body: some View {
         
@@ -17,7 +17,7 @@ struct CarrierView: View {
             Color.whiteApp
                 .ignoresSafeArea()
             VStack (spacing: 16) {
-                AsyncImage(url: URL(string: carrierViewModel.logo))
+                AsyncImage(url: URL(string: carrier.logo))
 //                    .resizable()
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(24)
@@ -25,24 +25,24 @@ struct CarrierView: View {
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text(carrierViewModel.name)
+                        Text(carrier.name)
                             .font(.bold24)
                             .foregroundColor(.blackApp)
                         
                         VStack(alignment: .leading) {
-                            Text(carrierViewModel.email == "" ? "" : Constant.email)
+                            Text(carrier.email == "" ? "" : Constant.email)
                                 .font(.regular17)
                                 .foregroundColor(.blackApp)
-                            Text(carrierViewModel.email)
+                            Text(carrier.email)
                                 .font(.regular12)
                                 .foregroundColor(.blueUniv)
                         }
                         
                         VStack(alignment: .leading) {
-                            Text(carrierViewModel.phone == "" ? "" : Constant.phone)
+                            Text(carrier.phone == "" ? "" : Constant.phone)
                                 .font(.regular17)
                                 .foregroundColor(.blackApp)
-                            Text(carrierViewModel.phone)
+                            Text(carrier.phone)
                                 .font(.regular12)
                                 .foregroundColor(.blueUniv)
                         }
@@ -59,5 +59,5 @@ struct CarrierView: View {
 }
 
 #Preview {
-    CarrierView(carrierViewModel: CarrierViewModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png", name: "Северо-западная пригородная пассажирская компания", email: "i.lozgkina@yandex.ru", phone: "(812) 458-68-68") )
+    CarrierView(carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png", name: "Северо-западная пригородная пассажирская компания", email: "i.lozgkina@yandex.ru", phone: "(812) 458-68-68") )
 }

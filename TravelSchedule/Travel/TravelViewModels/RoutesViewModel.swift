@@ -16,13 +16,9 @@ final class RoutesViewModel: ObservableObject {
     @Published var isEveningOn = true
     @Published var isNightOn = true
     @Published var isTransfersOn = true
-    
     @Published var routes: [RouteModel]
-    @Published var carrierViewModel: CarrierViewModel
     
     init() {
-        
-        self.carrierViewModel = CarrierViewModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png", name: "Северо-западная пригородная пассажирская компания", email: "i.lozgkina@yandex.ru", phone: "(812) 458-68-68")
         
         self.routes = [RouteModel(carrierName: "РЖД",
                                   logo: "rzhd",
