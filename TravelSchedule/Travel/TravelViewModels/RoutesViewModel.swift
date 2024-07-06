@@ -33,10 +33,20 @@ final class RoutesViewModel: ObservableObject {
                                   startTime: "22:30",
                                   endTime: "08:15",
                                   duration: "23 ч 35 мин",
-                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
+                                  carrier: CarrierModel(logo: "",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68"))
+                                                        phone: "(812) 458-68-68")),
+                       RouteModel(transfer: "",
+                                                 date: "15 января",
+                                                 startTime: "00:21",
+                                                 endTime: "09:10",
+                                                 duration: "15 ч 35 мин",
+                                                 carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
+                                                                       name: "Северо-западная пригородная пассажирская компания",
+                                                                       email: "i.lozgkina@yandex.ru",
+                                                                       phone: "(812) 458-68-68")),
+                       
         ]
         
         self.search()
@@ -103,10 +113,7 @@ final class RoutesViewModel: ObservableObject {
     
     func getDuration(duration: Int?) -> String {
         guard let duration else {return ""}
-        
-        print(duration)
-        
-        return ("23 ч 35 мин")
+        return ("\(duration / 3600) ч \((duration % 3600) / 60) мин")
     }
     
     // Расписание рейсов между станциями
@@ -126,6 +133,11 @@ final class RoutesViewModel: ObservableObject {
                 let routesData = try await service.search(from: fromStation.code,
                                                           to: toStation.code,
                                                           date:  date)
+                
+//                routesData.interval_segments?.forEach{intseg in
+//                    print(intseg.has_transfers)
+//
+//                }
                 
                 routesData.segments?.forEach {segment in
                     
@@ -147,8 +159,6 @@ final class RoutesViewModel: ObservableObject {
                     
                 }
                 
-                
-                print ("\nРасписание рейсов между станциями\n")
                 //                print(routes)
             } catch {
                 print("Error: \(error)")

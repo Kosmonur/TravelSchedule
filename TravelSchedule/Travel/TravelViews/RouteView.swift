@@ -19,9 +19,7 @@ struct RouteView: View {
                         .aspectRatio(contentMode: .fit)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .frame(width: 38, height: 38)
-                } placeholder: {
-                    ProgressView()
-                }
+                } placeholder: {}
                 VStack(alignment: .leading) {
                     Text(route.carrier.name)
                         .lineLimit(1)

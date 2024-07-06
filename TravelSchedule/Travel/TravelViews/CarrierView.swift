@@ -29,9 +29,7 @@ struct CarrierView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 104)
                         .clipped()
-                } placeholder: {
-                    ProgressView()
-                }
+                } placeholder: {}
                 .padding(.horizontal, 32)
                 
                 HStack {
