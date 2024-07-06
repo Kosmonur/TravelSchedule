@@ -70,5 +70,6 @@ struct RoutesListView: View {
 }
 
 #Preview {
-    RoutesListView(routesViewModel: RoutesViewModel(), title: "Маршрут")
+    RoutesListView(routesViewModel: RoutesViewModel(fromCode: "s2006004", toCode: "s9602494"), title: "Маршрут")
 }
+

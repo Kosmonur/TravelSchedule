@@ -9,8 +9,6 @@ import Foundation
 
 struct RouteModel: Identifiable {
     let id = UUID()
-    let carrierName: String
-    let logo: String
     let transfer: String
     let date: String
     let startTime: String

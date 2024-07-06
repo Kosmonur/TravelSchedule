@@ -10,7 +10,6 @@ import SwiftUI
 final class TravelViewModel: ObservableObject {
     
     @ObservedObject var citiesViewModel: CitiesViewModel
-    @ObservedObject var routesViewModel: RoutesViewModel
     @ObservedObject var storiesViewModel: StoriesViewModel
     
     @Published var findButtonIsHidden = true
@@ -29,7 +28,6 @@ final class TravelViewModel: ObservableObject {
     
     init() {
         self.citiesViewModel = CitiesViewModel()
-        self.routesViewModel = RoutesViewModel()
         self.storiesViewModel = StoriesViewModel(models: Constant.storiesData)
         citiesViewModel.getStationsList()
     }

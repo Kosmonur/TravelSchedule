@@ -51,7 +51,7 @@ final class CitiesViewModel: ObservableObject {
                                            let stationName = station.title,
                                            stationName != "" {
                                             let code = station.codes?.yandex_code ?? ""
-                                            stationNames.append(StationModel(name: stationName, code: code))
+                                            stationNames.append(StationModel(name: stationName + code, code: code))
                                         }
                                     }
                                     if !stationNames.isEmpty {

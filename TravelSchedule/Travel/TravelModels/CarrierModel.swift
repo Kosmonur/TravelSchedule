@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct CarrierModel: Identifiable {
-    let id = UUID()
+struct CarrierModel {
     let logo: String
     let name: String
     let email: String

@@ -9,7 +9,14 @@ import SwiftUI
 
 struct CarrierView: View {
     
-    var carrier: CarrierModel
+    @ObservedObject var carrierViewModel: CarrierViewModel
+    
+    init(carrier: CarrierModel) {
+        carrierViewModel = CarrierViewModel(logo: carrier.logo,
+                                            name: carrier.name,
+                                            email: carrier.email,
+                                            phone: carrier.phone)
+    }
     
     var body: some View {
         
@@ -17,32 +24,36 @@ struct CarrierView: View {
             Color.whiteApp
                 .ignoresSafeArea()
             VStack (spacing: 16) {
-                AsyncImage(url: URL(string: carrier.logo))
-//                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(24)
-                    .frame(height: 104)
+                AsyncImage(url: URL(string: carrierViewModel.logo)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 104)
+                        .clipped()
+                } placeholder: {
+                    ProgressView()
+                }
+                .padding(.horizontal, 32)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text(carrier.name)
+                        Text(carrierViewModel.name)
                             .font(.bold24)
                             .foregroundColor(.blackApp)
                         
                         VStack(alignment: .leading) {
-                            Text(carrier.email == "" ? "" : Constant.email)
+                            Text(carrierViewModel.email == "" ? "" : Constant.email)
                                 .font(.regular17)
                                 .foregroundColor(.blackApp)
-                            Text(carrier.email)
+                            Text(carrierViewModel.email)
                                 .font(.regular12)
                                 .foregroundColor(.blueUniv)
                         }
                         
                         VStack(alignment: .leading) {
-                            Text(carrier.phone == "" ? "" : Constant.phone)
+                            Text(carrierViewModel.phone == "" ? "" : Constant.phone)
                                 .font(.regular17)
                                 .foregroundColor(.blackApp)
-                            Text(carrier.phone)
+                            Text(carrierViewModel.phone)
                                 .font(.regular12)
                                 .foregroundColor(.blueUniv)
                         }
@@ -50,10 +61,10 @@ struct CarrierView: View {
                     }
                     Spacer()
                 }
-                .padding(.horizontal, 16)
                 .toolbarRole(.editor)
                 .navigationTitle(Constant.carrierInfo)
             }
+            .padding(.horizontal, 16)
         }
     }
 }

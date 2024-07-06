@@ -14,9 +14,17 @@ struct RouteView: View {
     var body: some View {
         VStack(spacing: 14) {
             HStack(alignment: .top) {
-                Image(uiImage: (UIImage(named: route.logo) ?? UIImage()))
+                AsyncImage(url: URL(string: route.carrier.logo)) { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(width: 38, height: 38)
+                } placeholder: {
+                    ProgressView()
+                }
                 VStack(alignment: .leading) {
-                    Text(route.carrierName)
+                    Text(route.carrier.name)
+                        .lineLimit(1)
                         .font(.regular17)
                         .foregroundStyle(.blackUniv)
                     Text(route.transfer)
@@ -50,5 +58,5 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: RoutesViewModel().routes[0])
+    RouteView(route: RoutesViewModel(fromCode: "s2006004", toCode: "s9602494").routes[0])
 }

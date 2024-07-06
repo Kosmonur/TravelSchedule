@@ -18,110 +18,104 @@ final class RoutesViewModel: ObservableObject {
     @Published var isTransfersOn = true
     @Published var routes: [RouteModel]
     
-    init() {
+    private var fromCode: String
+    private var toCode: String
+    private var date: String
+    
+    init(fromCode: String, toCode: String) {
         
-        self.routes = [RouteModel(carrierName: "РЖД",
-                                  logo: "rzhd",
-                                  transfer: "С пересадкой в Костроме",
+        self.fromCode = fromCode
+        self.toCode = toCode
+        self.date = "2024-07-06"
+        
+        print(fromCode)
+        print(toCode)
+        
+        
+        self.routes = [RouteModel(transfer: "С пересадкой в Костроме",
                                   date: "14 января",
                                   startTime: "22:30",
                                   endTime: "08:15",
                                   duration: "20 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "ФГК",
-                                  logo: "fgk",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "15 января",
                                   startTime: "11:15",
                                   endTime: "15:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "Урал логистика",
-                                  logo: "uralLog",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "16 января",
                                   startTime: "12:30",
                                   endTime: "21:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
-                       RouteModel(carrierName: "РЖД",
-                                  logo: "rzhd",
-                                  transfer: "С пересадкой в Костроме",
+                       RouteModel(transfer: "С пересадкой в Костроме",
                                   date: "14 января",
                                   startTime: "22:30",
                                   endTime: "08:15",
                                   duration: "20 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "ФГК",
-                                  logo: "fgk",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "15 января",
                                   startTime: "01:15",
                                   endTime: "09:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "Урал логистика",
-                                  logo: "uralLog",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "16 января",
                                   startTime: "12:30",
                                   endTime: "21:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
-                       RouteModel(carrierName: "РЖД",
-                                  logo: "rzhd",
-                                  transfer: "С пересадкой в Костроме",
+                       RouteModel(transfer: "С пересадкой в Костроме",
                                   date: "14 января",
                                   startTime: "22:30",
                                   endTime: "08:15",
                                   duration: "20 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "ФГК",
-                                  logo: "fgk",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "15 января",
                                   startTime: "01:15",
                                   endTime: "09:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68")),
                        
-                       RouteModel(carrierName: "Урал логистика",
-                                  logo: "uralLog",
-                                  transfer: "",
+                       RouteModel(transfer: "",
                                   date: "16 января",
                                   startTime: "12:30",
                                   endTime: "21:00",
                                   duration: "9 часов",
-                                  carrier: CarrierModel(logo: " https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
+                                  carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/szppk_logo2.png",
                                                         name: "Северо-западная пригородная пассажирская компания",
                                                         email: "i.lozgkina@yandex.ru",
                                                         phone: "(812) 458-68-68"))
@@ -186,14 +180,14 @@ final class RoutesViewModel: ObservableObject {
         
         Task {
             do {
-                let route = try await service.search(from: "s9602498",
-                                                     to: "s9603596",
-                                                     date:  "2024-07-03")
+                let route = try await service.search(from: "s2006004",
+                                                     to: "s9602494",
+                                                     date:  date)
                 
                 
                 
                 print ("\nРасписание рейсов между станциями\n")
-                print(route)
+//                print(route)
             } catch {
                 print("Error: \(error)")
             }
