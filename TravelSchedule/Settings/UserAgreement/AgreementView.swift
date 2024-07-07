@@ -8,7 +8,7 @@
 import SwiftUI
 import Network
 
-struct AgreementView: View {
+struct AgreementView: View, Sendable {
     
     @State private var isConnected = true
     @State var isProgressViewVisible: Bool = true

@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-struct WebView: UIViewRepresentable {
+struct WebView: UIViewRepresentable, Sendable {
     
     let url: URL
     @ObservedObject var viewModel: ProgressViewModel
@@ -41,9 +41,8 @@ extension WebView {
             self.viewModel = viewModel
             super.init()
             
-            observer = self.parent.webView.observe(\.estimatedProgress) { [weak self] webView, _ in
-                guard let self = self else { return }
-                self.parent.viewModel.progress = webView.estimatedProgress
+            observer = self.parent.webView.observe(\.estimatedProgress) { webView, _ in
+                parent.viewModel.progress = webView.estimatedProgress
             }
         }
         
@@ -54,7 +53,7 @@ extension WebView {
 }
 
 extension WebView {
-    class ProgressViewModel: ObservableObject {
+    final class ProgressViewModel: ObservableObject {
         @Published var progress: Double = .zero
         
         init (progress: Double) {
