@@ -41,9 +41,6 @@ struct SearchCityView: View {
                 .toolbarRole(.editor)
                 .navigationTitle(Constant.citySelect)
             }
-            .task {
-                await citiesViewModel.getStationsList()
-            }
         }
     }
 }

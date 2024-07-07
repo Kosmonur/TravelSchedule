@@ -35,6 +35,9 @@ struct ContentView: View {
             }
         }
         .tint(.blackApp)
+        .task {
+            await travelViewModel.citiesViewModel.getStationsList()
+        }
     }
 }
 
