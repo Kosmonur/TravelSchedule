@@ -8,6 +8,7 @@
 import Foundation
 import OpenAPIURLSession
 
+@MainActor
 final class CitiesViewModel: ObservableObject {
     
     @Published var cities: [CityModel] = []
@@ -23,6 +24,8 @@ final class CitiesViewModel: ObservableObject {
     }
     
     func getStationsList() {
+        cities.removeAll()
+        
         let client = Client(
             serverURL: try! Servers.server1(),
             transport: URLSessionTransport()

@@ -40,6 +40,7 @@ struct RouteView: View {
                     .foregroundColor(.grayUniv)
                     .frame(height: 1)
                 Text(route.duration)
+                    .lineLimit(1)
                     .font(.regular12)
                 Rectangle()
                     .foregroundColor(.grayUniv)
@@ -57,5 +58,13 @@ struct RouteView: View {
 }
 
 #Preview {
-    RouteView(route: RoutesViewModel(fromStation: StationModel(name: "Дибуны", code: "s2006004"), toStation: StationModel(name: "Коркино", code: "s9602494")).routes[0])
+    RouteView(route: RouteModel(transfer: "С пересадкой в Костроме",
+                                date: "14 января",
+                                startTime: "20:32",
+                                endTime: "04:58",
+                                duration: "32 ч 26 мин",
+                                carrier: CarrierModel(logo: "",
+                                                      name: "Северо-западная пригородная пассажирская компания",
+                                                      email: "i.lozgkina@yandex.ru",
+                                                      phone: "(812) 458-68-68")))
 }

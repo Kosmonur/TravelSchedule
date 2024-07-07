@@ -8,6 +8,7 @@
 import Foundation
 import OpenAPIURLSession
 
+@MainActor
 final class RoutesViewModel: ObservableObject {
     
     @Published var isRedDotHide = true
@@ -22,32 +23,39 @@ final class RoutesViewModel: ObservableObject {
     private var toStation: StationModel
     private var date: String
     
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
     init(fromStation: StationModel, toStation: StationModel) {
         
         self.fromStation = fromStation
         self.toStation = toStation
-        self.date = String(Date.now.description.prefix(10))
-        
-        self.routes = [RouteModel(transfer: "С пересадкой в Костроме",
-                                  date: "14 января",
-                                  startTime: "22:30",
-                                  endTime: "08:15",
-                                  duration: "23 ч 35 мин",
-                                  carrier: CarrierModel(logo: "",
-                                                        name: "Северо-западная пригородная пассажирская компания",
-                                                        email: "i.lozgkina@yandex.ru",
-                                                        phone: "(812) 458-68-68")),
-                       RouteModel(transfer: "",
-                                                 date: "15 января",
-                                                 startTime: "00:21",
-                                                 endTime: "09:10",
-                                                 duration: "15 ч 35 мин",
-                                                 carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
-                                                                       name: "Северо-западная пригородная пассажирская компания",
-                                                                       email: "i.lozgkina@yandex.ru",
-                                                                       phone: "(812) 458-68-68")),
-                       
-        ]
+        self.date = formatter.string(from: Date())
+
+//        self.routes = [RouteModel(transfer: "С пересадкой в Костроме",
+//                                  date: "14 января",
+//                                  startTime: "22:30",
+//                                  endTime: "08:15",
+//                                  duration: "23 ч 35 мин",
+//                                  carrier: CarrierModel(logo: "",
+//                                                        name: "Северо-западная пригородная пассажирская компания",
+//                                                        email: "i.lozgkina@yandex.ru",
+//                                                        phone: "(812) 458-68-68")),
+//                       RouteModel(transfer: "",
+//                                                 date: "15 января",
+//                                                 startTime: "00:21",
+//                                                 endTime: "09:10",
+//                                                 duration: "15 ч 35 мин",
+//                                                 carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
+//                                                                       name: "Северо-западная пригородная пассажирская компания",
+//                                                                       email: "i.lozgkina@yandex.ru",
+//                                                                       phone: "(812) 458-68-68")),
+//                       
+//        ]
         
         self.search()
         
@@ -113,11 +121,12 @@ final class RoutesViewModel: ObservableObject {
     
     func getDuration(duration: Int?) -> String {
         guard let duration else {return ""}
-        return ("\(duration / 3600) ч \((duration % 3600) / 60) мин")
+        return (duration < 86400 ? "\(duration / 3600)ч \((duration % 3600) / 60)мин" : "\(duration / 86400)дн \((duration % 86400) / 3600)ч")
     }
     
     // Расписание рейсов между станциями
     func search() {
+        routes.removeAll()
         let client = Client(
             serverURL: try! Servers.server1(),
             transport: URLSessionTransport()
@@ -134,10 +143,10 @@ final class RoutesViewModel: ObservableObject {
                                                           to: toStation.code,
                                                           date:  date)
                 
-//                routesData.interval_segments?.forEach{intseg in
-//                    print(intseg.has_transfers)
-//
-//                }
+                routesData.interval_segments?.forEach{intseg in
+                    print(intseg)
+
+                }
                 
                 routesData.segments?.forEach {segment in
                     
@@ -148,7 +157,7 @@ final class RoutesViewModel: ObservableObject {
                                                       email: carrier?.email ?? "",
                                                       phone: carrier?.phone ?? "")
                     
-                    let currentRoute = RouteModel(transfer: "что-то про пересадку",
+                    let currentRoute = RouteModel(transfer: "",
                                                   date: getDateFromUTC(utc: segment.value2.arrival),
                                                   startTime: getTimeFromUTC(utc: segment.value1.departure),
                                                   endTime: getTimeFromUTC(utc: segment.value2.arrival),
@@ -158,8 +167,6 @@ final class RoutesViewModel: ObservableObject {
                     routes.append(currentRoute)
                     
                 }
-                
-                //                print(routes)
             } catch {
                 print("Error: \(error)")
             }

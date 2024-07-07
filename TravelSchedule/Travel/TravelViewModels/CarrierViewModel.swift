@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class CarrierViewModel: ObservableObject {
     
     @Published var logo: String

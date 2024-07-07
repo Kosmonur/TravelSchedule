@@ -7,10 +7,8 @@
 
 import SwiftUI
 
+@MainActor
 final class TravelViewModel: ObservableObject {
-    
-    @ObservedObject var citiesViewModel: CitiesViewModel
-    @ObservedObject var storiesViewModel: StoriesViewModel
     
     @Published var findButtonIsHidden = true
     
@@ -26,9 +24,10 @@ final class TravelViewModel: ObservableObject {
         }
     }
     
+    let citiesViewModel = CitiesViewModel()
+    let storiesViewModel = StoriesViewModel(models: Constant.storiesData)
+    
     init() {
-        self.citiesViewModel = CitiesViewModel()
-        self.storiesViewModel = StoriesViewModel(models: Constant.storiesData)
         citiesViewModel.getStationsList()
     }
     
