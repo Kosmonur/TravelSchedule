@@ -14,7 +14,7 @@ protocol SearchServiceProtocol {
     func search(from: String, to: String, date: String) async throws -> Routes
 }
 
-final class SearchService: SearchServiceProtocol {
+final actor SearchService: SearchServiceProtocol {
     private let client: Client
     private let apikey: String
     

@@ -14,7 +14,7 @@ protocol StationsListServiceProtocol {
     func getStationsList() async throws -> HTTPBody
 }
 
-final class StationsListService: StationsListServiceProtocol {
+final actor StationsListService: StationsListServiceProtocol {
     private let client: Client
     private let apikey: String
     

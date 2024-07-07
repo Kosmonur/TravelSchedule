@@ -15,7 +15,7 @@ struct SearchCityView: View {
     @Binding var from: StationModel
     @Binding var to: StationModel
     let selectionType: SelectionType
-
+    
     var body: some View {
         let searchCityResult = citiesViewModel.searchCityResult()
         ZStack {
@@ -40,6 +40,9 @@ struct SearchCityView: View {
                 })
                 .toolbarRole(.editor)
                 .navigationTitle(Constant.citySelect)
+            }
+            .task {
+                await citiesViewModel.getStationsList()
             }
         }
     }

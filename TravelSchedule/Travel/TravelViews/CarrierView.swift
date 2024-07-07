@@ -30,7 +30,7 @@ struct CarrierView: View {
                         .frame(height: 104)
                         .clipped()
                 } placeholder: {}
-                .padding(.horizontal, 32)
+                    .padding(.horizontal, 32)
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 16) {

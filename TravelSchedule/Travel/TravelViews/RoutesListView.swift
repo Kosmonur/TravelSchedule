@@ -65,6 +65,9 @@ struct RoutesListView: View {
             .toolbarRole(.editor)
             .padding(16)
         }
+        .task {
+            await routesViewModel.search()
+        }
     }
 }
 

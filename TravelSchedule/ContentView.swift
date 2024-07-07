@@ -21,11 +21,11 @@ struct ContentView: View {
             TabView(selection: $selectedTab) {
                 TravelView(travelViewModel: travelViewModel,
                            path: $path)
-                    .tabItem {
-                        Image(.schedule)
-                            .renderingMode(.template)
-                    }
-                    .tag(0)
+                .tabItem {
+                    Image(.schedule)
+                        .renderingMode(.template)
+                }
+                .tag(0)
                 SettingsView(viewModel: settingsViewModel)
                     .tabItem {
                         Image(.setup)

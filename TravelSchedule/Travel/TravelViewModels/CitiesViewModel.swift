@@ -23,7 +23,7 @@ final class CitiesViewModel: ObservableObject {
         }
     }
     
-    func getStationsList() {
+    func getStationsList() async {
         cities.removeAll()
         
         let client = Client(
@@ -36,41 +36,38 @@ final class CitiesViewModel: ObservableObject {
             apikey: apiKey
         )
         
-        Task {
-            do {
-                let stationsList = try await service.getStationsList()
-                let decodeList = try await Data(collecting: stationsList, upTo: 50*1024*1024)
-                let allStations = try JSONDecoder().decode(StationsList.self, from: decodeList)
-                
-                allStations.countries?.filter {$0.title == "Россия"}
-                    .forEach {country in
-                        country.regions?.forEach { region in
-                            region.settlements?.forEach { settlement in
-                                if let cityName = settlement.title,
-                                   cityName != "" {
-                                    var stations: [StationModel] = []
-                                    settlement.stations?.forEach { station in
-                                        if station.transport_type == "train",
-                                           let stationName = station.title,
-                                           stationName != "" {
-                                            let code = station.codes?.yandex_code ?? ""
-                                            stations.append(StationModel(name: stationName, code: code))
-                                        }
+        do {
+            let stationsList = try await service.getStationsList()
+            let decodeList = try await Data(collecting: stationsList, upTo: 50*1024*1024)
+            let allStations = try JSONDecoder().decode(StationsList.self, from: decodeList)
+            
+            allStations.countries?.filter {$0.title == "Россия"}
+                .forEach {country in
+                    country.regions?.forEach { region in
+                        region.settlements?.forEach { settlement in
+                            if let cityName = settlement.title,
+                               cityName != "" {
+                                var stations: [StationModel] = []
+                                settlement.stations?.forEach { station in
+                                    if station.transport_type == "train",
+                                       let stationName = station.title,
+                                       stationName != "" {
+                                        let code = station.codes?.yandex_code ?? ""
+                                        stations.append(StationModel(name: stationName, code: code))
                                     }
-                                    if !stations.isEmpty {
-                                        let newSettlement = CityModel(name: cityName, stations: stations.sorted{$0.name < $1.name})
-                                        cities.append(newSettlement)
-                                    }
+                                }
+                                if !stations.isEmpty {
+                                    let newSettlement = CityModel(name: cityName, stations: stations.sorted{$0.name < $1.name})
+                                    cities.append(newSettlement)
                                 }
                             }
                         }
                     }
-                cities.sort {$0.name < $1.name}
-                
-//                print(cities)
-            } catch {
-                print("Error: \(error)")
-            }
+                }
+            cities.sort {$0.name < $1.name}
+            
+        } catch {
+            print("Error: \(error)")
         }
     }
     

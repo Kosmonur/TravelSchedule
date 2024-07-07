@@ -27,10 +27,6 @@ final class TravelViewModel: ObservableObject {
     let citiesViewModel = CitiesViewModel()
     let storiesViewModel = StoriesViewModel(models: Constant.storiesData)
     
-    init() {
-        citiesViewModel.getStationsList()
-    }
-    
     func swapFromTo () {
         swap(&from, &to)
     }

@@ -31,34 +31,9 @@ final class RoutesViewModel: ObservableObject {
     }()
     
     init(fromStation: StationModel, toStation: StationModel) {
-        
         self.fromStation = fromStation
         self.toStation = toStation
         self.date = formatter.string(from: Date())
-
-//        self.routes = [RouteModel(transfer: "С пересадкой в Костроме",
-//                                  date: "14 января",
-//                                  startTime: "22:30",
-//                                  endTime: "08:15",
-//                                  duration: "23 ч 35 мин",
-//                                  carrier: CarrierModel(logo: "",
-//                                                        name: "Северо-западная пригородная пассажирская компания",
-//                                                        email: "i.lozgkina@yandex.ru",
-//                                                        phone: "(812) 458-68-68")),
-//                       RouteModel(transfer: "",
-//                                                 date: "15 января",
-//                                                 startTime: "00:21",
-//                                                 endTime: "09:10",
-//                                                 duration: "15 ч 35 мин",
-//                                                 carrier: CarrierModel(logo: "https://yastat.net/s3/rasp/media/data/company/logo/doss.jpg",
-//                                                                       name: "Северо-западная пригородная пассажирская компания",
-//                                                                       email: "i.lozgkina@yandex.ru",
-//                                                                       phone: "(812) 458-68-68")),
-//                       
-//        ]
-        
-        self.search()
-        
     }
     
     func filteredRoutes() -> [RouteModel] {
@@ -125,7 +100,7 @@ final class RoutesViewModel: ObservableObject {
     }
     
     // Расписание рейсов между станциями
-    func search() {
+    func search() async {
         routes.removeAll()
         let client = Client(
             serverURL: try! Servers.server1(),
@@ -137,39 +112,37 @@ final class RoutesViewModel: ObservableObject {
             apikey: apiKey
         )
         
-        Task {
-            do {
-                let routesData = try await service.search(from: fromStation.code,
-                                                          to: toStation.code,
-                                                          date:  date)
+        do {
+            let routesData = try await service.search(from: fromStation.code,
+                                                      to: toStation.code,
+                                                      date:  date)
+            
+            routesData.interval_segments?.forEach{intseg in
+                print(intseg)
                 
-                routesData.interval_segments?.forEach{intseg in
-                    print(intseg)
-
-                }
-                
-                routesData.segments?.forEach {segment in
-                    
-                    let carrier = segment.value1.thread?.carrier
-                    
-                    let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
-                                                      name: carrier?.title ?? "",
-                                                      email: carrier?.email ?? "",
-                                                      phone: carrier?.phone ?? "")
-                    
-                    let currentRoute = RouteModel(transfer: "",
-                                                  date: getDateFromUTC(utc: segment.value2.arrival),
-                                                  startTime: getTimeFromUTC(utc: segment.value1.departure),
-                                                  endTime: getTimeFromUTC(utc: segment.value2.arrival),
-                                                  duration: getDuration(duration: segment.value1.duration),
-                                                  carrier: currentCarrier)
-                    
-                    routes.append(currentRoute)
-                    
-                }
-            } catch {
-                print("Error: \(error)")
             }
+            
+            routesData.segments?.forEach {segment in
+                
+                let carrier = segment.value1.thread?.carrier
+                
+                let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
+                                                  name: carrier?.title ?? "",
+                                                  email: carrier?.email ?? "",
+                                                  phone: carrier?.phone ?? "")
+                
+                let currentRoute = RouteModel(transfer: "",
+                                              date: getDateFromUTC(utc: segment.value2.arrival),
+                                              startTime: getTimeFromUTC(utc: segment.value1.departure),
+                                              endTime: getTimeFromUTC(utc: segment.value2.arrival),
+                                              duration: getDuration(duration: segment.value1.duration),
+                                              carrier: currentCarrier)
+                
+                routes.append(currentRoute)
+                
+            }
+        } catch {
+            print("Error: \(error)")
         }
     }
 }
