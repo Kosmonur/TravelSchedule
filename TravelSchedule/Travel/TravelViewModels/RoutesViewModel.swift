@@ -117,11 +117,6 @@ final class RoutesViewModel: ObservableObject {
                                                       to: toStation.code,
                                                       date:  date)
             
-            routesData.interval_segments?.forEach{intseg in
-                print(intseg)
-                
-            }
-            
             routesData.segments?.forEach {segment in
                 
                 let carrier = segment.value1.thread?.carrier
