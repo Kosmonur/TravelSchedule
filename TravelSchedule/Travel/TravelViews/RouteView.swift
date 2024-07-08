@@ -22,10 +22,12 @@ struct RouteView: View {
                 } placeholder: {}
                 VStack(alignment: .leading) {
                     Text(route.carrier.name)
-                        .lineLimit(1)
+                        .lineLimit(2)
                         .font(.regular17)
                         .foregroundStyle(.blackUniv)
                     Text(route.transfer)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                         .font(.regular12)
                         .foregroundStyle(.redUniv)
                 }

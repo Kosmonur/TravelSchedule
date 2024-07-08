@@ -245,15 +245,23 @@ components:
         departure_platform:
           type: string
         departure:
-          type: string  
+          type: string
         stops:
           type: string
         departure_terminal:
           type: string
         to:
           $ref: '#/components/schemas/Station'
+        transfers:
+            type: array
+            items:
+                $ref: '#/components/schemas/Transfers'
         has_transfers:
           type: boolean
+        details:
+            type: array
+            items:
+                $ref: '#/components/schemas/Details'
         tickets_info:
           $ref: '#/components/schemas/TicketsInfo'
         duration:
@@ -412,6 +420,32 @@ components:
         email:
           type: string
           
+    Details:
+      type: object
+      properties:
+        duration:
+          type: number
+          
+    Transfers:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        short_title:
+          type: string
+        popular_title:
+          type: string
+        code:
+          type: string
+        station_type:
+          type: string
+        station_type_name:
+          type: string
+        transport_type:
+          type: string
+          
     Codes:
       type: object
       properties:
@@ -437,4 +471,5 @@ components:
           type: string
           
   
+
 

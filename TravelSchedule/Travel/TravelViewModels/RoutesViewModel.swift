@@ -118,19 +118,27 @@ final class RoutesViewModel: ObservableObject {
                                                       date:  date)
             
             routesData.segments?.forEach {segment in
-                
                 let carrier = segment.value1.thread?.carrier
+                let has_transfer = segment.value1.has_transfers ?? false
+                let transferTitle = has_transfer ?  "\(Constant.withTransfer)\(segment.value1.transfers?.first?.title ?? "")" : ""
+                
+                var transferDuration = 0
+                segment.value1.details?.forEach {detail in
+                    transferDuration += Int(detail.duration ?? 0)
+                }
+                
+                let duration = has_transfer ? transferDuration : segment.value1.duration
                 
                 let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
                                                   name: carrier?.title ?? "",
                                                   email: carrier?.email ?? "",
                                                   phone: carrier?.phone ?? "")
                 
-                let currentRoute = RouteModel(transfer: "",
+                let currentRoute = RouteModel(transfer: transferTitle,
                                               date: getDateFromUTC(utc: segment.value2.arrival),
                                               startTime: getTimeFromUTC(utc: segment.value1.departure),
                                               endTime: getTimeFromUTC(utc: segment.value2.arrival),
-                                              duration: getDuration(duration: segment.value1.duration),
+                                              duration: getDuration(duration: duration),
                                               carrier: currentCarrier)
                 
                 routes.append(currentRoute)

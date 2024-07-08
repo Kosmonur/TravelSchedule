@@ -39,6 +39,7 @@ enum Constant {
     static let apply = "Применить"
     static let noOptions = "Вариантов нет"
     static let monthNames = ["января", "февраля", "марта", "апреля" ,"мая" , "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
+    static let withTransfer = "С пересадкой в "
     
     
     //MockData
