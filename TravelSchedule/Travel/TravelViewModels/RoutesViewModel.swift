@@ -22,6 +22,7 @@ final class RoutesViewModel: ObservableObject {
     private var fromStation: StationModel
     private var toStation: StationModel
     private var date: String
+    private var currentTimeDate = Date()
     
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -30,13 +31,26 @@ final class RoutesViewModel: ObservableObject {
         return formatter
     }()
     
+    private let localISOFormatter: ISO8601DateFormatter = {
+        let localISOFormatter = ISO8601DateFormatter()
+        localISOFormatter.timeZone = TimeZone.current
+        return localISOFormatter
+    }()
+    
     init(fromStation: StationModel, toStation: StationModel) {
         self.fromStation = fromStation
         self.toStation = toStation
-        self.date = formatter.string(from: Date())
+        self.date = formatter.string(from: currentTimeDate)
     }
     
     func filteredRoutes() -> [RouteModel] {
+        
+        let nightyRoutes = isNightOn ? routes.filter { route in
+            if let startHour = Int(route.startTime.prefix(2)),
+               (0 ..< 6).contains(startHour) {
+                return true
+            } else { return false }
+        } : []
         
         let morningRoutes = isMorningOn ? routes.filter { route in
             if let startHour = Int(route.startTime.prefix(2)),
@@ -59,14 +73,7 @@ final class RoutesViewModel: ObservableObject {
             } else { return false }
         } : []
         
-        let nightyRoutes = isNightOn ? routes.filter { route in
-            if let startHour = Int(route.startTime.prefix(2)),
-               (0 ..< 6).contains(startHour) {
-                return true
-            } else { return false }
-        } : []
-        
-        var outputRoutes = [morningRoutes, dayRoutes, eveningRoutes, nightyRoutes].flatMap {$0}
+        var outputRoutes = [nightyRoutes, morningRoutes, dayRoutes, eveningRoutes].flatMap {$0}
         outputRoutes.sort(by: { $0.date.prefix(2) < $1.date.prefix(2) })
         
         return(isTransfersOn ? outputRoutes : outputRoutes.filter {
@@ -96,7 +103,10 @@ final class RoutesViewModel: ObservableObject {
     
     func getDuration(duration: Int?) -> String {
         guard let duration else {return ""}
-        return (duration < 86400 ? "\(duration / 3600)ч \((duration % 3600) / 60)мин" : "\(duration / 86400)дн \((duration % 86400) / 3600)ч")
+        let secInMin = 60
+        let secInHour = 3600
+        let secInDay = 86400
+        return (duration < secInDay ? "\(duration / secInHour)ч \((duration % secInHour) / secInMin)мин" : "\(duration / secInDay)дн \((duration % secInDay) / secInHour)ч")
     }
     
     // Расписание рейсов между станциями
@@ -109,7 +119,7 @@ final class RoutesViewModel: ObservableObject {
         
         let service = SearchService(
             client: client,
-            apikey: apiKey
+            apikey: ApiConstants.apiKey
         )
         
         do {
@@ -127,6 +137,9 @@ final class RoutesViewModel: ObservableObject {
                     transferDuration += Int(detail.duration ?? 0)
                 }
                 
+                let departureMoment = segment.value1.departure ?? ""
+                let departureTimeDate = localISOFormatter.date(from: departureMoment) ?? currentTimeDate
+                
                 let duration = has_transfer ? transferDuration : segment.value1.duration
                 
                 let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
@@ -135,14 +148,15 @@ final class RoutesViewModel: ObservableObject {
                                                   phone: carrier?.phone ?? "")
                 
                 let currentRoute = RouteModel(transfer: transferTitle,
-                                              date: getDateFromUTC(utc: segment.value2.arrival),
-                                              startTime: getTimeFromUTC(utc: segment.value1.departure),
+                                              date: getDateFromUTC(utc: departureMoment),
+                                              startTime: getTimeFromUTC(utc: departureMoment),
                                               endTime: getTimeFromUTC(utc: segment.value2.arrival),
                                               duration: getDuration(duration: duration),
                                               carrier: currentCarrier)
                 
-                routes.append(currentRoute)
-                
+                if departureTimeDate > currentTimeDate {
+                    routes.append(currentRoute)
+                }
             }
         } catch {
             print("Error: \(error)")

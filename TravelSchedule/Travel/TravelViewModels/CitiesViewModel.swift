@@ -15,12 +15,7 @@ final class CitiesViewModel: ObservableObject {
     @Published var searchCity: String = ""
     
     func searchCityResult() -> [CityModel] {
-        if searchCity.isEmpty {
-            return cities
-        } else {
-            return cities.filter { $0.name.lowercased().contains(searchCity.lowercased())
-            }
-        }
+        searchCity.isEmpty ? cities : cities.filter { $0.name.lowercased().contains(searchCity.lowercased())}
     }
     
     func getStationsList() async {
@@ -33,7 +28,7 @@ final class CitiesViewModel: ObservableObject {
         
         let service = StationsListService(
             client: client,
-            apikey: apiKey
+            apikey: ApiConstants.apiKey
         )
         
         do {

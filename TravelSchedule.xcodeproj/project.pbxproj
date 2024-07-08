@@ -30,7 +30,7 @@
 		F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */; };
 		F2238C402C31E28B00FC6D8D /* OpenAPIRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F2238C3F2C31E28B00FC6D8D /* OpenAPIRuntime */; };
 		F2238C432C31E2A400FC6D8D /* OpenAPIURLSession in Frameworks */ = {isa = PBXBuildFile; productRef = F2238C422C31E2A400FC6D8D /* OpenAPIURLSession */; };
-		F2238C522C31E32D00FC6D8D /* APIkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C462C31E32D00FC6D8D /* APIkey.swift */; };
+		F2238C522C31E32D00FC6D8D /* ApiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C462C31E32D00FC6D8D /* ApiConstants.swift */; };
 		F2238C572C31E32D00FC6D8D /* openapi-generator-config.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */; };
 		F2238C582C31E32D00FC6D8D /* openapi.yaml in Resources */ = {isa = PBXBuildFile; fileRef = F2238C4C2C31E32D00FC6D8D /* openapi.yaml */; };
 		F2238C5B2C31E32D00FC6D8D /* StationsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */; };
@@ -81,7 +81,7 @@
 		F21C09662BD90DD2006AAD9A /* FilterTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTimeView.swift; sourceTree = "<group>"; };
 		F21C09682BD913CE006AAD9A /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		F21C096A2BD913E4006AAD9A /* RadioButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonView.swift; sourceTree = "<group>"; };
-		F2238C462C31E32D00FC6D8D /* APIkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIkey.swift; sourceTree = "<group>"; };
+		F2238C462C31E32D00FC6D8D /* ApiConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiConstants.swift; sourceTree = "<group>"; };
 		F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "openapi-generator-config.yaml"; sourceTree = "<group>"; };
 		F2238C4C2C31E32D00FC6D8D /* openapi.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = openapi.yaml; sourceTree = "<group>"; };
 		F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationsListService.swift; sourceTree = "<group>"; };
@@ -158,7 +158,7 @@
 		F2238C512C31E32D00FC6D8D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				F2238C462C31E32D00FC6D8D /* APIkey.swift */,
+				F2238C462C31E32D00FC6D8D /* ApiConstants.swift */,
 				F2238C4B2C31E32D00FC6D8D /* openapi-generator-config.yaml */,
 				F2238C4C2C31E32D00FC6D8D /* openapi.yaml */,
 				F2238C4F2C31E32D00FC6D8D /* StationsListService.swift */,
@@ -409,7 +409,7 @@
 				F21C091B2BD3BCA4006AAD9A /* SearchCityView.swift in Sources */,
 				F21C09222BD3BFC4006AAD9A /* SearchBarView.swift in Sources */,
 				F2238C5B2C31E32D00FC6D8D /* StationsListService.swift in Sources */,
-				F2238C522C31E32D00FC6D8D /* APIkey.swift in Sources */,
+				F2238C522C31E32D00FC6D8D /* ApiConstants.swift in Sources */,
 				F232A5672C037E1B006B5EDD /* StoryPreviewModel.swift in Sources */,
 				F21C096B2BD913E4006AAD9A /* RadioButtonView.swift in Sources */,
 				F232A5592C0345B6006B5EDD /* TimerConfiguration.swift in Sources */,

@@ -29,7 +29,7 @@ struct RoutesListView: View {
                         }
                     }
                 }
-                .padding(.bottom, -32)
+                .padding(.bottom, -16)
                 NavigationLink(destination:
                                 FilterTimeView(isMorningOn: $routesViewModel.isMorningOn, isDayOn: $routesViewModel.isDayOn, isEveningOn: $routesViewModel.isEveningOn, isNightOn: $routesViewModel.isNightOn, isTransfersOn: $routesViewModel.isTransfersOn)) {
                     HStack{
