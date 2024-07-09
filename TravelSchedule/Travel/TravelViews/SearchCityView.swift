@@ -42,6 +42,10 @@ struct SearchCityView: View {
                 .navigationTitle(Constant.citySelect)
             }
         }
+        .fullScreenCover(isPresented: $citiesViewModel.serverError) {
+                ErrorView(errorType: .serverError)
+                    .navigationBarBackButtonHidden(true)
+        }
     }
 }
 

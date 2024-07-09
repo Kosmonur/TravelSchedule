@@ -13,6 +13,7 @@ final class CitiesViewModel: ObservableObject {
     
     @Published var cities: [CityModel] = []
     @Published var searchCity: String = ""
+    @Published var serverError = false
     
     func searchCityResult() -> [CityModel] {
         searchCity.isEmpty ? cities : cities.filter { $0.name.lowercased().contains(searchCity.lowercased())}
@@ -20,7 +21,7 @@ final class CitiesViewModel: ObservableObject {
     
     func getStationsList() async {
         cities.removeAll()
-        
+        serverError = false
         let client = Client(
             serverURL: try! Servers.server1(),
             transport: URLSessionTransport()
@@ -45,6 +46,7 @@ final class CitiesViewModel: ObservableObject {
             
         } catch {
             print("Error: \(error)")
+            serverError = true
         }
     }
     

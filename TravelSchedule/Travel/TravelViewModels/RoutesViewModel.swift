@@ -18,6 +18,7 @@ final class RoutesViewModel: ObservableObject {
     @Published var isNightOn = true
     @Published var isTransfersOn = true
     @Published var routes: [RouteModel] = []
+    @Published var serverError = false
     
     private var fromStation: StationModel
     private var toStation: StationModel
@@ -90,6 +91,7 @@ final class RoutesViewModel: ObservableObject {
     
     func search() async {
         routes.removeAll()
+        serverError = false
         let client = Client(
             serverURL: try! Servers.server1(),
             transport: URLSessionTransport()
@@ -119,6 +121,7 @@ final class RoutesViewModel: ObservableObject {
             }
         } catch {
             print("Error: \(error)")
+            serverError = true
         }
     }
     

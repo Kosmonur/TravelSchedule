@@ -65,6 +65,10 @@ struct RoutesListView: View {
             .toolbarRole(.editor)
             .padding(16)
         }
+        .fullScreenCover(isPresented: $routesViewModel.serverError) {
+            ErrorView(errorType: .serverError)
+                .navigationBarBackButtonHidden(true)
+        }
         .task {
             await routesViewModel.search()
         }
