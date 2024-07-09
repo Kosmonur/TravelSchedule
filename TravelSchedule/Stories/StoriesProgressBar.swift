@@ -2,11 +2,13 @@ import SwiftUI
 import Combine
 
 struct StoriesProgressBar: View {
-    let storiesCount: Int
-    let timerConfiguration: TimerConfiguration
+    
     @Binding var currentProgress: CGFloat
     @State private var timer: Timer.TimerPublisher
     @State private var cancellable: Cancellable?
+    
+    private let storiesCount: Int
+    private let timerConfiguration: TimerConfiguration
     
     init(storiesCount: Int, timerConfiguration: TimerConfiguration, currentProgress: Binding<CGFloat>) {
         self.storiesCount = storiesCount

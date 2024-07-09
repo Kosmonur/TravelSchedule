@@ -11,7 +11,7 @@ struct StoriesView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    let storiesModel: StoriesViewModel
+    private let storiesModel: StoriesViewModel
     
     private let duration = 0.6
     private let stories: [StoryModel]

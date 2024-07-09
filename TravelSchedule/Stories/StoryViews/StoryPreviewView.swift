@@ -18,7 +18,7 @@ struct StoryPreviewView: View {
                 .scaledToFill()
                 .opacity(model.isViewed ? 0.5 : 1)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
-                .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(.blueUniv, lineWidth: model.isViewed ? 0 : 4))
+                .overlay(RoundedRectangle(cornerRadius: 16).strokeBorder(.blueUniv, lineWidth: model.isViewed ? .zero : 4))
             HStack {
                 Text (model.title)
                     .font(.regular12)
@@ -33,6 +33,6 @@ struct StoryPreviewView: View {
 }
 
 #Preview {
-    StoryPreviewView(model: StoryPreviewModel(id: 0, previewImageName: "Preview2", title: "Text ", isViewed: false, storyModels: []))
+    StoryPreviewView(model: StoryPreviewModel(id: .zero, previewImageName: "Preview2", title: "Text ", isViewed: false, storyModels: []))
 }
 

@@ -45,7 +45,7 @@ struct AgreementView: View, Sendable {
         }
     }
     
-    func checkConnection() {
+    private func checkConnection() {
         let monitor = NWPathMonitor()
         let queue = DispatchQueue(label: "Monitor")
         

@@ -40,5 +40,5 @@ struct StoryView: View {
 }
 
 #Preview {
-    StoryView(story: StoryModel(id: 0, imageName: "1", title: String(repeating: "Text ", count: 10), description: String(repeating: "Text ", count: 30), isViewed: false))
+    StoryView(story: StoryModel(id: .zero, imageName: "1", title: String(repeating: "Text ", count: 10), description: String(repeating: "Text ", count: 30), isViewed: false))
 }

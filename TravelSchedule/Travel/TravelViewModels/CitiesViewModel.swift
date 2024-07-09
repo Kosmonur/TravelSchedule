@@ -36,29 +36,11 @@ final class CitiesViewModel: ObservableObject {
             let decodeList = try await Data(collecting: stationsList, upTo: 50*1024*1024)
             let allStations = try JSONDecoder().decode(StationsList.self, from: decodeList)
             
-            allStations.countries?.filter {$0.title == "Россия"}
-                .forEach {country in
-                    country.regions?.forEach { region in
-                        region.settlements?.forEach { settlement in
-                            if let cityName = settlement.title,
-                               cityName != "" {
-                                var stations: [StationModel] = []
-                                settlement.stations?.forEach { station in
-                                    if station.transport_type == "train",
-                                       let stationName = station.title,
-                                       stationName != "" {
-                                        let code = station.codes?.yandex_code ?? ""
-                                        stations.append(StationModel(name: stationName, code: code))
-                                    }
-                                }
-                                if !stations.isEmpty {
-                                    let newSettlement = CityModel(name: cityName, stations: stations.sorted{$0.name < $1.name})
-                                    cities.append(newSettlement)
-                                }
-                            }
-                        }
-                    }
+            allStations.countries?.filter {$0.title == "Россия"}.forEach {country in
+                country.regions?.forEach { region in
+                    getSettlementInRegion(region)
                 }
+            }
             cities.sort {$0.name < $1.name}
             
         } catch {
@@ -66,5 +48,29 @@ final class CitiesViewModel: ObservableObject {
         }
     }
     
+    private func getSettlementInRegion(_ region: Components.Schemas.Region) {
+        region.settlements?.forEach { settlement in
+            if let cityName = settlement.title,
+               cityName != "" {
+                var stations: [StationModel] = []
+                getStationsInSettlement(settlement, &stations)
+                if !stations.isEmpty {
+                    let newSettlement = CityModel(name: cityName, stations: stations.sorted{$0.name < $1.name})
+                    cities.append(newSettlement)
+                }
+            }
+        }
+    }
+    
+    private func getStationsInSettlement(_ settlement: Components.Schemas.SingleSettlement, _ stations: inout [StationModel]) {
+        settlement.stations?.forEach { station in
+            if station.transport_type == "train",
+               let stationName = station.title,
+               stationName != "" {
+                let code = station.codes?.yandex_code ?? ""
+                stations.append(StationModel(name: stationName, code: code))
+            }
+        }
+    }
 }
 

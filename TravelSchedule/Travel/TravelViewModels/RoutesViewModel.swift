@@ -47,7 +47,7 @@ final class RoutesViewModel: ObservableObject {
         
         let nightyRoutes = isNightOn ? routes.filter { route in
             if let startHour = Int(route.startTime.prefix(2)),
-               (0 ..< 6).contains(startHour) {
+               (.zero ..< 6).contains(startHour) {
                 return true
             } else { return false }
         } : []
@@ -88,28 +88,6 @@ final class RoutesViewModel: ObservableObject {
         "\(fromStation.name) → \(toStation.name)"
     }
     
-    func getTimeFromUTC(utc: String?) -> String {
-        guard let utc else {return ""}
-        return String(utc.dropFirst(11).dropLast(9))
-    }
-    
-    func getDateFromUTC(utc: String?) -> String {
-        guard let utc else {return ""}
-        let day = String(utc.dropFirst(8).dropLast(15))
-        let monthNumber = Int(String(utc.dropFirst(5).dropLast(18))) ?? 1
-        let monthName = Constant.monthNames[monthNumber-1]
-        return "\(day) \(monthName)"
-    }
-    
-    func getDuration(duration: Int?) -> String {
-        guard let duration else {return ""}
-        let secInMin = 60
-        let secInHour = 3600
-        let secInDay = 86400
-        return (duration < secInDay ? "\(duration / secInHour)ч \((duration % secInHour) / secInMin)мин" : "\(duration / secInDay)дн \((duration % secInDay) / secInHour)ч")
-    }
-    
-    // Расписание рейсов между станциями
     func search() async {
         routes.removeAll()
         let client = Client(
@@ -132,35 +110,60 @@ final class RoutesViewModel: ObservableObject {
                 let has_transfer = segment.value1.has_transfers ?? false
                 let transferTitle = has_transfer ?  "\(Constant.withTransfer)\(segment.value1.transfers?.first?.title ?? "")" : ""
                 
-                var transferDuration = 0
+                var transferDuration: Int = .zero
                 segment.value1.details?.forEach {detail in
-                    transferDuration += Int(detail.duration ?? 0)
+                    transferDuration += Int(detail.duration ?? .zero)
                 }
                 
-                let departureMoment = segment.value1.departure ?? ""
-                let departureTimeDate = localISOFormatter.date(from: departureMoment) ?? currentTimeDate
-                
-                let duration = has_transfer ? transferDuration : segment.value1.duration
-                
-                let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
-                                                  name: carrier?.title ?? "",
-                                                  email: carrier?.email ?? "",
-                                                  phone: carrier?.phone ?? "")
-                
-                let currentRoute = RouteModel(transfer: transferTitle,
-                                              date: getDateFromUTC(utc: departureMoment),
-                                              startTime: getTimeFromUTC(utc: departureMoment),
-                                              endTime: getTimeFromUTC(utc: segment.value2.arrival),
-                                              duration: getDuration(duration: duration),
-                                              carrier: currentCarrier)
-                
-                if departureTimeDate > currentTimeDate {
-                    routes.append(currentRoute)
-                }
+                checkAndAppendRoute(segment, has_transfer, transferDuration, carrier, transferTitle)
             }
         } catch {
             print("Error: \(error)")
         }
+    }
+    
+    private func checkAndAppendRoute(_ segment: Components.Schemas.Segment, _ has_transfer: Bool, _ transferDuration: Int, _ carrier: Components.Schemas.Carrier?, _ transferTitle: String) {
+        let departureMoment = segment.value1.departure ?? ""
+        let departureTimeDate = localISOFormatter.date(from: departureMoment) ?? currentTimeDate
+        
+        let duration = has_transfer ? transferDuration : segment.value1.duration
+        
+        let currentCarrier = CarrierModel(logo: carrier?.logo ?? "",
+                                          name: carrier?.title ?? "",
+                                          email: carrier?.email ?? "",
+                                          phone: carrier?.phone ?? "")
+        
+        let currentRoute = RouteModel(transfer: transferTitle,
+                                      date: getDateFromUTC(utc: departureMoment),
+                                      startTime: getTimeFromUTC(utc: departureMoment),
+                                      endTime: getTimeFromUTC(utc: segment.value2.arrival),
+                                      duration: getDuration(duration: duration),
+                                      carrier: currentCarrier)
+        
+        if departureTimeDate > currentTimeDate {
+            routes.append(currentRoute)
+        }
+    }
+    
+    private func getTimeFromUTC(utc: String?) -> String {
+        guard let utc else {return ""}
+        return String(utc.dropFirst(11).dropLast(9))
+    }
+    
+    private func getDateFromUTC(utc: String?) -> String {
+        guard let utc else {return ""}
+        let day = String(utc.dropFirst(8).dropLast(15))
+        let monthNumber = Int(String(utc.dropFirst(5).dropLast(18))) ?? 1
+        let monthName = Constant.monthNames[monthNumber-1]
+        return "\(day) \(monthName)"
+    }
+    
+    private func getDuration(duration: Int?) -> String {
+        guard let duration else {return ""}
+        let secInMin = 60
+        let secInHour = 3600
+        let secInDay = 86400
+        return (duration < secInDay ? "\(duration / secInHour)ч \((duration % secInHour) / secInMin)мин" : "\(duration / secInDay)дн \((duration % secInDay) / secInHour)ч")
     }
 }
 

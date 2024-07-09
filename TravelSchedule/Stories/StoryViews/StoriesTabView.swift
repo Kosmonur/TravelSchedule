@@ -21,13 +21,13 @@ struct StoriesTabView: View {
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
     }
     
-    func didTapStoryLeft() {
+    private func didTapStoryLeft() {
         withAnimation {
             currentStoryIndex = max(currentStoryIndex - 1, .zero)
         }
     }
     
-    func didTapStoryRight() {
+    private func didTapStoryRight() {
         withAnimation {
             currentStoryIndex = min(currentStoryIndex + 1, stories.count - 1)
         }
@@ -36,5 +36,5 @@ struct StoriesTabView: View {
 
 #Preview {
     
-    StoriesTabView(stories: [StoryModel(id: 0, imageName: "1", title: "Text1", description: "Text1", isViewed: false), StoryModel(id: 1, imageName: "2", title: "Text2", description: "Text2", isViewed: false), StoryModel(id: 2, imageName: "3", title: "Text3", description: "Text3", isViewed: false)], currentStoryIndex: .constant(0))
+    StoriesTabView(stories: [StoryModel(id: .zero, imageName: "1", title: "Text1", description: "Text1", isViewed: false), StoryModel(id: 1, imageName: "2", title: "Text2", description: "Text2", isViewed: false), StoryModel(id: 2, imageName: "3", title: "Text3", description: "Text3", isViewed: false)], currentStoryIndex: .constant(0))
 }
