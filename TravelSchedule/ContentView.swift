@@ -7,21 +7,26 @@
 
 import SwiftUI
 
+@MainActor
 struct ContentView: View {
     
     @State var path = NavigationPath()
     @State private var selectedTab: Int = .zero
     
+    private let settingsViewModel = SettingsViewModel()
+    private let travelViewModel = TravelViewModel()
+    
     var body: some View {
         NavigationStack(path: $path) {
             TabView(selection: $selectedTab) {
-                ScheduleView(path: $path)
-                    .tabItem {
-                        Image(.schedule)
-                            .renderingMode(.template)
-                    }
-                    .tag(0)
-                SettingsView()
+                TravelView(travelViewModel: travelViewModel,
+                           path: $path)
+                .tabItem {
+                    Image(.schedule)
+                        .renderingMode(.template)
+                }
+                .tag(0)
+                SettingsView(viewModel: settingsViewModel)
                     .tabItem {
                         Image(.setup)
                             .renderingMode(.template)
@@ -30,6 +35,9 @@ struct ContentView: View {
             }
         }
         .tint(.blackApp)
+        .task {
+            await travelViewModel.citiesViewModel.getStationsList()
+        }
     }
 }
 
